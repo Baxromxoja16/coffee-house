@@ -16,6 +16,7 @@ class TabButton extends HTMLElement {
                 cursor: pointer;
                 line-height: 150%;
                 letter-spacing: 0;
+                font-size: 16px;
                
                 background: var(--white);
                 color: var(--dark);
@@ -32,6 +33,7 @@ class TabButton extends HTMLElement {
                 background: var(--light);
                 border-radius: 50%;
                 font-size: 16px;
+                transition: ease-in-out 0.5s;
             }
 
             .tab-button:hover {
