@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --dark: rgba(64, 63, 61, 1);
+    --light: rgba(225, 212, 201, 1);
+    --accent: rgba(176, 144, 122, 1);
+    --body: rgba(225, 212, 201, 1);
+    --container: rgba(102, 95, 85, 1);
+    --backdrop: rgba(64, 63, 61, 0.8);
+    --boder-ligth: rgba(193, 182, 173, 1);
+    --boder-dark: rgba(102, 95, 85, 1);
+}
