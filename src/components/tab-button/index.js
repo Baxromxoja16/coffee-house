@@ -4,6 +4,8 @@ class TabButton extends HTMLElement {
     }
 
     connectedCallback() {
+        const text = this.getAttribute('text');
+        const icon = this.getAttribute('icon');
         this.innerHTML = `
         <style>
             .tab-button {
@@ -47,9 +49,9 @@ class TabButton extends HTMLElement {
         </style>
         <button class="tab-button">
             <span class="icon">
-                🫖
+                ${icon}
             </span>
-            Coffee
+            ${text}
         </button>
         `;
     }
