@@ -9,7 +9,7 @@ class PrimaryButton extends HTMLElement {
         <style>
             .primary-button {
                 position: relative;
-                padding: 20px 78px;
+                padding: 20px 64px;
                 border: none;
                 border-radius: 100px;
                 cursor: pointer;
