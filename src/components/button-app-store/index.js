@@ -6,7 +6,6 @@ class AppStoreButton extends HTMLElement {
 
     connectedCallback() {
         const text = this.getAttribute('text');
-        const icon = this.getAttribute('icon');
         this.shadowRoot.innerHTML = `
         <style>
             .button-app-store {
@@ -75,6 +74,25 @@ class AppStoreButton extends HTMLElement {
             <span class="content text-secondary">${text}</span>
         </button>
         `;
+
+        const svgElement = this.shadowRoot.querySelector('slot[name="icon"]');
+        const buttonElement = this.shadowRoot.querySelector('.button-app-store');
+        if (svgElement) {
+            const assignedNodes = svgElement.assignedNodes();
+            assignedNodes.forEach(node => {
+                const paths = node.querySelectorAll('path');
+                paths.forEach(p => {
+                    buttonElement.addEventListener('mouseover', () => {
+                        p.style.transition = '0.3s';
+                        p.style.fill = 'var(--light)';
+                    });
+                    buttonElement.addEventListener('mouseout', () => {
+                        p.style.transition = '0.3s';
+                        p.style.fill = 'var(--dark)';
+                    });
+                });
+            });
+        }
     }
 
 }
