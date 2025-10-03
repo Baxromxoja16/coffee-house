@@ -51,10 +51,12 @@ class DesktopSlider extends HTMLElement {
                 color: var(--dark);
             }
 
-            @media (max-width: 768px) {
+            @media (max-width: 380px) {
                 .desktop-slider {
-                    width: 100%;
-                    padding: 0 20px;
+                    width: 348px;
+                }
+                .slider-image {
+                    height: 348px;
                 }
             }
         </style>
