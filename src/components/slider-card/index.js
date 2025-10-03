@@ -1,4 +1,4 @@
-class DesktopSlider extends HTMLElement {
+class SliderCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -7,7 +7,7 @@ class DesktopSlider extends HTMLElement {
     connectedCallback() {
     this.shadowRoot.innerHTML = `
         <style>
-            .desktop-slider {
+            .slider-card {
                 width: 480px;
                 display: flex;
                 flex-direction: column;
@@ -52,7 +52,7 @@ class DesktopSlider extends HTMLElement {
             }
 
             @media (max-width: 380px) {
-                .desktop-slider {
+                .slider-card {
                     width: 348px;
                 }
                 .slider-image {
@@ -60,7 +60,7 @@ class DesktopSlider extends HTMLElement {
                 }
             }
         </style>
-        <div class="desktop-slider">
+        <div class="slider-card">
             <div class="slider-image">
                 <slot name="image"></slot>
             </div>
@@ -74,4 +74,4 @@ class DesktopSlider extends HTMLElement {
   }
 }
 
-customElements.define('desktop-slider', DesktopSlider);
+customElements.define('slider-card', SliderCard);
