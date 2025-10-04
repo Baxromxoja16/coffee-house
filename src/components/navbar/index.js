@@ -5,7 +5,7 @@ class Navbar extends HTMLElement {
     }
 
     async connectedCallback() {
-        const globalStyles = await fetch('../../../style.css').then(r => r.text());
+        const globalStyles = await fetch('../../../global.css').then(r => r.text());
 
         this.shadowRoot.innerHTML = `
         <style>
