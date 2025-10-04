@@ -32,6 +32,19 @@ body {
     background-color: var(--body);
 }
 
+.main-title {
+    font-size: 60px;
+    line-height: 125%;
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 40px;
+}
+
+.main-title span {
+    font-style: italic;
+    color: var(--accent);
+}
+
 @media (max-width: 768px) {
     .container {
         max-width: 648px;

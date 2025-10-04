@@ -1,0 +1,126 @@
+/* Header section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 100px 730px 100px 100px;
+    position: relative;
+    z-index: 1;
+}
+.hero .title {
+    font-size: 72px;
+    line-height: 105%;
+    color: var(--light);
+}
+.hero .title span {
+    color: var(--accent);
+    font-style: italic;
+}
+.hero .hero-text {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: var(--light);
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 40px;
+    z-index: -1;
+}
+
+/* Slider sectin start */
+.slider {
+    margin: 100px 0;
+}
+
+.slider .slider-box {
+    position: relative;
+}
+
+.slider .slider-box .slider-buttons button-carousel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.slider .slider-box .slider-items {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+}
+
+.slider .slider-box .slider-buttons button-carousel:first-child {
+    left: 0;
+}
+
+.slider .slider-box .slider-buttons button-carousel:last-child {
+    right: 0;
+}
+
+.slider .slider-pagination {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.slider .slider-pagination span {
+    width: 40px;
+    height: 4px;
+    border-radius: 100px;
+    background: var(--boder-ligtht);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.slider .slider-pagination span:hover,
+.slider .slider-pagination span.active {
+    background: var(--boder-dark);
+}
+/* Slider section end */
+
+/* Friends section start */
+.friends {
+    margin-bottom: 100px;
+}
+.friends .friends-content{
+    display: flex;
+    gap: 40px;
+}
+.friends .friends-content .content-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 40px;
+}
+.friends .friends-content .content-box div {
+    border-radius: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.friends .friends-content .content-box div img {
+    transform: scale(1);
+    transition: 0.3s ease-out;
+}
+.friends .friends-content .content-box div:hover img {
+    transform: scale(0.9) ;
+}
+
+.friends .friends-content .content-box div.first-image {
+    height: 590px;
+}
+.friends .friends-content .content-box div.secound-image {
+    height: 430px;
+}
+.friends .friends-content .content-box div.third-image {
+    height: 430px;
+}
+.friends .friends-content .content-box div.fourth-image {
+    height: 590px;
+}
+/* Friends section end */

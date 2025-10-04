@@ -23,38 +23,6 @@
     <title>Coffee House</title>
 
     <style>
-        .hero {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            padding: 100px 730px 100px 100px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .title {
-            font-size: 72px;
-            line-height: 105%;
-            color: var(--light);
-        }
-        .hero .title span {
-            color: var(--accent);
-            font-style: italic;
-        }
-        .hero .hero-text {
-            font-weight: 400;
-            font-style: Regular;
-            font-size: 16px;
-            color: var(--light);
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            border-radius: 40px;
-            z-index: -1;
-        }
     </style>
 </head>
 <body>
@@ -72,6 +40,67 @@
             </div>
         </div>
     </header>
+
+    <main>
+        <!-- slider -->
+        <section class="slider">
+            <h2 class="main-title">Choose your <span>favorite</span> coffee</h2>
+            <div class="container">
+                <div class="slider-box">
+                    <div class="slider-items">
+                        <slider-card>
+                            <img slot="image" src="./images/coffee-img/coffee-slider-1.png" alt="png">
+                            <h2 slot="content-title" class="title">S’mores Frappuccino</h2>
+                            <p slot="content-text" class="text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+                            <span slot="content-price" class="price">$27.5</span>
+                        </slider-card>
+                    </div>
+
+                    <div class="slider-buttons">
+                        <button-carousel>
+                            <svg width="24" height="24" slot="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button-carousel>
+                        <button-carousel>
+                            <svg width="24" height="24" slot="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button-carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-pagination">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+
+        <section class="friends">
+            <div class="container">
+                <h2 class="main-title">Resource is <span>the perfect and cozy place</span> where you can enjoy a variety of hot beverages, relax, catch up with friends, or get some work done.</h2>
+                <div class="friends-content">
+                    <div class="content-box">
+                        <div class="first-image">
+                            <img src="./images/card-img/about-1.jpg" alt="jpg">
+                        </div>
+                        <div class="secound-image">
+                            <img src="./images/card-img/about-2.jpg" alt="jpg">
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <div class="third-image">
+                            <img src="./images/card-img/about-3.jpg" alt="jpg">
+                        </div>
+                        <div class="fourth-image">
+                            <img src="./images/card-img/about-4.jpg" alt="jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
 
 
