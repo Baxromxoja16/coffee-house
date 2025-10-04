@@ -18,3 +18,23 @@
     --boder-dark: rgba(102, 95, 85, 1);
     --white: rgba(255,255,255, 1);
 }
+
+.container {
+    max-width: 1400px;
+    padding: 0 40px;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 648px;
+    }
+}
+
+@media (max-width: 380px) {
+    .container {
+        max-width: 316px;
+        padding: 0 16px;
+        margin: auto;
+    }
+}
