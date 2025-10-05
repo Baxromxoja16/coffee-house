@@ -16,7 +16,7 @@ class AppStoreButton extends HTMLElement {
                 font-size: 16px;
                 font-weight: 600;
                 line-height: 150%;
-                background: var(--white);
+                background: transparent;
                 color: var(--dark);
                 overflow: hidden;
                 transition: ease-in-out 0.3s;
