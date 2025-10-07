@@ -17,12 +17,13 @@ class Footer extends HTMLElement {
                     display: flex;
                     align-items: center;
                     gap: 100px;
-                    margin-bottom: 40px;
                 } 
 
                 footer .footer-content .footer-social .main-title{
                     color: var(--light);
-                    text-align: left;            
+                    line-height: 107%;
+                    margin-bottom: 35px;
+                    text-align: left;
                 }
                 footer .footer-content .footer-social .social {
                     display: flex;

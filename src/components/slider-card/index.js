@@ -12,7 +12,7 @@ class SliderCard extends HTMLElement {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 20px;
+                gap: 17px;
 
             }
             .slider-image {
@@ -28,7 +28,7 @@ class SliderCard extends HTMLElement {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 16px;
+                gap: 13px;
                 text-align: center;
             }
             .slider-content ::slotted(h2) {

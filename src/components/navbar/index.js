@@ -16,6 +16,11 @@ class Navbar extends HTMLElement {
                 align-items: center;
                 margin: 20px 0;
             }
+            
+            nav .image,
+            nav .image img {
+                height: 60px;
+            }
 
             nav .nav-menu {
                 display: flex;

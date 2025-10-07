@@ -2,14 +2,16 @@
 .hero {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    padding: 100px 730px 100px 100px;
+    gap: 42px;
+    padding: 82px 730px 100px 100px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+    border-radius: 40px;
 }
 .hero .title {
-    font-size: 72px;
-    line-height: 105%;
+    font-size: 76px;
+    line-height: 84%;
     color: var(--light);
 }
 .hero .title span {
@@ -28,17 +30,20 @@
     top: 0;
     left: 0;
     width: 100%;
-    border-radius: 40px;
     z-index: -1;
 }
 
 /* Slider sectin start */
 .slider {
-    margin: 100px 0;
+    margin: 90px 0;
 }
 
 .slider .slider-box {
     position: relative;
+}
+
+.slider .main-title {
+    margin-bottom: 36px;
 }
 
 .slider .slider-box .slider-buttons button-carousel {
@@ -66,7 +71,7 @@
     display: flex;
     gap: 12px;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 37px;
 }
 
 .slider .slider-pagination span {
@@ -88,6 +93,11 @@
 .friends {
     margin-bottom: 100px;
 }
+.friends .main-title {
+    text-align: left;
+    line-height: 117%;
+    margin-bottom: 44px;
+}
 .friends .friends-content{
     display: flex;
     gap: 40px;
@@ -100,6 +110,7 @@
 }
 .friends .friends-content .content-box div {
     border-radius: 20px;
+    max-width: 660px;
     cursor: pointer;
     overflow: hidden;
 }
@@ -108,7 +119,7 @@
     transition: 0.3s ease-out;
 }
 .friends .friends-content .content-box div:hover img {
-    transform: scale(0.9) ;
+    transform: scale(0.9);
 }
 
 .friends .friends-content .content-box div.first-image {
@@ -127,27 +138,31 @@
 
 /* dowload section start */
 .download {
-    margin-bottom: 100px;
+    margin-bottom: 95px;
 }
 .download-content {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
     gap: 90px;
 }
 .download-content .content-info {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 40px; */
+    margin-top: 134px;
 }
 .download-content .content-info .main-title {
     text-align: start;
     margin-bottom: 0;
+    line-height: 100%;
+    margin-bottom: 50px;
 }
 .download-content .content-info .content-text {
     font-weight: 400;
     font-style: Regular;
     font-size: 16px;
+    margin-bottom: 40px;
     color: var(--dark);
 }
 .download-content .content-info .content-buttons {

@@ -9,7 +9,7 @@ class AppStoreButton extends HTMLElement {
         this.shadowRoot.innerHTML = `
         <style>
             .button-app-store {
-                padding: 12px 40px 12px 20px;
+                padding: 12px 40px 7px 20px;
                 border: 1px solid var(--boder-dark);
                 border-radius: 100px;
                 cursor: pointer;
@@ -20,12 +20,18 @@ class AppStoreButton extends HTMLElement {
                 color: var(--dark);
                 overflow: hidden;
                 transition: ease-in-out 0.3s;
+                display: flex;
+                align-items:center;
+                gap: 8px;
             }
-            .button-app-store {
-                display: grid;
-                grid-template-columns: auto 1fr; 
-                grid-template-rows: auto auto;  
-                gap: 0 8px; 
+            .button-app-store .icon-content {
+
+            }
+            .button-app-store .text-content {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                text-align: left;
             }
 
             .button-app-store:hover
@@ -40,24 +46,19 @@ class AppStoreButton extends HTMLElement {
             }
 
             .button-app-store .with-icon {
-                grid-row: 1 / span 2;
-                grid-column: 1;
                 transition: ease-in-out 0.3s;
                 align-self: center;
             }
 
             .button-app-store .text-primary {
-                grid-row: 1;
-                grid-column: 2;
                 font-size: 12px;
                 color: #666;
                 transition: ease-in-out 0.3s;
                 justify-self: start;
+                line-height: 92%;
             }
 
             .button-app-store .text-secondary {
-                grid-row: 2;
-                grid-column: 2;
                 font-size: 16px;
                 font-weight: 600;
                 color: #000;
@@ -67,11 +68,15 @@ class AppStoreButton extends HTMLElement {
         </style>
 
         <button class="button-app-store">
-            <span class="content with-icon">
-                <slot name="icon"></slot>
-            </span>
-            <span class="content text-primary">Available on the</span>
-            <span class="content text-secondary">${text}</span>
+            <div class="icon-content">
+                <span class="content with-icon">
+                    <slot name="icon"></slot>
+                </span>
+            </div>
+            <div class="text-content">
+                <span class="content text-primary">Available on the</span>
+                <span class="content text-secondary">${text}</span>
+            </div>
         </button>
         `;
 
