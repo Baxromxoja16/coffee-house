@@ -5,7 +5,6 @@ class SocialButton extends HTMLElement {
     }
 
     connectedCallback() {
-        const text = this.getAttribute('text');
         this.shadowRoot.innerHTML = `
         <style>
             .social-button {
@@ -22,7 +21,7 @@ class SocialButton extends HTMLElement {
                 width: 60px;
                 height: 60px;
                
-                background: var(--white);
+                background: transparent;
                 border: 1px solid var(--boder-ligtht);
 
                 transition: ease-in-out 0.3s;

@@ -124,3 +124,35 @@
     height: 590px;
 }
 /* Friends section end */
+
+/* dowload section start */
+.download {
+    margin-bottom: 100px;
+}
+.download-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 90px;
+}
+.download-content .content-info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.download-content .content-info .main-title {
+    text-align: start;
+    margin-bottom: 0;
+}
+.download-content .content-info .content-text {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: var(--dark);
+}
+.download-content .content-info .content-buttons {
+    display: flex;
+    gap: 20px;
+}
+/* download section end */
+
