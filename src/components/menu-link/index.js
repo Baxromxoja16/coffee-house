@@ -39,7 +39,7 @@ class MenuLink extends HTMLElement {
             }
 
         </style>
-        <a href="#!" class="menu-link">
+        <a href="/coffee/coffee.html" class="menu-link">
             <div class="contact-content">
                 <slot name="text"></slot>
                 <slot name="icon"></slot>

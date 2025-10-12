@@ -5,6 +5,7 @@ class Navbar extends HTMLElement {
     }
 
     async connectedCallback() {
+        const location = window.location.href;
         const globalStyles = await fetch('../../../global.css').then(r => r.text());
 
         this.shadowRoot.innerHTML = `
@@ -74,8 +75,8 @@ class Navbar extends HTMLElement {
         </style>
         <div class="container">
             <nav>
-                <a href="#" class="image">
-                    <img src="./images/logo.png" alt="png"/>
+                <a href="/" class="image">
+                    <img src="${location.includes('index.html') ? './images/logo.png' : '../images/logo.png'}" alt="png"/>
                 </a>
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="#slider">Favorite coffee</a></li>

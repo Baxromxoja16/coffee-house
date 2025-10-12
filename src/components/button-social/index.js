@@ -45,7 +45,6 @@ class SocialButton extends HTMLElement {
             assignedNodes.forEach(node => {
                 const paths = node.querySelectorAll('path');
                 paths.forEach(p => {
-                    console.log(buttonElement);
                     buttonElement.addEventListener('mouseover', () => {
                         p.style.transition = '0.3s';
                         p.style.stroke = 'var(--dark)';
