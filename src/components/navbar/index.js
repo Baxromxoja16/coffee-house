@@ -74,7 +74,7 @@ class Navbar extends HTMLElement {
         </style>
         <div class="container">
             <nav>
-                <a href="#! " class="image">
+                <a href="#" class="image">
                     <img src="./images/logo.png" alt="png"/>
                 </a>
                 <ul class="nav-menu">
