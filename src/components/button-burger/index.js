@@ -17,7 +17,7 @@ class BurgerButton extends HTMLElement {
                 cursor: pointer;
                 width: 44px;
                 height: 44px;
-                background: var(--white, #fff);
+                background: transparent;
                 border: 1px solid var(--boder-dark, #ccc);
                 transition: background 0.3s ease;
                 position: relative;

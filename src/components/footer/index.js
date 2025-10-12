@@ -10,6 +10,9 @@ class Footer extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
             ${globalStyles}
+                footer {
+                    margin-bottom: 40px;
+                } 
                 footer .footer-content {
                     background: var(--container);
                     border-radius: 40px;
@@ -48,6 +51,64 @@ class Footer extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
+                }
+                     @media (max-width:768px) {
+                    footer .footer-content {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: start;
+                        text-align: start;
+
+                        padding: 60px;
+                    }
+
+                    footer .footer-content .footer-social .main-title {
+                        font-size: 60px;
+                        text-align: start;
+                        letter-spacing: 1px;
+                    }
+
+                    footer .footer-content .footer-contact,
+                    footer .footer-content .footer-social {
+                        max-width: 100%;
+                    }
+
+                    footer .footer-content .footer-contact .contact-title {
+                        font-size: 20px;
+                    }
+                }
+
+                @media (max-width:380px) {
+                    footer .container {
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    padding:0;
+                    }
+                    footer .footer-content {
+                        flex-direction: column;
+                        width:328px;
+                        
+                        align-items: flex-start;
+                        justify-content: start;
+                        text-align: start;
+
+                        padding: 40px;
+                    }
+
+                    footer .footer-content .footer-social .main-title {
+                        font-size: 32px;
+                        text-align: start;
+                    }
+
+                    footer .footer-content .footer-contact,
+                    footer .footer-content .footer-social {
+                        max-width: 100%;
+                    }
+
+                    footer .footer-content .footer-contact .contact-title {
+                        font-size: 20px;
+                    }
                 }
             </style>
 
