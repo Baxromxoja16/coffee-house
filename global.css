@@ -10,6 +10,10 @@
     letter-spacing: 0%;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --dark: rgba(64, 63, 61, 1);
     --light: rgba(225, 212, 201, 1);

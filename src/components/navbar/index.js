@@ -78,10 +78,10 @@ class Navbar extends HTMLElement {
                     <img src="./images/logo.png" alt="png"/>
                 </a>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="#!">Favorite coffee</a></li>
-                    <li class="nav-item"><a href="#!">About</a></li>
-                    <li class="nav-item"><a href="#!">Mobile app</a></li>
-                    <li class="nav-item"><a href="#!">Contact us</a></li>
+                    <li class="nav-item"><a href="#slider">Favorite coffee</a></li>
+                    <li class="nav-item"><a href="#friends">About</a></li>
+                    <li class="nav-item"><a href="#download">Mobile app</a></li>
+                    <li class="nav-item"><a href="#footer">Contact us</a></li>
                 </ul>
                 
                 <menu-link>
