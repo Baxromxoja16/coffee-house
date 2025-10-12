@@ -51,7 +51,11 @@ body {
 }
 
 span[slot="icon"] {
-    display: flex;
+    display: block;
+}
+
+.center {
+    display: flex !important;
     align-items: center;
     justify-content: center;
 }
