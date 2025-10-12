@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+header .title {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+header .main-title {
+    font-size: 60px;
+    color: #403F3D;
+    text-align: center;
+    width: 800px;
+    height: 150px;
+}
+header .main-title span {
+    color: #B0907A;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.cards {
+    margin-bottom: 100px;
+}
+.cards .cards-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 37px;
+    align-items: stretch;
+}

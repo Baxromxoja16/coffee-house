@@ -20,7 +20,7 @@ class TabButton extends HTMLElement {
                 letter-spacing: 0;
                 font-size: 16px;
                
-                background: var(--white);
+                background: transparent;
                 color: var(--dark);
                 border: 1px solid var(--boder-ligtht);
 

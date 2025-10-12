@@ -12,6 +12,7 @@ class CoffeeCard extends HTMLElement {
                 border-radius: 40px;
                 border: 1px solid var(--boder-ligtht);
                 cursor: pointer;
+                height: 100%;
             }
             .coffee-image {
                 width: 100%;
@@ -35,6 +36,7 @@ class CoffeeCard extends HTMLElement {
                 align-items: start;
                 gap: 12px;
                 padding: 20px;
+                justify-content: space-between;
             }
             .coffee-content ::slotted(h2) {
                 font-size: 24px;
