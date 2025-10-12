@@ -50,6 +50,12 @@ body {
     color: var(--accent);
 }
 
+span[slot="icon"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 768px) {
     .container {
         max-width: 648px;
