@@ -108,6 +108,7 @@
 
 .friends .friends-content {
     display: flex;
+    justify-content: center;
     gap: 40px;
 }
 
@@ -120,34 +121,35 @@
 
 .friends .friends-content .content-box div {
     border-radius: 20px;
-    max-width: 600px;
+    max-width: 660px;
     cursor: pointer;
     overflow: hidden;
 }
 
 .friends .friends-content .content-box div img {
-    transform: scale(1);
+    transform: scale(1.2);
+    width: 100%;
     transition: 0.3s ease-out;
 }
 
-/* .friends .friends-content .content-box div:hover img {
-    transform: scale(0.9);
-} */
+.friends .friends-content .content-box div:hover img {
+    transform: scale(1);
+}
 
 .friends .friends-content .content-box div.first-image {
-    height: 590px;
+    max-height: 590px;
 }
 
 .friends .friends-content .content-box div.secound-image {
-    height: 430px;
+    max-height: 430px;
 }
 
 .friends .friends-content .content-box div.third-image {
-    height: 430px;
+    max-height: 430px;
 }
 
 .friends .friends-content .content-box div.fourth-image {
-    height: 590px;
+    max-height: 590px;
 }
 
 /* Friends section end */
@@ -159,15 +161,12 @@
 
 .download-content {
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     justify-content: space-between;
     gap: 90px;
 }
 
 .download-content .content-info {
-    /* display: flex;
-    flex-direction: column;
-    gap: 40px; */
     margin-top: 134px;
 }
 
@@ -184,6 +183,10 @@
     font-size: 16px;
     margin-bottom: 40px;
     color: var(--dark);
+}
+
+.download-content .content-image img {
+    width: 100%;
 }
 
 .download-content .content-info .content-buttons {
@@ -224,8 +227,8 @@
 
     .friends .container .main-title {
         font-size: 60px;
-        width: 680px;
-        height: 450px;
+        max-width: 680px;
+        /* height: 450px; */
     }
 
     .friends .friends-content {
@@ -312,9 +315,9 @@
 
     .friends .container .main-title {
         font-size: 32px;
-        width: 290px;
+        max-width: 290px;
         text-align:center;
-        height: 300px;
+        /* height: 300px; */
         min-width: 100%;
     }
 

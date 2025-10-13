@@ -34,8 +34,14 @@ class MenuLink extends HTMLElement {
 
             .contact-content {
                 display: flex;
-                align-items: start;
+                align-items: center;
                 gap: 8px;
+            }
+            
+            @media (min-width: 768px) {
+                .menu-link .contact-content ::slotted(span.text) {
+                    font-size: 32px;
+                }
             }
 
         </style>
