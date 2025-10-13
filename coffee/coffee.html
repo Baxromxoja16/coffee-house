@@ -23,6 +23,7 @@
   <script src="../src/components/coffee-card/index.js" defer></script>
   <script src="../src/components/navbar/index.js" defer></script>
   <script src="../src/components/footer/index.js" defer></script>
+  <script src="../src/pages/coffee.js" defer></script>
 
   <title>Coffee Page</title>
 </head>
@@ -45,54 +46,14 @@
     <section class="cards">
       <div class="container">
         <div class="cards-content">
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-1.jpg" alt="png">
-            <h2 slot="content-title" class="title">Cappuccino</h2>
-            <p slot="content-text" class="text">Cappuccino is a coffee-based drink made primarily from espresso and milk.</p>
-            <span slot="content-price" class="price">$15.5</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-2.jpg" alt="png">
-            <h2 slot="content-title" class="title">Kahlua coffee</h2>
-            <p slot="content-text" class="text">Classic coffee with milk and Kahlua liqueur under a cap of frothed milk</p>
-            <span slot="content-price" class="price">$7</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-3.jpg" alt="png">
-            <h2 slot="content-title" class="title">Honey raf</h2>
-            <p slot="content-text" class="text">Espresso with frothed milk, cream and aromatic honey</p>
-            <span slot="content-price" class="price">$5.50</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-4.jpg" alt="png">
-            <h2 slot="content-title" class="title">Ice cappuccino</h2>
-            <p slot="content-text" class="text">Cappuccino with soft thick foam in summer version with ice</p>
-            <span slot="content-price" class="price">$5.00</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-5.jpg" alt="png">
-            <h2 slot="content-title" class="title">Espresso</h2>
-            <p slot="content-text" class="text">Classic black coffee</p>
-            <span slot="content-price" class="price">$4.50</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-6.jpg" alt="png">
-            <h2 slot="content-title" class="title">Latte</h2>
-            <p slot="content-text" class="text">Espresso coffee with the addition of steamed milk and dense milk foam</p>
-            <span slot="content-price" class="price">$5.50</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-7.jpg" alt="png">
-            <h2 slot="content-title" class="title">Latte macchiato</h2>
-            <p slot="content-text" class="text">Espresso with frothed milk and chocolate</p>
-            <span slot="content-price" class="price">$5.50</span>
-        </coffee-card>
-          <coffee-card>
-            <img slot="image" src="../images/dessert-img/coffee-8.jpg" alt="png">
-            <h2 slot="content-title" class="title">Coffee with cognac</h2>
-            <p slot="content-text" class="text">Fragrant black coffee with cognac and whipped cream</p>
-            <span slot="content-price" class="price">$6.50</span>
-        </coffee-card>
+          <!-- Coffee -->
+          <coffee-card data-category="coffee">...</coffee-card>
+
+          <!-- Tea -->
+          <coffee-card data-category="tea">...</coffee-card>
+
+          <!-- Dessert -->
+          <coffee-card data-category="dessert">...</coffee-card>
         </div>
       </div>
     </section>
