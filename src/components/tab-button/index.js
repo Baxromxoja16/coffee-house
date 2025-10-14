@@ -38,7 +38,8 @@ class TabButton extends HTMLElement {
                 transition: ease-in-out 0.5s;
             }
 
-            .tab-button:hover {
+            .tab-button:hover,
+            .tab-button.active {
                 background: var(--boder-dark);
                 color: var(--light);
                 border: 1px solid var(--boder-dark);

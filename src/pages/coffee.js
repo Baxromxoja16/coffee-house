@@ -98,19 +98,16 @@ class MenuPage {
             const categories = ['coffee', 'tea', 'dessert'];
             const category = categories[index];
             
-            // Birinchi tugma active
             if (index === 0) {
                 button.setAttribute('active', 'true');
             }
             
             button.addEventListener('click', () => {
-                // Barcha tugmalardan active ni olib tashlash
-                tabButtons.forEach(btn => btn.removeAttribute('active'));
-                
-                // Bosilgan tugmaga active qo'shish
+                tabButtons.forEach(btn => {btn.removeAttribute('active'); btn.children[1].classList.remove('active')});
+                button.children[1].classList.add('active')
+
                 button.setAttribute('active', 'true');
                 
-                // Kategoriyani o'zgartirish
                 this.currentCategory = category;
                 this.displayProducts();
             });
@@ -128,7 +125,6 @@ class MenuPage {
             }, 250);
         });
         
-        // Dastlabki limit ni sozlash
         this.updateDisplayLimit();
     }
     
@@ -146,10 +142,8 @@ class MenuPage {
         
         if (!cardsContent || !productsToShow) return;
         
-        // Containerni tozalash
         cardsContent.innerHTML = '';
         
-        // Mahsulotlarni ko'rsatish
         const itemsToDisplay = productsToShow.slice(0, this.displayLimit);
         
         itemsToDisplay.forEach(product => {
@@ -157,7 +151,6 @@ class MenuPage {
             cardsContent.appendChild(card);
         });
         
-        // Load More tugmasini boshqarish
         this.handleLoadMoreButton(productsToShow.length);
     }
     
@@ -165,7 +158,6 @@ class MenuPage {
         const container = document.querySelector('.cards .container');
         let loadMoreBtn = document.querySelector('.load-more-btn');
         
-        // Load More kerakmi?
         const needsLoadMore = window.innerWidth <= 768 && 
                               totalProducts > this.displayLimit && 
                               this.displayLimit === 4;
@@ -211,7 +203,6 @@ class MenuPage {
         
         if (!cardsContent) return;
         
-        // Qolgan mahsulotlarni qo'shish
         const remainingProducts = productsToShow.slice(this.displayLimit);
         
         remainingProducts.forEach(product => {
@@ -219,7 +210,6 @@ class MenuPage {
             cardsContent.appendChild(card);
         });
         
-        // Load More tugmasini yashirish
         const loadMoreBtn = document.querySelector('.load-more-btn');
         if (loadMoreBtn) {
             loadMoreBtn.style.display = 'none';
@@ -229,10 +219,8 @@ class MenuPage {
     }
 }
 
-// Sahifa yuklanganda ishga tushirish
 document.addEventListener('DOMContentLoaded', () => {
     const menuPage = new MenuPage();
     
-    // Global o'zgaruvchiga saqlash
     window.menuPageInstance = menuPage;
 });
