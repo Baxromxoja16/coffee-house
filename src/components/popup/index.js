@@ -1,12 +1,12 @@
 class Popup extends HTMLElement {
-    constructor() {
+    constructor(productId) {
         super();
         this.attachShadow({ mode: 'open' });
         this.productData = null;
         this.selectedSize = 's';
         this.selectedAdditives = [];
         this.isLoading = false;
-        this.open(1)
+        this.productId = null;
     }
   
     connectedCallback() {
@@ -15,6 +15,10 @@ class Popup extends HTMLElement {
     }
 
     render() {
+        const productId = this.getAttribute('productId');
+        this.productId = productId;
+        this.open(productId)
+
         this.shadowRoot.innerHTML = `
         <style>
             .overlay {

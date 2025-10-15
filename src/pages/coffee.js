@@ -23,8 +23,8 @@ class MenuPage {
     
     async loadProducts() {
         try {
-            const response = await fetch('../products.json');
-            this.products = await response.json();
+            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products');
+            this.products = (await response.json()).data;
             console.log(this.products)
         } catch (error) {
             console.error('Error loading products:', error);
@@ -148,10 +148,20 @@ class MenuPage {
         
         itemsToDisplay.forEach(product => {
             const card = this.createProductCard(product);
+            this.addListener(card, product.id || 1)
             cardsContent.appendChild(card);
         });
         
         this.handleLoadMoreButton(productsToShow.length);
+    }
+
+    addListener(card, productId) {
+        card.addEventListener('click', () => {
+            const popup = document.createElement('popup-modal');
+            popup.setAttribute('productId', productId);
+
+            document.querySelector('body').appendChild(popup);
+        })
     }
     
     handleLoadMoreButton(totalProducts) {
@@ -214,7 +224,6 @@ class MenuPage {
         if (loadMoreBtn) {
             loadMoreBtn.style.display = 'none';
         }
-        
         this.isLoadMoreVisible = false;
     }
 }
