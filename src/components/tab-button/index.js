@@ -32,13 +32,18 @@ class TabButton extends HTMLElement {
                 justify-content: center;
                 width: 30px;
                 height: 30px;
-                background: var(--light);
+                background: var(--boder-ligtht);
                 border-radius: 50%;
                 font-size: 16px;
                 transition: ease-in-out 0.5s;
+                color: var(--dark);
             }
 
-            .tab-button:hover,
+            .tab-button:hover {
+                background: var(--boder-dark);
+                color: var(--light);
+                border: 1px solid var(--boder-dark);
+            }
             .tab-button.active {
                 background: var(--boder-dark);
                 color: var(--light);
@@ -46,6 +51,7 @@ class TabButton extends HTMLElement {
             }
             .tab-button:hover .icon {
                 background: var(--body);
+                color: var(--dark);
             }
         </style>
         <button class="tab-button">

@@ -16,8 +16,8 @@ class SecondaryButton extends HTMLElement {
                 letter-spacing: 0;
                 font-size: 16px;
                 font-weight: 600;
-               
-                background: var(--white);
+               width:100%;
+                background: transparent;
                 color: var(--dark);
                 border: 1px solid var(--boder-dark);
 
