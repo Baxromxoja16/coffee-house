@@ -1,16 +1,20 @@
 class Navbar extends HTMLElement {
+    private shadow: ShadowRoot;
+
+    isBurgerOpen: boolean = false;
+
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.shadow = this.attachShadow({ mode: 'open' });
     }
 
     async connectedCallback() {
         const location = window.location.href;
-        const globalStyles = await fetch('../../../global.css').then(r => r.text());
+        const globalStyles = await fetch('/global.css').then(r => r.text());
 
-        this.shadowRoot.innerHTML = `
+        this.shadow.innerHTML = `
         <style>
-            ${globalStyles}
+            
             nav {
                 display: flex;
                 justify-content: space-between;
@@ -137,7 +141,7 @@ class Navbar extends HTMLElement {
                     display: none !important;
                 }
             }
-
+            ${globalStyles}
 
         </style>
         <div class="container">
@@ -205,9 +209,9 @@ class Navbar extends HTMLElement {
     }
 
     setupBurgerMenu() {
-        const burgerButton = this.shadowRoot.querySelector('button-burger');
-        const burgerMenu = this.shadowRoot.querySelector('.burger-menu');
-        const burgerLinks = this.shadowRoot.querySelectorAll('.burger-menu a');
+        const burgerButton = this.shadow.querySelector('button-burger');
+        const burgerMenu = this.shadow.querySelector('.burger-menu');
+        const burgerLinks = this.shadow.querySelectorAll('.burger-menu a');
 
         if (!burgerButton || !burgerMenu) return;
 
@@ -218,7 +222,7 @@ class Navbar extends HTMLElement {
         burgerLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = link.getAttribute('href');
+                const targetId: string = link.getAttribute('href') as string;
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
@@ -240,9 +244,6 @@ class Navbar extends HTMLElement {
     }
 
     toggleBurgerMenu() {
-        const burgerMenu = this.shadowRoot.querySelector('.burger-menu');
-        const burgerButton = this.shadowRoot.querySelector('button-burger');
-
         if (this.isBurgerOpen) {
             this.closeBurgerMenu();
         } else {
@@ -251,8 +252,8 @@ class Navbar extends HTMLElement {
     }
 
     openBurgerMenu() {
-        const burgerMenu = this.shadowRoot.querySelector('.burger-menu');
-        const burgerButton = this.shadowRoot.querySelector('button-burger');
+        const burgerMenu: Element = this.shadow.querySelector('.burger-menu') as Element;
+        const burgerButton = this.shadow.querySelector('button-burger')  as Element;
 
         burgerMenu.classList.add('open');
         this.isBurgerOpen = true;
@@ -263,8 +264,8 @@ class Navbar extends HTMLElement {
     }
 
     closeBurgerMenu() {
-        const burgerMenu = this.shadowRoot.querySelector('.burger-menu');
-        const burgerButton = this.shadowRoot.querySelector('button-burger');
+        const burgerMenu = this.shadow.querySelector('.burger-menu')  as Element;
+        const burgerButton = this.shadow.querySelector('button-burger')  as Element;
 
         burgerMenu.classList.remove('open');
         this.isBurgerOpen = false;
