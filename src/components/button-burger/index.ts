@@ -1,12 +1,15 @@
 class BurgerButton extends HTMLElement {
+    private shadow: ShadowRoot;
+    public isOpen = false;
+
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.shadow = this.attachShadow({ mode: 'open' });
         this.isOpen = false;
     }
 
     connectedCallback() {
-        this.shadowRoot.innerHTML = `
+        this.shadow.innerHTML = `
         <style>
             .burger-button {
                 display: flex;
@@ -55,7 +58,7 @@ class BurgerButton extends HTMLElement {
         </button>
         `;
 
-        const button = this.shadowRoot.querySelector('.burger-button');
+        const button = this.shadow.querySelector('.burger-button') as Element;
         
         button.addEventListener('click', () => {
             this.isOpen = !this.isOpen;
