@@ -1,4 +1,12 @@
+import { Categories,  Category,  IProduct } from "../types/interfaces";
+
 class MenuPage {
+    products: IProduct[] = [];
+    categories: Categories;
+    currentCategory: Category;
+    displayLimit: number;
+    isLoadMoreVisible: boolean;
+
     constructor() {
         this.products = [];
         this.categories = {
@@ -6,7 +14,7 @@ class MenuPage {
             tea: [],
             dessert: []
         };
-        this.currentCategory = 'coffee';
+        this.currentCategory = Category.Coffee;
         this.displayLimit = 4;
         this.isLoadMoreVisible = false;
         
@@ -43,7 +51,7 @@ class MenuPage {
         });
     }
     
-    getImagePath(category, index) {
+    getImagePath(category: Category, index: number) {
         const categoryMap = {
             'coffee': 'coffee',
             'tea': 'tea',
@@ -60,12 +68,12 @@ class MenuPage {
         return `../images/dessert-img/${categoryMap[category]}-${newIdx}.${categoryMap[category] === 'coffee' ? 'jpg' : 'png'}`;
     }
     
-    createProductCard(product) {
+    createProductCard(product: IProduct) {
         const card = document.createElement('coffee-card');
         
         const img = document.createElement('img');
         img.slot = 'image';
-        img.src = this.getImagePath(product.category, product.index);
+        img.src = this.getImagePath(product.category, product.index as number);
         img.alt = product.name;
         
         const title = document.createElement('h2');
@@ -95,7 +103,7 @@ class MenuPage {
         const tabButtons = document.querySelectorAll('tab-button');
         
         tabButtons.forEach((button, index) => {
-            const categories = ['coffee', 'tea', 'dessert'];
+            const categories = [Category.Coffee, Category.Tea, Category.Dessert];
             const category = categories[index];
             
             if (index === 0) {
@@ -115,7 +123,7 @@ class MenuPage {
     }
     
     setupResponsive() {
-        let resizeTimer;
+        let resizeTimer: number;
         
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
@@ -155,18 +163,18 @@ class MenuPage {
         this.handleLoadMoreButton(productsToShow.length);
     }
 
-    addListener(card, productId) {
+    addListener(card: HTMLElement, productId: number) {
         card.addEventListener('click', () => {
             const popup = document.createElement('popup-modal');
-            popup.setAttribute('productId', productId);
+            popup.setAttribute('productId', productId.toString());
 
-            document.querySelector('body').appendChild(popup);
+            (document.querySelector('body') as HTMLElement).appendChild(popup);
         })
     }
     
-    handleLoadMoreButton(totalProducts) {
-        const container = document.querySelector('.cards .container');
-        let loadMoreBtn = document.querySelector('.load-more-btn');
+    handleLoadMoreButton(totalProducts: number) {
+        const container = document.querySelector('.cards .container') as HTMLElement;
+        let loadMoreBtn = document.querySelector('.load-more-btn') as HTMLElement;
         
         const needsLoadMore = window.innerWidth <= 768 && 
                               totalProducts > this.displayLimit && 
@@ -199,7 +207,7 @@ class MenuPage {
             </button>
         `;
         
-        const btn = btnContainer.querySelector('button');
+        const btn = btnContainer.querySelector('button') as HTMLElement;
         btn.addEventListener('click', () => {
             this.loadMoreProducts();
         });
@@ -208,7 +216,7 @@ class MenuPage {
     }
     
     loadMoreProducts() {
-        const cardsContent = document.querySelector('.cards-content');
+        const cardsContent = document.querySelector('.cards-content') as HTMLElement;
         const productsToShow = this.categories[this.currentCategory];
         
         if (!cardsContent) return;
@@ -220,7 +228,7 @@ class MenuPage {
             cardsContent.appendChild(card);
         });
         
-        const loadMoreBtn = document.querySelector('.load-more-btn');
+        const loadMoreBtn = document.querySelector('.load-more-btn') as HTMLElement;
         if (loadMoreBtn) {
             loadMoreBtn.style.display = 'none';
         }
@@ -231,5 +239,5 @@ class MenuPage {
 document.addEventListener('DOMContentLoaded', () => {
     const menuPage = new MenuPage();
     
-    window.menuPageInstance = menuPage;
+    (window as Window as { menuPageInstance?: MenuPage }).menuPageInstance = menuPage;
 });

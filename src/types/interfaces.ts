@@ -6,6 +6,12 @@ export enum Category {
     Tea = 'tea'
 }
 
+/** Categories */
+export interface Categories {
+    coffee: IProduct[],
+    tea: IProduct[],
+    dessert: IProduct[]
+}
 /** Size entry (har bir size uchun obyekt) */
 export interface SizeEntry {
     size: string;
@@ -36,7 +42,8 @@ export interface IProduct {
     description: string;
     price: string;
     discountPrice?: string;
-    category: Category | string;
+    category: Category;
+    index?: number;
 }
 
 /** Product detail (batafsil) */
