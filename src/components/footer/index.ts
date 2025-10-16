@@ -1,13 +1,15 @@
 class Footer extends HTMLElement {
+    private shadow: ShadowRoot;
+
     constructor() {
         super()
-        this.attachShadow({ mode: 'open' });
+        this.shadow = this.attachShadow({ mode: 'open' });
     }
 
     async connectedCallback() {
         const globalStyles = await fetch('/global.css').then(r => r.text());
 
-        this.shadowRoot.innerHTML = `
+        this.shadow.innerHTML = `
             <style>
             ${globalStyles}
                 footer {
