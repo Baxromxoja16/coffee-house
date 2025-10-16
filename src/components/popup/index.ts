@@ -1,8 +1,17 @@
+import { Additive, IProductDetail, SizeEntry, SizesMap } from "../../types/interfaces";
+
 class Popup extends HTMLElement {
-    constructor(productId) {
+    shadow: ShadowRoot | null;
+    productData: IProductDetail;
+    selectedSize: keyof SizesMap = 's';
+    selectedAdditives: string[];
+    isLoading: boolean;
+    productId: string | null
+
+    constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
-        this.productData = null;
+        this.shadow! = this.attachShadow({ mode: 'open' });
+        this.productData = {} as IProductDetail;
         this.selectedSize = 's';
         this.selectedAdditives = [];
         this.isLoading = false;
@@ -15,11 +24,11 @@ class Popup extends HTMLElement {
     }
 
     render() {
-        const productId = this.getAttribute('productId');
+        const productId: string | null = this.getAttribute('productId') ? this.getAttribute('productId') as string : null ;
         this.productId = productId;
-        this.open(productId)
+        this.open(productId as string)
 
-        this.shadowRoot.innerHTML = `
+        this.shadow!!.innerHTML = `
         <style>
             .overlay {
                 width: 100%;
@@ -337,9 +346,9 @@ class Popup extends HTMLElement {
     }
 
     setupEventListeners() {
-        const overlay = this.shadowRoot.querySelector('.overlay');
-        const modal = this.shadowRoot.querySelector('.modal');
-        const closeIcon = this.shadowRoot.querySelector('.close-icon');
+        const overlay = this.shadow!.querySelector('.overlay') as HTMLElement;
+        const modal = this.shadow!.querySelector('.modal') as HTMLElement;
+        const closeIcon = this.shadow!.querySelector('.close-icon') as HTMLElement;
         
         // Close button
         closeIcon.addEventListener('click', () => this.close());
@@ -355,14 +364,14 @@ class Popup extends HTMLElement {
         });
 
         // Add to Cart button
-        const addToCartBtn = this.shadowRoot.querySelector('.add-to-cart');
+        const addToCartBtn = this.shadow!.querySelector('.add-to-cart') as HTMLElement;
         addToCartBtn.addEventListener('click', () => {
             this.addToCart();
         });
 
     }
 
-    async open(productId) {
+    async open(productId: string = '') {
         this.showLoader();
         
         try {
@@ -379,7 +388,7 @@ class Popup extends HTMLElement {
         }
     }
 
-    async fetchProduct(productId) {
+    async fetchProduct(productId: string): Promise<IProductDetail> {
         return new Promise((resolve, reject) => {
             setTimeout(async () => {
                 try {
@@ -404,21 +413,21 @@ class Popup extends HTMLElement {
         });
     }
     
-    getImagePath(category, index) {
+    getImagePath(category: string, index: string) {
         return `../images/dessert-img/${category}-${index}.jpg`;
     }
     
     populateModal() {
         if (!this.productData) return;
     
-        const img = this.shadowRoot.querySelector('.modal-img img');
-        const title = this.shadowRoot.querySelector('.modal-title');
-        const description = this.shadowRoot.querySelector('.modal-description');
-        const sizeContainer = this.shadowRoot.querySelector('.modal-size .size-item');
-        const additivesContainer = this.shadowRoot.querySelector('.modal-additives .size-item');
+        const img = this.shadow!.querySelector('.modal-img img') as HTMLImageElement;
+        const title = this.shadow!.querySelector('.modal-title') as HTMLElement;
+        const description = this.shadow!.querySelector('.modal-description') as HTMLElement;
+        const sizeContainer = this.shadow!.querySelector('.modal-size .size-item') as HTMLElement;
+        const additivesContainer = this.shadow!.querySelector('.modal-additives .size-item') as HTMLElement;
     
         // Set basic info
-        img.src = this.productData.image;
+        img.src = this.productData.image || '';
         img.alt = this.productData.name;
         title.textContent = this.productData.name;
         description.textContent = this.productData.description;
@@ -428,7 +437,7 @@ class Popup extends HTMLElement {
         additivesContainer.innerHTML = '';
     
         // Add sizes
-        Object.entries(this.productData.sizes).forEach(([key, sizeData], index) => {
+        Object.entries(this.productData.sizes as SizesMap).forEach(([key, sizeData], index) => {
             const btn = document.createElement('tab-button');
             btn.setAttribute('text', sizeData.size);
             btn.setAttribute('icon', key.toUpperCase());
@@ -438,7 +447,7 @@ class Popup extends HTMLElement {
             
             if (index === 0) {
                 btn.setAttribute('active', 'true');
-                this.selectedSize = key;
+                this.selectedSize = key as keyof SizesMap;
             }
     
             // Tooltip
@@ -453,18 +462,18 @@ class Popup extends HTMLElement {
                     tooltipText = `$${price}`;
                 }
                 
-                this.showTooltip(e.target, tooltipText);
+                this.showTooltip(e.target as EventTarget, tooltipText);
             });
     
             btn.addEventListener('mouseleave', (e) => {
-                this.hideTooltip(e.target);
+                this.hideTooltip(e.target as EventTarget);
             });
     
             btn.addEventListener('click', () => {
                 sizeContainer.querySelectorAll('tab-button').forEach(b => b.removeAttribute('active'));
                 this.activeButton(sizeContainer)
                 btn.setAttribute('active', 'true');
-                this.selectedSize = key;
+                this.selectedSize = key as keyof SizesMap;
                 this.updateTotal();
             });
     
@@ -472,7 +481,7 @@ class Popup extends HTMLElement {
         });
     
         // Add additives
-        this.productData.additives.forEach((additive, index) => {
+        (this.productData.additives as Additive[]).forEach((additive, index) => {
             const btn = document.createElement('tab-button');
             btn.setAttribute('text', additive.name);
             btn.setAttribute('icon', (index + 1).toString());
@@ -492,19 +501,18 @@ class Popup extends HTMLElement {
                     tooltipText = `+$${price}`;
                 }
                 
-                this.showTooltip(e.target, tooltipText);
+                this.showTooltip((e.target as EventTarget), tooltipText);
             });
     
             btn.addEventListener('mouseleave', (e) => {
-                this.hideTooltip(e.target);
+                this.hideTooltip(e.target as EventTarget);
             });
     
             btn.addEventListener('click', () => {
-                const container = additivesContainer.querySelectorAll('tab-button')
                 const isActive = btn.hasAttribute('active');
                 if (isActive) {
                     btn.removeAttribute('active');
-                    this.selectedAdditives = this.selectedAdditives.filter(a => a !== additive.name);
+                    this.selectedAdditives = this.selectedAdditives.filter((a: string) => a !== additive.name);
                 } else {
                     btn.setAttribute('active', 'true');
                     this.selectedAdditives.push(additive.name);
@@ -519,18 +527,22 @@ class Popup extends HTMLElement {
         this.updateTotal();
     }
     
-    showTooltip(element, htmlContent) {
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tooltip show';
-        tooltip.innerHTML = htmlContent;
-        element.style.position = 'relative';
-        element.appendChild(tooltip);
+    showTooltip(element: EventTarget, htmlContent: string) {
+        if(element) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip show';
+            tooltip.innerHTML = htmlContent;
+            (element as HTMLElement).style.position = 'relative';
+            (element as HTMLElement).appendChild(tooltip);
+        }
     }
     
-    hideTooltip(element) {
-        const tooltip = element.querySelector('.tooltip');
-        if (tooltip) {
-            tooltip.remove();
+    hideTooltip(element: EventTarget) {
+        if(element) {
+            const tooltip = (element as HTMLElement).querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
         }
     }
     
@@ -540,7 +552,7 @@ class Popup extends HTMLElement {
         let total = 0;
     
         // Get selected size price
-        const selectedSizeData = this.productData.sizes[this.selectedSize];
+        const selectedSizeData = this.productData.sizes?.[this.selectedSize];
         if (selectedSizeData) {
             const sizePrice = parseFloat(selectedSizeData.discountPrice || selectedSizeData.price);
             total += sizePrice;
@@ -548,35 +560,35 @@ class Popup extends HTMLElement {
     
 
         this.selectedAdditives.forEach(additiveName => {
-            const additive = this.productData.additives.find(a => a.name === additiveName);
+            const additive = this.productData.additives?.find(a => a.name === additiveName);
             if (additive) {
                 const additivePrice = parseFloat(additive.discountPrice || additive.price);
                 total += additivePrice;
             }
         });
     
-        const totalElement = this.shadowRoot.querySelector('.total-price');
+        const totalElement = this.shadow!.querySelector('.total-price') as HTMLElement;
         totalElement.textContent = `$${total.toFixed(2)}`;
     }
 
     showLoader() {
         this.isLoading = true;
-        this.shadowRoot.querySelector('.overlay')?.classList.add('show');
-        this.shadowRoot.querySelector('.loader')?.classList.add('show');
+        this.shadow!.querySelector('.overlay')?.classList.add('show');
+        this.shadow!.querySelector('.loader')?.classList.add('show');
     }
 
     hideLoader() {
         this.isLoading = false;
-        this.shadowRoot.querySelector('.loader').classList.remove('show');
+        (this.shadow!.querySelector('.loader') as HTMLElement).classList.remove('show');
     }
 
     showModal() {
-        this.shadowRoot.querySelector('.modal').classList.add('show');
+        (this.shadow!.querySelector('.modal') as HTMLElement).classList.add('show');
         document.body.style.overflow = 'hidden';
     }
 
-    showError(message) {
-        const notification = this.shadowRoot.querySelector('.notification');
+    showError(message: string) {
+        const notification = this.shadow!.querySelector('.notification') as HTMLElement;
         notification.textContent = message;
         notification.classList.add('show');
         
@@ -591,7 +603,7 @@ class Popup extends HTMLElement {
             product: this.productData,
             size: this.selectedSize,
             additives: this.selectedAdditives,
-            total: this.shadowRoot.querySelector('.total-price').textContent
+            total: (this.shadow!.querySelector('.total-price') as HTMLElement).textContent
         };
 
         console.log('Added to cart:', cartItem);
@@ -607,8 +619,8 @@ class Popup extends HTMLElement {
     }
 
     close() {
-        this.shadowRoot.querySelector('.overlay').classList.remove('show');
-        this.shadowRoot.querySelector('.modal').classList.remove('show');
+        (this.shadow!.querySelector('.overlay')  as HTMLElement).classList.remove('show');
+        (this.shadow!.querySelector('.modal') as HTMLElement).classList.remove('show');
         document.body.style.overflow = '';
         
         // Reset selections
@@ -616,7 +628,7 @@ class Popup extends HTMLElement {
         this.selectedAdditives = [];
     }
 
-    activeButton(container) {
+    activeButton(container: HTMLElement) {
         const tabButtons = container.querySelectorAll('tab-button');
         console.log(tabButtons);
         tabButtons.forEach((button, index) => {

@@ -1,8 +1,8 @@
 import js from "@eslint/js";
 import globals from "globals";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default [
+export default defineConfig([
   { 
     root: true,
     env: {
@@ -24,6 +24,5 @@ export default [
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
     },
     languageOptions: { globals: globals.browser } 
-  },
-  tseslint.configs.recommended,
-]
+  }
+])
