@@ -1,11 +1,12 @@
 class SliderCard extends HTMLElement {
+    shadow: ShadowRoot
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.shadow = this.attachShadow({ mode: 'open' });
   }
 
     connectedCallback() {
-    this.shadowRoot.innerHTML = `
+    this.shadow.innerHTML = `
         <style>
             .slider-card {
                 width: 480px;
