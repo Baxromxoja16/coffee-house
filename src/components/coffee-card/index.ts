@@ -1,11 +1,12 @@
 class CoffeeCard extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+    shadow: ShadowRoot
+    constructor() {
+        super();
+        this.shadow = this.attachShadow({ mode: 'open' });
+    }
 
     connectedCallback() {
-    this.shadowRoot.innerHTML = `
+    this.shadow.innerHTML = `
         <style>
             .coffee-card {
                 width: 310px;
