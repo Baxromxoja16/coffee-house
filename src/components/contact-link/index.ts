@@ -1,11 +1,13 @@
 class ContactLink extends HTMLElement {
+    shadow: ShadowRoot
+
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.shadow = this.attachShadow({ mode: 'open' });
     }
 
     connectedCallback() {
-        this.shadowRoot.innerHTML = `<style>
+        this.shadow.innerHTML = `<style>
             .contact-link {
                 letter-spacing: 0;
                 font-size: 16px;
