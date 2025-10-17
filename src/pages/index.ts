@@ -1,3 +1,6 @@
+import '../components/error/index'
+import AppError from '../components/error/index';
+
 interface FavoriteProduct {
   id: number;
   name: string;
@@ -10,6 +13,9 @@ interface FavoriteProduct {
 
 interface ApiResponse {
   data: FavoriteProduct[];
+  error?: string;
+  isTestError?: boolean;
+  timestamp?: Date
 }
 
 class CarouselSlider {
@@ -19,6 +25,7 @@ class CarouselSlider {
   private pagination: HTMLElement[];
   private prevButton: HTMLElement | null;
   private nextButton: HTMLElement | null;
+  public err: HTMLElement | null;
 
   private currentIndex = 0;
   private autoPlayInterval = 6000;
@@ -31,11 +38,14 @@ class CarouselSlider {
   private touchStartX = 0;
   private touchEndX = 0;
 
-  private loader: boolean = false;
+  public loader: boolean = false;
 
   constructor(sliderElement: HTMLElement) {
     this.slider = sliderElement;
+    this.err = document.getElementById('appError');
+
     const items = this.slider.querySelector('.slider-items');
+
     if (!items || !(items instanceof HTMLElement)) {
       throw new Error('Slider: .slider-items element not found');
     }
@@ -64,11 +74,14 @@ class CarouselSlider {
       this.loader = true;
       const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products/favorites');
       const result: ApiResponse = await response.json();
+      if(result.error) {
+        (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
+        return;
+    };
       const products = result.data;
       this.loader = false;
 
       this.sliderItems.innerHTML = '';
-      console.log(products)
       products.forEach((product, index) => {
         const card = this.createSliderCard(product, index + 1);
         this.sliderItems.appendChild(card);
@@ -88,6 +101,7 @@ class CarouselSlider {
 
     } catch (error) {
       this.loader = false;
+      (this.err as AppError)?.show('Server bilan muammo yuz berdi. Iltimos, qayta urinib ko\'ring.');
       console.error('Error loading favorites:', error);
     }
   }

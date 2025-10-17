@@ -1,3 +1,4 @@
+import AppError from "../components/error";
 import { Categories,  Category,  IProduct } from "../types/interfaces";
 
 class MenuPage {
@@ -6,6 +7,7 @@ class MenuPage {
     currentCategory: Category;
     displayLimit: number;
     isLoadMoreVisible: boolean;
+    err: HTMLElement | null;
 
     constructor() {
         this.products = [];
@@ -17,6 +19,7 @@ class MenuPage {
         this.currentCategory = Category.Coffee;
         this.displayLimit = 4;
         this.isLoadMoreVisible = false;
+        this.err = document.getElementById('appError');
         
         this.init();
     }
@@ -32,9 +35,17 @@ class MenuPage {
     async loadProducts() {
         try {
             const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products');
-            this.products = (await response.json()).data;
-            console.log(this.products)
+            const data = await response.json();
+
+            if(data.error) {
+                (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
+                return;
+            };
+
+            this.products = data.data;
+
         } catch (error) {
+            (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
             console.error('Error loading products:', error);
         }
     }

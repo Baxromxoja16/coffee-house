@@ -1,4 +1,5 @@
 import { Additive, IProductDetail, SizeEntry, SizesMap } from "../../types/interfaces";
+import AppError from "../error";
 
 class Popup extends HTMLElement {
     shadow: ShadowRoot | null;
@@ -7,6 +8,7 @@ class Popup extends HTMLElement {
     selectedAdditives: string[];
     isLoading: boolean;
     productId: string | null
+    public err: HTMLElement | null;
 
     constructor() {
         super();
@@ -16,6 +18,7 @@ class Popup extends HTMLElement {
         this.selectedAdditives = [];
         this.isLoading = false;
         this.productId = null;
+        this.err = document.getElementById('appError');
     }
   
     connectedCallback() {
@@ -383,7 +386,7 @@ class Popup extends HTMLElement {
             this.showModal();
         } catch (error) {
             this.hideLoader();
-            this.showError('Something went wrong. Please, try again');
+            (this.err as AppError)?.show('Something went wrong. Please, try again');
             console.error('Error fetching product:', error);
         }
     }
