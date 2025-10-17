@@ -247,27 +247,6 @@ class Popup extends HTMLElement {
                 width: 100% !important;
             }
 
-            .notification {
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #ff4444;
-                color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                font-size: 14px;
-                font-weight: 600;
-                z-index: 1000;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                display: none;
-                animation: slideDown 0.3s ease;
-            }
-
-            .notification.show {
-                display: block;
-            }
-
             @keyframes slideDown {
                 from {
                     transform: translateX(-50%) translateY(-20px);
@@ -295,7 +274,6 @@ class Popup extends HTMLElement {
         </style>
 
         <div>
-            <div class="notification"></div>
             <div class="overlay show"></div>
             <div class="loader show">
                 <div class="loader-spinner"></div>
@@ -386,6 +364,7 @@ class Popup extends HTMLElement {
             this.showModal();
         } catch (error) {
             this.hideLoader();
+            this.hideModal();
             (this.err as AppError)?.show('Something went wrong. Please, try again');
             console.error('Error fetching product:', error);
         }
@@ -590,14 +569,10 @@ class Popup extends HTMLElement {
         document.body.style.overflow = 'hidden';
     }
 
-    showError(message: string) {
-        const notification = this.shadow!.querySelector('.notification') as HTMLElement;
-        notification.textContent = message;
-        notification.classList.add('show');
-        
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 3000);
+    hideModal() {
+        (this.shadow!.querySelector('.modal') as HTMLElement).classList.remove('show');
+        (this.shadow!.querySelector('.overlay') as HTMLElement).classList.remove('show');
+        document.body.style.overflow = 'hidden';
     }
 
     addToCart() {
