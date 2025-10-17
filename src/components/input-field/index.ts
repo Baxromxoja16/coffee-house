@@ -1,5 +1,6 @@
 class InputField extends HTMLElement {
-    shadow: ShadowRoot
+    shadow: ShadowRoot;
+    name: string | null = null;
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
@@ -8,6 +9,9 @@ class InputField extends HTMLElement {
     async connectedCallback() {
         const label = this.getAttribute('label');
         const type = this.getAttribute('type');
+        const name = this.getAttribute('name');
+        this.name = name || null;
+
         this.shadow.innerHTML = `
         <style>
             * {
@@ -61,9 +65,13 @@ class InputField extends HTMLElement {
         </style>
         <div class="input-field">
             <label for="${label || 'Input'}">${label || 'Input'}</label>
-            <input type="${type || 'text'}" id="${label || 'Input'}" placeholder="Placeholder" />
+            <input type="${type || 'text'}" id="${label || 'Input'}" name="${name}" placeholder="Placeholder" />
         </div>
         `
+    }
+
+    get value(): { [key: string]: string | null} {
+        return {[this.name || '']: (this.shadow.querySelector('input') as HTMLInputElement).value || null};
     }
 }
 

@@ -72,3 +72,24 @@ export interface ApiErrorResponse {
     isTestError?: boolean;
     timestamp?: string; // ISO string
 }
+
+export interface AuthResponse {
+    data: AuthSuccessResponse,
+    message: string
+}
+
+export interface AuthSuccessResponse {
+    access_token: string;
+    user: User;
+}
+
+export interface User {
+    id?: number;
+    login: string;
+    city: string;
+    street: string;
+    houseNumber: number;
+    paymentMethod: 'cash' | 'card';
+    createdAt?: string; // ISO format
+}
+  

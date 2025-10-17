@@ -17,14 +17,80 @@
     <style>
         .form-field {
             display: flex;
-            align-items: center;
             flex-wrap: wrap;
             gap: 24px;
         }
         .button {
             max-width: 200px;
             margin: auto;
+            margin-top: 40px;
+            margin-bottom: 100px;
         }
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .input-field .radio-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .input-field label {
+            font-family: Inter;
+            font-weight: 400;
+            font-style: Regular;
+            font-size: 16px;
+            color: var(--dark);
+        }
+        .input-field .title-label {
+            margin-bottom: 9px;
+        }
+        
+        input[type="radio" i] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+            /* size matches your SVG: 16x16 */
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            min-height: 16px;
+            box-sizing: border-box;
+
+            /* make shape rounded like the SVG corners (rx 7.5 => circle-ish). We'll use border-radius 8 for full rounding */
+            border-radius: 8px;
+
+            /* default (unchecked) look: cream fill + dark border */
+            background-color: #E1D4C9; /* fill from your SVG */
+            border: 1px solid #665F55; /* stroke from your SVG */
+
+            /* align with label text */
+            vertical-align: middle;
+            margin: 0 6px 0 0; /* small gap between radio and following label text if you place input before label */
+            cursor: pointer;
+
+            /* smooth transition for state changes */
+            transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        } 
+
+        input[type="radio" i]:focus,
+        input[type="radio" i]:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102,95,85,0.12); /* subtle focus ring */
+        }
+
+        input[type="radio" i]:checked {
+            background-color: #665F55; /* dark filled rect from checked SVG */
+            border-color: #665F55;
+
+            /* radial-gradient creates the inner cream circle perfectly centered */
+            background-image: radial-gradient(circle at 50% 50%, #E1D4C9 0 40%, transparent 47%);
+            background-repeat: no-repeat;
+            background-size: 100% 97%; /* adjust for inner circle size */
+        }
+        
     </style>
     <title>Register</title>
 </head>
@@ -37,12 +103,21 @@
             <h1 class="main-title">Registration</h1>
 
             <form class="form-field">
-                <input-field type="text" label="Login"></input-field>
-                <input-field type="password" label="Password"></input-field>
-                <input-field type="password" label="Confirm Password"></input-field>
-                <input-field type="text" label="City"></input-field>
-                <input-field type="text" label="Street"></input-field>
-                <input-field type="password" label="House number"></input-field>
+                <input-field type="text" name="login" label="Login"></input-field>
+                <input-field type="password" name="password" label="Password"></input-field>
+                <input-field type="password" name="confirmPassword" label="Confirm Password"></input-field>
+                <input-field type="text" name="city" label="City"></input-field>
+                <input-field type="text" name="street" label="Street"></input-field>
+                <input-field type="password" name="houseNumber" label="House number"></input-field>
+                <div class="input-field">
+                    <label class="title-label">Pay by</label>
+                    <div class="radio-container">
+                        <input type="radio" id="cash" name="paymentMethod">
+                        <label for="cash">Cash</label>
+                        <input type="radio" id="card" name="paymentMethod">
+                        <label for="card">Card</label>
+                    </div>
+                </div>
             </form>
 
             <div class="button">
@@ -50,6 +125,8 @@
             </div>
         </div>
     </main>
+
+    <custom-footer></custom-footer>
 
 
     
