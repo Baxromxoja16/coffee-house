@@ -118,15 +118,13 @@ class MenuPage {
             const category = categories[index];
             
             if (index === 0) {
-                button.setAttribute('active', 'true');
+                button.children[1].classList.add('active')
             }
             
             button.addEventListener('click', () => {
                 tabButtons.forEach(btn => {btn.removeAttribute('active'); btn.children[1].classList.remove('active')});
                 button.children[1].classList.add('active')
 
-                button.setAttribute('active', 'true');
-                
                 this.currentCategory = category;
                 this.displayProducts();
             });
@@ -158,6 +156,7 @@ class MenuPage {
     displayProducts() {
         const cardsContent = document.querySelector('.cards-content');
         const productsToShow = this.categories[this.currentCategory];
+        console.log(productsToShow);
         
         if (!cardsContent || !productsToShow) return;
         
