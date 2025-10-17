@@ -29,7 +29,7 @@ class DropdownField extends HTMLElement {
         select {
             display: block;
             width: 100%;
-            padding: 14px 16px;
+            padding: 16px;
             border-radius: 12px;
             border: 1px solid var(--boder-ligtht);
             color: var(--dark);

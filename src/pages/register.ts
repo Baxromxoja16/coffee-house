@@ -207,6 +207,7 @@ class Register {
                 this.responseData = responseData;
                 console.log(this.responseData);
             } else {
+                window.location.href = "index.html";
                 alert((responseData as ApiResponse<AuthSuccessResponse>).message);
             }
         } catch (error) {

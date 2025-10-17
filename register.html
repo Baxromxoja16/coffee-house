@@ -29,9 +29,14 @@
 
     <style>
         .form-field {
-            display: flex;
-            flex-wrap: wrap;
             gap: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .input-field,
+        input-field,
+        dropdown-field {
+            grid-column: span 1;
         }
         .button {
             max-width: 200px;
