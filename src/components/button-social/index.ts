@@ -1,11 +1,12 @@
 class SocialButton extends HTMLElement {
+    shadow: ShadowRoot;
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.shadow = this.attachShadow({ mode: 'open' });
     }
 
     connectedCallback() {
-        this.shadowRoot.innerHTML = `
+        this.shadow.innerHTML = `
         <style>
             .social-button {
                 display: flex;
@@ -38,22 +39,24 @@ class SocialButton extends HTMLElement {
         </button>
         `;
 
-        const svgElement = this.shadowRoot.querySelector('slot[name="icon"]');
-        const buttonElement = this.shadowRoot.querySelector('.social-button');
+        const svgElement = this.shadow.querySelector('slot[name="icon"]') as HTMLSlotElement;
+        const buttonElement = this.shadow.querySelector('.social-button') as HTMLElement;
         if (svgElement) {
             const assignedNodes = svgElement.assignedNodes();
             assignedNodes.forEach(node => {
-                const paths = node.querySelectorAll('path');
-                paths.forEach(p => {
-                    buttonElement.addEventListener('mouseover', () => {
-                        p.style.transition = '0.3s';
-                        p.style.stroke = 'var(--dark)';
+                if (node instanceof Element) {
+                    const paths = node.querySelectorAll('path');
+                    paths.forEach(p => {
+                        buttonElement.addEventListener('mouseover', () => {
+                            p.style.transition = '0.3s';
+                            p.style.stroke = 'var(--dark)';
+                        });
+                        buttonElement.addEventListener('mouseout', () => {
+                            p.style.transition = '0.3s';
+                            p.style.stroke = 'var(--light)';
+                        });
                     });
-                    buttonElement.addEventListener('mouseout', () => {
-                        p.style.transition = '0.3s';
-                        p.style.stroke = 'var(--light)';
-                    });
-                });
+                }
             });
         }
     }

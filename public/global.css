@@ -24,6 +24,7 @@ html {
     --boder-ligtht: rgba(193, 182, 173, 1);
     --boder-dark: rgba(102, 95, 85, 1);
     --white: rgba(255,255,255, 1);
+    --placeholder: rgba(161, 168, 179, 1);
 }
 
 .container {
