@@ -1,7 +1,21 @@
+interface FavoriteProduct {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  discountPrice?: string;
+  category: string;
+  image?: string;
+}
+
+interface ApiResponse {
+  data: FavoriteProduct[];
+}
+
 class CarouselSlider {
   private slider: HTMLElement;
   private sliderItems: HTMLElement;
-  private slides: HTMLElement[];
+  private slides: HTMLElement[] = [];
   private pagination: HTMLElement[];
   private prevButton: HTMLElement | null;
   private nextButton: HTMLElement | null;
@@ -25,24 +39,88 @@ class CarouselSlider {
     }
     this.sliderItems = items;
 
-    // slides are custom elements <slider-card>, treat them as HTMLElements
-    this.slides = Array.from(this.sliderItems.querySelectorAll('slider-card')) as HTMLElement[];
-
     this.pagination = Array.from(this.slider.querySelectorAll('.slider-pagination span')) as HTMLElement[];
-
     this.prevButton = this.slider.querySelector('.slider-buttons button-carousel:first-child');
     this.nextButton = this.slider.querySelector('.slider-buttons button-carousel:last-child');
 
-    this.progressStep = 100 / (this.autoPlayInterval / 50); // matches original logic
+    this.progressStep = 100 / (this.autoPlayInterval / 50);
 
     this.init();
   }
 
-  private init(): void {
+  private async init(): Promise<void> {
+    await this.loadFavorites();
+    this.slides = Array.from(this.sliderItems.querySelectorAll('slider-card')) as HTMLElement[];
     this.setupSlides();
     this.setupEventListeners();
     this.showSlide(this.currentIndex);
     this.startAutoPlay();
+  }
+
+  private async loadFavorites(): Promise<void> {
+    try {
+      const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products/favorites');
+      const result: ApiResponse = await response.json();
+      const products = result.data;
+
+      this.sliderItems.innerHTML = '';
+      console.log(products)
+      products.forEach((product, index) => {
+        const card = this.createSliderCard(product, index + 1);
+        this.sliderItems.appendChild(card);
+      });
+
+      // Update pagination dots count
+      const paginationContainer = this.slider.querySelector('.slider-pagination');
+      if (paginationContainer) {
+        paginationContainer.innerHTML = '';
+        products.forEach((_, index) => {
+          const span = document.createElement('span');
+          if (index === 0) span.classList.add('active');
+          paginationContainer.appendChild(span);
+        });
+        this.pagination = Array.from(paginationContainer.querySelectorAll('span')) as HTMLElement[];
+      }
+
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    }
+  }
+
+  private createSliderCard(product: FavoriteProduct, imageIndex: number): HTMLElement {
+    const card = document.createElement('slider-card');
+
+    const img = document.createElement('img');
+    img.slot = 'image';
+    img.src = `./images/coffee-img/coffee-slider-${imageIndex}.png`;
+    img.alt = product.name;
+
+    const title = document.createElement('h2');
+    title.slot = 'content-title';
+    title.className = 'title';
+    title.textContent = product.name;
+
+    const text = document.createElement('p');
+    text.slot = 'content-text';
+    text.className = 'text';
+    text.textContent = product.description;
+
+    const priceSpan = document.createElement('span');
+    priceSpan.slot = 'content-price';
+    priceSpan.className = 'price';
+
+    if (product.discountPrice) {
+      priceSpan.innerHTML = `<span style="text-decoration: line-through; opacity: 0.6; margin-right: 8px;">$${product.price}</span>$${product.discountPrice}`;
+    } else {
+      priceSpan.textContent = `$${product.price}`;
+    }
+
+    card.appendChild(img);
+    card.appendChild(title);
+    card.appendChild(text);
+    card.appendChild(priceSpan);
+
+    return card;
   }
 
   private setupSlides(): void {
@@ -116,7 +194,6 @@ class CarouselSlider {
 
     this.animateTransition(currentSlide, nextSlide, direction);
 
-    // update pagination (guard indexes exist)
     if (this.pagination[this.currentIndex]) {
       this.pagination[this.currentIndex].classList.remove('active');
     }
@@ -135,7 +212,6 @@ class CarouselSlider {
     this.sliderItems.style.height = `${currentHeight}px`;
     this.sliderItems.style.position = 'relative';
 
-    // prepare next slide
     nextSlide.style.display = 'block';
     nextSlide.style.position = 'absolute';
     nextSlide.style.top = '0';
@@ -145,7 +221,6 @@ class CarouselSlider {
     nextSlide.style.opacity = '1';
     nextSlide.style.transition = 'none';
 
-    // prepare current slide
     currentSlide.style.position = 'absolute';
     currentSlide.style.top = '0';
     currentSlide.style.left = '0';
@@ -153,7 +228,6 @@ class CarouselSlider {
     currentSlide.style.transform = 'translateX(0)';
     currentSlide.style.opacity = '1';
 
-    // force reflow
     void nextSlide.offsetHeight;
 
     nextSlide.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
@@ -167,9 +241,7 @@ class CarouselSlider {
       nextSlide.style.opacity = '1';
     });
 
-    // cleanup after transition duration (500ms)
     window.setTimeout(() => {
-      // cleanup currentSlide styles
       currentSlide.style.display = 'none';
       currentSlide.style.position = '';
       currentSlide.style.transform = '';
@@ -179,7 +251,6 @@ class CarouselSlider {
       currentSlide.style.top = '';
       currentSlide.style.transition = '';
 
-      // cleanup nextSlide styles
       nextSlide.style.position = '';
       nextSlide.style.transform = '';
       nextSlide.style.transition = '';
@@ -188,7 +259,6 @@ class CarouselSlider {
       nextSlide.style.top = '';
       nextSlide.style.opacity = '';
 
-      // adjust container height to new slide height
       const newHeight = nextSlide.offsetHeight;
       this.sliderItems.style.height = `${newHeight}px`;
     }, 500);
@@ -284,11 +354,10 @@ class CarouselSlider {
   }
 }
 
-/* Initialize on DOMContentLoaded */
 document.addEventListener('DOMContentLoaded', () => {
   const sliderElement = document.querySelector<HTMLElement>('#slider');
   if (sliderElement) {
     const carousel = new CarouselSlider(sliderElement);
-    (window as Window as { carouselInstance?: CarouselSlider }).carouselInstance = carousel; // typed and safe
+    (window as Window & { carouselInstance?: CarouselSlider }).carouselInstance = carousel;
   }
 });

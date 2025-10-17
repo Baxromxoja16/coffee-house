@@ -50,6 +50,10 @@
     margin-bottom: 36px;
 }
 
+.slider .slider-box .slider-items {
+    overflow: hidden;
+}
+
 .slider .slider-box .slider-buttons button-carousel {
     position: absolute;
     top: 50%;
