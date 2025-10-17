@@ -31,6 +31,8 @@ class CarouselSlider {
   private touchStartX = 0;
   private touchEndX = 0;
 
+  private loader: boolean = false;
+
   constructor(sliderElement: HTMLElement) {
     this.slider = sliderElement;
     const items = this.slider.querySelector('.slider-items');
@@ -59,9 +61,11 @@ class CarouselSlider {
 
   private async loadFavorites(): Promise<void> {
     try {
+      this.loader = true;
       const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products/favorites');
       const result: ApiResponse = await response.json();
       const products = result.data;
+      this.loader = false;
 
       this.sliderItems.innerHTML = '';
       console.log(products)
@@ -83,6 +87,7 @@ class CarouselSlider {
       }
 
     } catch (error) {
+      this.loader = false;
       console.error('Error loading favorites:', error);
     }
   }
@@ -203,6 +208,16 @@ class CarouselSlider {
 
     this.currentIndex = index;
     this.resetProgress();
+  }
+
+  showLoader() {
+    this.loader = true;
+    document.querySelector('.loader')?.classList.add('show');
+  }
+
+  hideLoader() {
+    this.loader = false;
+    (document.querySelector('.loader') as HTMLElement).classList.remove('show');
   }
 
   private animateTransition(currentSlide: HTMLElement, nextSlide: HTMLElement, direction: 'next' | 'prev'): void {
