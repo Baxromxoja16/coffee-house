@@ -89,7 +89,6 @@ class Login {
             });
 
             const responseData: ApiErrorResponse | ApiResponse<AuthSuccessResponse> = await response.json();
-            console.log(responseData);
 
             if ('error' in responseData && responseData.error) {
                 (this.err as AppError)?.show('Incorrect login or password');
@@ -101,8 +100,10 @@ class Login {
                 console.log(this.responseData);
             } else {
                 const message = (responseData as ApiResponse<AuthSuccessResponse>).message || 'Registration successful!';
-                console.log(message);
+                const data = (responseData as ApiResponse<AuthSuccessResponse>);
+                console.log(data);
                 localStorage.setItem('toastMessage', message);
+                localStorage.setItem('userData', JSON.stringify(data));
                 window.location.href = "index.html";
             }
         } catch (error) {
