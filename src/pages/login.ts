@@ -101,7 +101,7 @@ class Login {
             } else {
                 const message = (responseData as ApiResponse<AuthSuccessResponse>).message || 'Registration successful!';
                 const data = (responseData as ApiResponse<AuthSuccessResponse>);
-                console.log(data);
+
                 localStorage.setItem('toastMessage', message);
                 localStorage.setItem('userData', JSON.stringify(data));
                 window.location.href = "index.html";
