@@ -1,5 +1,5 @@
 import { Additive, IProductDetail, SizeEntry, SizesMap } from "../../types/interfaces";
-import AppError from "../error";
+import AppError from "../../shared/error";
 
 class Popup extends HTMLElement {
     shadow: ShadowRoot | null;

@@ -1,4 +1,4 @@
-import AppError from "../components/error";
+import AppError from "../shared/error";
 import { Categories,  Category,  IProduct } from "../types/interfaces";
 
 class MenuPage {

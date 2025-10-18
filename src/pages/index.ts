@@ -1,5 +1,6 @@
-import '../components/error/index'
-import AppError from '../components/error/index';
+import '../shared/error/index'
+import AppError from '../shared/error';
+import AppSuccess from '../shared/succes';
 
 interface FavoriteProduct {
   id: number;
@@ -101,7 +102,6 @@ class CarouselSlider {
 
     } catch (error) {
       this.loader = false;
-      (this.err as AppError)?.show('Server bilan muammo yuz berdi. Iltimos, qayta urinib ko\'ring.');
       console.error('Error loading favorites:', error);
     }
   }
@@ -388,5 +388,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sliderElement) {
     const carousel = new CarouselSlider(sliderElement);
     (window as Window & { carouselInstance?: CarouselSlider }).carouselInstance = carousel;
+  }
+  
+  const message = localStorage.getItem('toastMessage');
+  if (message) {
+    const toast = document.getElementById('appSuccess') as AppSuccess;
+    toast.show(message);
+    localStorage.removeItem('toastMessage');
   }
 });

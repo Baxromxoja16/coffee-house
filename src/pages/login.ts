@@ -1,14 +1,17 @@
-import AppError from "../components/error";
+import AppError from "../shared/error";
 import InputField from "../components/input-field";
 import { ApiErrorResponse, ApiResponse, AuthSuccessResponse } from "../types/interfaces";
+import AppSuccess from "../shared/succes";
 
 class Login {
     public err: HTMLElement | null;
+    public success: HTMLElement | null;
     error: string = '';
     responseData: AuthSuccessResponse | {} = {};
     
     constructor() {
         this.err = document.getElementById('appError');
+        this.success = document.getElementById('appSuccess');
         this.setupSubmitButton()
     }
 
@@ -100,8 +103,10 @@ class Login {
                 this.responseData = responseData;
                 console.log(this.responseData);
             } else {
+                const message = (responseData as ApiResponse<AuthSuccessResponse>).message || 'Registration successful!';
+                console.log(message);
+                localStorage.setItem('toastMessage', message);
                 window.location.href = "index.html";
-                alert((responseData as ApiResponse<AuthSuccessResponse>).message);
             }
         } catch (error) {
             console.error('Error during registration:', error);

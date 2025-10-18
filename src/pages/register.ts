@@ -1,7 +1,7 @@
 import InputField from "../components/input-field";
 import DropdownField from "../components/dropdown-field";
 import { ApiErrorResponse, ApiResponse, AuthSuccessResponse } from "../types/interfaces";
-import AppError from "../components/error";
+import AppError from "../shared/error";
 
 interface CityStreets {
     [key: string]: string[];
