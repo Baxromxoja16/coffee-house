@@ -1,12 +1,10 @@
 import AppError from "../shared/error";
 import InputField from "../components/input-field";
 import { ApiErrorResponse, ApiResponse, AuthSuccessResponse } from "../types/interfaces";
-import AppSuccess from "../shared/succes";
 
 class Login {
     public err: HTMLElement | null;
     public success: HTMLElement | null;
-    error: string = '';
     responseData: AuthSuccessResponse | {} = {};
     
     constructor() {
@@ -94,8 +92,7 @@ class Login {
             console.log(responseData);
 
             if ('error' in responseData && responseData.error) {
-                this.error = responseData.error;
-                (this.err as AppError)?.show(responseData.error);
+                (this.err as AppError)?.show('Incorrect login or password');
                 return;
             }
 
