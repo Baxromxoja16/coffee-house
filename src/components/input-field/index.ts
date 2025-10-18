@@ -24,23 +24,27 @@ class InputField extends HTMLElement {
             return { isValid: true, message: '' };
         },
         confirmPassword: (value: string) => {
-            const passwordField = document.querySelector('input-field[name="password"]') as InputField;
-            const password = passwordField?.getValue() || '';
-            if (value !== password) {
-                return { isValid: false, message: 'Passwords do not match' };
-            }
-            if (value.length < 6) {
-                return { isValid: false, message: 'Password must be at least 6 characters' };
-            }
-            if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
-                return { isValid: false, message: 'Password must contain at least 1 special character' };
+            if(window.location.href.includes('register')) {
+                const passwordField = document.querySelector('input-field[name="password"]') as InputField;
+                const password = passwordField?.getValue() || '';
+                if (value !== password) {
+                    return { isValid: false, message: 'Passwords do not match' };
+                }
+                if (value.length < 6) {
+                    return { isValid: false, message: 'Password must be at least 6 characters' };
+                }
+                if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+                    return { isValid: false, message: 'Password must contain at least 1 special character' };
+                }
             }
             return { isValid: true, message: '' };
         },
         houseNumber: (value: string) => {
-            const num = parseInt(value);
-            if (isNaN(num) || num <= 1) {
-                return { isValid: false, message: 'House number must be greater than 1' };
+            if(window.location.href.includes('register')) {
+                const num = parseInt(value);
+                if (isNaN(num) || num <= 1) {
+                    return { isValid: false, message: 'House number must be greater than 1' };
+                }
             }
             return { isValid: true, message: '' };
         }
