@@ -250,7 +250,7 @@ class Navbar extends HTMLElement {
     
 
     getCartCount() {
-        return JSON.parse(localStorage.getItem('carts') || "[]").length || 0;
+        return JSON.parse(localStorage.getItem('cart') || "[]").length || 0;
     }
 
     setupBurgerMenu() {

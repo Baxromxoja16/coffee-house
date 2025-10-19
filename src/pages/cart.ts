@@ -1,12 +1,6 @@
-import { IProduct, User } from "../types/interfaces";
-
-interface CartItem extends IProduct {
-    size?: string;
-    additives?: string[];
-    quantity: number;
-    totalPrice: string;
-    totalDiscountPrice?: string;
-}
+import AppError from "../shared/error";
+import AppSuccess from "../shared/succes";
+import { CartItem, User } from "../types/interfaces";
 
 class Cart {
     private cart: CartItem[] = [];
@@ -373,7 +367,7 @@ class Cart {
     private showError(message: string): void {
         const errorElement = document.getElementById('appError');
         if (errorElement && 'show' in errorElement) {
-            (errorElement as any).show(message);
+            (errorElement as AppError).show(message);
         } else {
             alert(message);
         }
@@ -382,7 +376,7 @@ class Cart {
     private showSuccess(message: string): void {
         const successElement = document.getElementById('appSuccess');
         if (successElement && 'show' in successElement) {
-            (successElement as any).show(message);
+            (successElement as AppSuccess).show(message);
         } else {
             alert(message);
         }

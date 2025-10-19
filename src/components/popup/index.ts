@@ -1,5 +1,7 @@
-import { Additive, IProductDetail, SizeEntry, SizesMap } from "../../types/interfaces";
+import { Additive, CartItem, IProductDetail, SizeEntry, SizesMap } from "../../types/interfaces";
 import AppError from "../../shared/error";
+import { saveCartAndNotify } from "../../shared/save-cart-notify";
+import AppSuccess from "../../shared/succes";
 
 class Popup extends HTMLElement {
     shadow: ShadowRoot | null;
@@ -9,6 +11,7 @@ class Popup extends HTMLElement {
     isLoading: boolean;
     productId: string | null
     public err: HTMLElement | null;
+    public success: HTMLElement | null;
 
     constructor() {
         super();
@@ -19,6 +22,7 @@ class Popup extends HTMLElement {
         this.isLoading = false;
         this.productId = null;
         this.err = document.getElementById('appError');
+        this.success = document.getElementById('appSuccess');
     }
   
     connectedCallback() {
@@ -576,23 +580,8 @@ class Popup extends HTMLElement {
     }
 
     addToCart() {
-        // Cart logic here
-        const cartItem = {
-            product: this.productData,
-            size: this.selectedSize,
-            additives: this.selectedAdditives,
-            total: (this.shadow!.querySelector('.total-price') as HTMLElement).textContent
-        };
-
-        console.log('Added to cart:', cartItem);
-        
-        // Dispatch custom event
-        this.dispatchEvent(new CustomEvent('product-added', {
-            detail: cartItem,
-            bubbles: true,
-            composed: true
-        }));
-
+        saveCartAndNotify(this.productData);
+        (this.success as AppSuccess).show('Added to cart')
         this.close();
     }
 
