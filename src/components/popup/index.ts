@@ -251,6 +251,15 @@ class Popup extends HTMLElement {
                 width: 100% !important;
             }
 
+            .discount-price {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 125%;
+                color: var(--dark);
+                opacity: 0.5;
+                text-decoration: line-through
+            }
+
             @keyframes slideDown {
                 from {
                     transform: translateX(-50%) translateY(-20px);
@@ -305,7 +314,7 @@ class Popup extends HTMLElement {
 
                     <div class="total">
                         <p class="total-label">Total:</p>
-                        <p class="total-price">$0.00</p>
+                        <p class="total-price"><span class="discount-price">$0.00</span> <span class="price">$0.00</span></p>
                     </div>
 
                     <div class="modal-alert">
@@ -535,26 +544,38 @@ class Popup extends HTMLElement {
     updateTotal() {
         if (!this.productData) return;
     
-        let total = 0;
+        let totalPrice = 0;
+        let totalDiscountPrice = 0;
     
         // Get selected size price
         const selectedSizeData = this.productData.sizes?.[this.selectedSize];
         if (selectedSizeData) {
-            const sizePrice = parseFloat(selectedSizeData.discountPrice || selectedSizeData.price);
-            total += sizePrice;
+            totalPrice += parseFloat(selectedSizeData.price);
+            totalDiscountPrice += parseFloat(selectedSizeData.discountPrice || selectedSizeData.price);
         }
     
-
+        // Add additives prices
         this.selectedAdditives.forEach(additiveName => {
             const additive = this.productData.additives?.find(a => a.name === additiveName);
             if (additive) {
-                const additivePrice = parseFloat(additive.discountPrice || additive.price);
-                total += additivePrice;
+                totalPrice += parseFloat(additive.price);
+                totalDiscountPrice += parseFloat(additive.discountPrice || additive.price);
             }
         });
     
         const totalElement = this.shadow!.querySelector('.total-price') as HTMLElement;
-        totalElement.textContent = `$${total.toFixed(2)}`;
+        const discountElement = totalElement.querySelector('.discount-price') as HTMLElement;
+        const priceElement = totalElement.querySelector('.price') as HTMLElement;
+    
+        // Show discount price if there's a difference
+        if (totalDiscountPrice !== totalPrice) {
+            discountElement.style.display = 'inline';
+            discountElement.textContent = `$${totalPrice.toFixed(2)}`;
+            priceElement.textContent = `$${totalDiscountPrice.toFixed(2)}`;
+        } else {
+            discountElement.style.display = 'none';
+            priceElement.textContent = `$${totalPrice.toFixed(2)}`;
+        }
     }
 
     showLoader() {

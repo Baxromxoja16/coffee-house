@@ -39,6 +39,11 @@ class CoffeeCard extends HTMLElement {
                 padding: 20px;
                 justify-content: space-between;
             }
+            .coffee-content .cart-price {
+                display: flex;
+                align-items: start;
+                gap: 12px;
+            }
             .coffee-content ::slotted(h2) {
                 font-size: 24px;
                 font-weight: 600;
@@ -59,6 +64,14 @@ class CoffeeCard extends HTMLElement {
                 line-height: 125%;
                 color: var(--dark);
             }
+            .coffee-content ::slotted(.content-discountPrice) {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 125%;
+                color: var(--dark);
+                opacity: 0.5;
+                text-decoration: line-through
+            }
         </style>
         <div class="coffee-card">
             <div class="coffee-image">
@@ -67,7 +80,10 @@ class CoffeeCard extends HTMLElement {
             <div class="coffee-content">
                 <slot name="content-title"></slot>
                 <slot name="content-text"></slot>
-                <slot name="content-price"></slot>
+                <div class="cart-price">
+                    <slot name="content-price"></slot>
+                    <slot name="content-discountPrice"></slot>
+                </div>
             </div>
         </div>
     `;

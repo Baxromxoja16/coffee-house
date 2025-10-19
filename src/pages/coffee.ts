@@ -101,11 +101,17 @@ class MenuPage {
         price.slot = 'content-price';
         price.className = 'price';
         price.textContent = `$${product.price}`;
+
+        const discountPrice = document.createElement('span');
+        discountPrice.slot = 'content-discountPrice';
+        discountPrice.className = 'content-discountPrice';
+        discountPrice.textContent = `$${product.discountPrice}`;
         
         card.appendChild(img);
         card.appendChild(title);
         card.appendChild(text);
         card.appendChild(price);
+        card.appendChild(discountPrice);
         
         return card;
     }
