@@ -1,3 +1,5 @@
+import { IProduct } from "../../types/interfaces";
+
 class Navbar extends HTMLElement {
     private shadow: ShadowRoot;
 
@@ -6,6 +8,8 @@ class Navbar extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
+
+        window.addEventListener('cart-updated', this.onCartUpdated);
     }
 
     async connectedCallback() {
@@ -233,6 +237,16 @@ class Navbar extends HTMLElement {
 
         this.setupBurgerMenu();
     }
+
+    private onCartUpdated = (e: Event) => {
+        const ev = e as CustomEvent<IProduct[]>;
+        const count = ev.detail?.length ?? this.getCartCount();
+        const countSpan = this.shadow.querySelector('.cart-button span') as HTMLSpanElement;
+        countSpan.textContent = count.toString();
+        console.log(ev);
+        console.log(count);
+    };
+    
 
     getCartCount() {
         return JSON.parse(localStorage.getItem('carts') || "[]").length || 0;
