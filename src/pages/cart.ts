@@ -6,9 +6,11 @@ class Cart {
     private cart: CartItem[] = [];
     private user: User | null = null;
     private isLoading: boolean = false;
+    public success: HTMLElement | null
 
     constructor() {
         this.init();
+        this.success = document.getElementById('appSuccess');
     }
 
     private async init(): Promise<void> {
@@ -275,12 +277,12 @@ class Cart {
                     productId: item.id,
                     size: item.size,
                     additives: item.additives,
-                    price: item.totalDiscountPrice || item.totalPrice
+                    quantity: 1
                 })),
-                totalPrice: this.calculateTotals().totalDiscount
+                totalPrice: +this.calculateTotals().totalDiscount || +this.calculateTotals().total
             };
 
-            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/confirm', {
+            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/orders/confirm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -288,7 +290,6 @@ class Cart {
                 },
                 body: JSON.stringify(orderData)
             });
-
             if (response.status >= 400) {
                 this.showError('Something went wrong. Please, try again');
                 return;
@@ -350,12 +351,7 @@ class Cart {
     }
 
     private showSuccess(message: string): void {
-        const successElement = document.getElementById('appSuccess');
-        if (successElement && 'show' in successElement) {
-            (successElement as AppSuccess).show(message);
-        } else {
-            alert(message);
-        }
+        (this.success as AppSuccess).show(message);
     }
 
     private setupEventListeners(): void {
