@@ -61,7 +61,7 @@ class Cart {
         cartContent.innerHTML = '';
 
         if (this.cart.length === 0) {
-            if(localStorage.getItem('access_token')) {
+            if (localStorage.getItem('access_token')) {
                 cartContent.innerHTML = `
                     <div class="total-price">
                         <p class="total-title">
@@ -141,8 +141,8 @@ class Cart {
                     </div>
                 </div>
                 <div class="cart-right">
-                    ${item.totalDiscountPrice ? `<div class="price-discount">$${item.sizeDiscountPrice}</div>` : ''}
-                    <div class="price">$${item.sizePrice}</div>
+                    ${item.totalDiscountPrice ? `<div class="price-discount">$${item.totalPrice}</div>` : ''}
+                    <div class="price">$${item.totalDiscountPrice || item.totalPrice}</div>
                 </div>
             </div>
         `;
@@ -175,7 +175,7 @@ class Cart {
             <p class="total-title">
                 Total:
                 <span class="all-price">
-                    ${hasDiscount ? `<span class="price-discount">$${totalDiscount}</span>` : ''}
+                    ${hasDiscount ? `<span class="price-discount">$${total}</span>` : ''}
                     <span class="price">$${hasDiscount ? totalDiscount : total}</span>
                 </span>
             </p>
