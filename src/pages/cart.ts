@@ -121,8 +121,6 @@ class Cart {
     }
 
     private createCartItemHTML(item: CartItem, index: number): string {
-        const hasDiscount = item.totalDiscountPrice && item.totalDiscountPrice !== item.totalPrice;
-
         return `
             <div class="cart" data-index="${index}">
                 <div class="cart-left">
@@ -134,34 +132,20 @@ class Cart {
                     </span>
                     <div class="cart-info">
                         <div class="image">
-                            <img src="./images/dessert-img/${item.category}-${item.id}.jpg" alt="${item.name}" width="100%">
+                            <img src="${item?.image || `./images/dessert-img/${item.category}-${item.id}.jpg`}" alt="${item.name}" width="100%">
                         </div>
                         <div class="info-text">
                             <h3 class="info-title">${item.name}</h3>
-                            <p class="info-description">${this.formatDescription(item)}</p>
+                            <p class="info-description">${item.description}</p>
                         </div>
                     </div>
                 </div>
                 <div class="cart-right">
-                    ${hasDiscount ? `<div class="price-discount">$${item.totalPrice}</div>` : ''}
-                    <div class="price">$${hasDiscount ? item.totalDiscountPrice : item.totalPrice}</div>
+                    ${item.totalDiscountPrice ? `<div class="price-discount">$${item.sizeDiscountPrice}</div>` : ''}
+                    <div class="price">$${item.sizePrice}</div>
                 </div>
             </div>
         `;
-    }
-
-    private formatDescription(item: CartItem): string {
-        const parts: string[] = [];
-
-        if (item.size) {
-            parts.push(item.size);
-        }
-
-        if (item.additives && item.additives.length > 0) {
-            parts.push(item.additives.join(', '));
-        }
-
-        return parts.join(', ') || 'No extras';
     }
 
     private setupDeleteButtons(): void {
@@ -191,7 +175,7 @@ class Cart {
             <p class="total-title">
                 Total:
                 <span class="all-price">
-                    ${hasDiscount ? `<span class="price-discount">$${total}</span>` : ''}
+                    ${hasDiscount ? `<span class="price-discount">$${totalDiscount}</span>` : ''}
                     <span class="price">$${hasDiscount ? totalDiscount : total}</span>
                 </span>
             </p>
@@ -291,7 +275,6 @@ class Cart {
                     productId: item.id,
                     size: item.size,
                     additives: item.additives,
-                    quantity: item.quantity,
                     price: item.totalDiscountPrice || item.totalPrice
                 })),
                 totalPrice: this.calculateTotals().totalDiscount
@@ -305,13 +288,6 @@ class Cart {
                 },
                 body: JSON.stringify(orderData)
             });
-
-            // const result: ApiResponse<IProduct> | ApiErrorResponse = await response.json();
-
-            // if ('error' in result) {
-            //     this.showError(result.error);
-            //     return;
-            // }
 
             if (response.status >= 400) {
                 this.showError('Something went wrong. Please, try again');

@@ -93,11 +93,18 @@ export interface User {
     createdAt?: string; // ISO format
 }
   
-export interface CartItem extends IProduct {
+export interface CartItem {
     id: number;
-    size?: string;
-    additives?: string[];
-    quantity: number;
+    name: string;
+    description: string;
+    category: Category;
+    size: string;
+    sizePrice: string;
+    sizeDiscountPrice?: string;
+    additives: string[];
+    additivesPrice: string;
+    additivesDiscountPrice?: string;
     totalPrice: string;
     totalDiscountPrice?: string;
+    image?: string;
 }

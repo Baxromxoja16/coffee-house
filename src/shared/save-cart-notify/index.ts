@@ -1,14 +1,17 @@
-import { IProduct } from "../../types/interfaces";
+import { CartItem } from "../../types/interfaces";
 
-export function saveCartAndNotify(cart: IProduct) {
-    // console.log(cart);
+export function saveCartAndNotify(cart: CartItem) {
     const cartsString = localStorage.getItem('cart') || '[]';
-    const carts: IProduct[] = JSON.parse(cartsString);
-    console.log(carts.find((v) => v.id === cart.id)?.id);
-    if(carts.find((v) => v.id === cart.id)?.id) return true;
-    // console.log(carts);
+    const carts: CartItem[] = JSON.parse(cartsString);
+    
+    const foundCart =  carts.findIndex((v) => v.id === cart.id);
+    if(foundCart + 1) {
+        carts.splice(foundCart, 1, cart)
+        localStorage.setItem('cart', JSON.stringify(carts));
+        return true;
+    };
+
     carts.push(cart);
-    // console.log(carts);
 
     localStorage.setItem('cart', JSON.stringify(carts));
 

@@ -580,13 +580,56 @@ class Popup extends HTMLElement {
     }
 
     addToCart() {
-        const isSaved = saveCartAndNotify(this.productData);
-        console.log(isSaved);
-        if(isSaved) {
-            (this.success as AppSuccess).show('This cart has already been added to carts')
+        if (!this.productData) return;
+    
+        // Get selected size data
+        const selectedSizeData = this.productData.sizes?.[this.selectedSize];
+        if (!selectedSizeData) return;
+    
+        // Calculate additives prices
+        let additivesPrice = 0;
+        let additivesDiscountPrice = 0;
+        
+        this.selectedAdditives.forEach(additiveName => {
+            const additive = this.productData.additives?.find(a => a.name === additiveName);
+            if (additive) {
+                additivesPrice += parseFloat(additive.price);
+                additivesDiscountPrice += parseFloat(additive.discountPrice || additive.price);
+            }
+        });
+    
+        // Calculate total
+        const sizePrice = parseFloat(selectedSizeData.price);
+        const sizeDiscountPrice = parseFloat(selectedSizeData.discountPrice || selectedSizeData.price);
+        
+        const totalPrice = sizePrice + additivesPrice;
+        const totalDiscountPrice = sizeDiscountPrice + additivesDiscountPrice;
+    
+        // Create cart item
+        const cartItem: CartItem = {
+            id: this.productData.id,
+            name: this.productData.name,
+            description: this.productData.description,
+            category: this.productData.category,
+            size: selectedSizeData.size,
+            sizePrice: selectedSizeData.price,
+            sizeDiscountPrice: selectedSizeData.discountPrice,
+            additives: [...this.selectedAdditives],
+            additivesPrice: additivesPrice.toFixed(2),
+            additivesDiscountPrice: additivesDiscountPrice > 0 ? additivesDiscountPrice.toFixed(2) : undefined,
+            totalPrice: totalPrice.toFixed(2),
+            totalDiscountPrice: totalDiscountPrice !== totalPrice ? totalDiscountPrice.toFixed(2) : undefined,
+            image: this.productData.image
+        };
+
+        const isDuplicate = saveCartAndNotify(cartItem);
+        
+        if (isDuplicate) {
+            (this.success as AppSuccess).show('This item has already been added to cart');
         } else {
-            (this.success as AppSuccess).show('Added to cart')
+            (this.success as AppSuccess).show('Added to cart');
         }
+        
         this.close();
     }
 
