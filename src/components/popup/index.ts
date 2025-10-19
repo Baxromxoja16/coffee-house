@@ -580,8 +580,13 @@ class Popup extends HTMLElement {
     }
 
     addToCart() {
-        saveCartAndNotify(this.productData);
-        (this.success as AppSuccess).show('Added to cart')
+        const isSaved = saveCartAndNotify(this.productData);
+        console.log(isSaved);
+        if(isSaved) {
+            (this.success as AppSuccess).show('This cart has already been added to carts')
+        } else {
+            (this.success as AppSuccess).show('Added to cart')
+        }
         this.close();
     }
 
