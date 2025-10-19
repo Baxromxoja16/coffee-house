@@ -129,6 +129,7 @@ class Navbar extends HTMLElement {
             .menu-buttons {
                 display: flex;
                 gap: 32px;
+                text-decoration: none;
             }
 
             .menu-buttons .cart-button {
@@ -176,7 +177,7 @@ class Navbar extends HTMLElement {
                     <li class="nav-item"><a href="#footer">Contact us</a></li>
                 </ul>
                 
-                <div class="menu-buttons">
+                <a class="menu-buttons" href="/cart.html">
                     <div class="cart-button">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.0942 8.36255L17.1455 15.1959C17.3319 16.4074 16.3945 17.5 15.1688 17.5H4.83122C3.60545 17.5 2.66809 16.4074 2.85448 15.1959L3.90576 8.36255C4.05586 7.38689 4.89536 6.66667 5.88251 6.66667H14.1175C15.1046 6.66667 15.9441 7.38689 16.0942 8.36255Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -197,7 +198,7 @@ class Navbar extends HTMLElement {
                             Menu
                         </span>
                     </menu-link>
-                </div>
+                </a>
                     <button-burger>
                         <svg slot="burger" width="18" height="10" viewBox="0 0 18 10" fill="none">
                             <path d="M1 1H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>

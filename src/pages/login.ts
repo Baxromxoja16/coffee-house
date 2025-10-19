@@ -103,7 +103,8 @@ class Login {
                 const data = (responseData as ApiResponse<AuthSuccessResponse>);
 
                 localStorage.setItem('toastMessage', message);
-                localStorage.setItem('userData', JSON.stringify(data));
+                localStorage.setItem('userData', JSON.stringify(data.data.user));
+                localStorage.setItem('access_token', JSON.stringify(data.data.access_token));
                 window.location.href = "index.html";
             }
         } catch (error) {
