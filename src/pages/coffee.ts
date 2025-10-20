@@ -8,6 +8,7 @@ class MenuPage {
     displayLimit: number;
     isLoadMoreVisible: boolean;
     err: HTMLElement | null;
+    loader: boolean = false;
 
     constructor() {
         this.products = [];
@@ -34,17 +35,21 @@ class MenuPage {
     
     async loadProducts() {
         try {
+            this.loader = true;
             const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products');
             const data = await response.json();
 
             if(data.error) {
+                this.loader = false;
                 (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
                 return;
             };
 
             this.products = data.data;
+            this.loader = false;
 
         } catch (error) {
+            this.loader = false;
             (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
             console.error('Error loading products:', error);
         }
@@ -102,16 +107,18 @@ class MenuPage {
         price.className = 'price';
         price.textContent = `$${product.price}`;
 
-        const discountPrice = document.createElement('span');
-        discountPrice.slot = 'content-discountPrice';
-        discountPrice.className = 'content-discountPrice';
-        discountPrice.textContent = `$${product.discountPrice}`;
+        if(localStorage.getItem('access_token')) {
+            const discountPrice = document.createElement('span');
+            discountPrice.slot = 'content-discountPrice';
+            discountPrice.className = 'content-discountPrice';
+            discountPrice.textContent = `$${product.discountPrice}`;
+            card.appendChild(discountPrice);
+        }
         
         card.appendChild(img);
         card.appendChild(title);
         card.appendChild(text);
         card.appendChild(price);
-        card.appendChild(discountPrice);
         
         return card;
     }
@@ -249,6 +256,16 @@ class MenuPage {
             loadMoreBtn.style.display = 'none';
         }
         this.isLoadMoreVisible = false;
+    }
+
+    showLoader() {
+        this.loader = true;
+        document.querySelector('.loader')?.classList.add('show');
+    }
+    
+    hideLoader() {
+        this.loader = false;
+        (document.querySelector('.loader') as HTMLElement).classList.remove('show');
     }
 }
 
