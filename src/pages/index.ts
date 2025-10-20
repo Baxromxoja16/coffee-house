@@ -65,6 +65,7 @@ class CarouselSlider {
     await this.loadFavorites();
     this.slides = Array.from(this.sliderItems.querySelectorAll('slider-card')) as HTMLElement[];
     this.setupSlides();
+    this.setMaximumHeight(this.slides)
     this.setupEventListeners();
     this.showSlide(this.currentIndex);
     this.startAutoPlay();
@@ -144,8 +145,13 @@ class CarouselSlider {
 
   private setupSlides(): void {
     this.slides.forEach((slide, index) => {
-      slide.style.display = index === 0 ? 'block' : 'none';
-      slide.style.opacity = index === 0 ? '1' : '0';
+      if (index === 0) {
+        slide.style.display = 'block';
+        slide.style.opacity = '1';
+      } else {
+        slide.style.display = 'none';
+        slide.style.opacity = '0';
+      }
     });
   }
 
@@ -309,6 +315,36 @@ class CarouselSlider {
         this.sliderItems.style.overflow = 'visible';
       }, 50);
     }, 600); // 600ms - transition duration
+  }
+
+  private async setMaximumHeight(cards: HTMLElement[]): Promise<void> {
+    // Barcha cardlarni ko'rsatib height ni o'lchash
+    let maxHeight = 0;
+
+    cards.forEach(card => {
+      card.style.display = 'block';
+      card.style.position = 'static';
+      // card.style.visibility = 'hidden';
+      // card.style.opacity = '0';
+      const height = card.offsetHeight;
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
+    });
+
+    // Maximum height ni set qilish
+    this.sliderItems.style.height = `${maxHeight}px`;
+
+    // Birinchi carddan tashqari hammasini yashirish
+    cards.forEach((card, index) => {
+      card.style.visibility = 'visible';
+      card.style.opacity = '1';
+      if (index === 0) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
   }
 
   private nextSlide(): void {
