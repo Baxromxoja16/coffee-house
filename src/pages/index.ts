@@ -75,10 +75,10 @@ class CarouselSlider {
       this.loader = true;
       const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products/favorites');
       const result: ApiResponse = await response.json();
-      if(result.error) {
+      if (result.error) {
         (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
         return;
-    };
+      };
       const products = result.data;
       this.loader = false;
 
@@ -237,60 +237,78 @@ class CarouselSlider {
   private animateTransition(currentSlide: HTMLElement, nextSlide: HTMLElement, direction: 'next' | 'prev'): void {
     const isNext = direction === 'next';
 
-    const currentHeight = currentSlide.offsetHeight;
-    this.sliderItems.style.height = `${currentHeight}px`;
+    // Container ni prepare qilish
     this.sliderItems.style.position = 'relative';
+    this.sliderItems.style.overflow = 'hidden';
 
+    // Current slide height ni saqlash
+    const currentHeight = currentSlide.offsetHeight;
+    this.sliderItems.style.minHeight = `${currentHeight}px`;
+
+    // Current slide ni prepare qilish
+    currentSlide.style.position = 'absolute';
+    currentSlide.style.top = '0';
+    currentSlide.style.left = '0';
+    currentSlide.style.width = '100%';
+    currentSlide.style.transform = 'translateX(0)';
+    currentSlide.style.opacity = '1';
+    currentSlide.style.transition = 'none';
+    currentSlide.style.zIndex = '1';
+
+    // Next slide ni prepare qilish
     nextSlide.style.display = 'block';
     nextSlide.style.position = 'absolute';
     nextSlide.style.top = '0';
     nextSlide.style.left = '0';
-    nextSlide.style.right = '0';
+    nextSlide.style.width = '100%';
     nextSlide.style.transform = isNext ? 'translateX(100%)' : 'translateX(-100%)';
     nextSlide.style.opacity = '1';
     nextSlide.style.transition = 'none';
+    nextSlide.style.zIndex = '2';
 
-    currentSlide.style.position = 'absolute';
-    currentSlide.style.top = '0';
-    currentSlide.style.left = '0';
-    currentSlide.style.right = '0';
-    currentSlide.style.transform = 'translateX(0)';
-    currentSlide.style.opacity = '1';
-
+    // Force reflow
     void nextSlide.offsetHeight;
 
-    nextSlide.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
-    currentSlide.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
+    // Transition qo'shish
+    currentSlide.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    nextSlide.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
 
+    // Animatsiyani boshlash
     requestAnimationFrame(() => {
-      currentSlide.style.opacity = '0';
       currentSlide.style.transform = isNext ? 'translateX(-100%)' : 'translateX(100%)';
+      currentSlide.style.opacity = '0';
 
       nextSlide.style.transform = 'translateX(0)';
       nextSlide.style.opacity = '1';
     });
 
+    // Cleanup after animation
     window.setTimeout(() => {
+      // Current slide ni yashirish
       currentSlide.style.display = 'none';
-      currentSlide.style.position = '';
+      currentSlide.style.position = 'static';
       currentSlide.style.transform = '';
       currentSlide.style.opacity = '';
-      currentSlide.style.left = '';
-      currentSlide.style.right = '';
-      currentSlide.style.top = '';
       currentSlide.style.transition = '';
+      currentSlide.style.zIndex = '';
+      currentSlide.style.width = '';
 
-      nextSlide.style.position = '';
+      // Next slide ni normalize qilish
+      nextSlide.style.position = 'static';
       nextSlide.style.transform = '';
       nextSlide.style.transition = '';
-      nextSlide.style.left = '';
-      nextSlide.style.right = '';
-      nextSlide.style.top = '';
-      nextSlide.style.opacity = '';
+      nextSlide.style.zIndex = '';
+      nextSlide.style.width = '';
 
+      // Height ni yangilash
       const newHeight = nextSlide.offsetHeight;
-      this.sliderItems.style.height = `${newHeight}px`;
-    }, 500);
+      this.sliderItems.style.minHeight = `${newHeight}px`;
+
+      // Overflow ni tiklash
+      setTimeout(() => {
+        this.sliderItems.style.overflow = 'visible';
+      }, 50);
+    }, 600); // 600ms - transition duration
   }
 
   private nextSlide(): void {
@@ -389,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const carousel = new CarouselSlider(sliderElement);
     (window as Window & { carouselInstance?: CarouselSlider }).carouselInstance = carousel;
   }
-  
+
   const message = localStorage.getItem('toastMessage');
   if (message) {
     const toast = document.getElementById('appSuccess') as AppSuccess;

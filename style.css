@@ -36,14 +36,13 @@
     z-index: -1;
 }
 
-/* Slider sectin start */
+/* Slider section start */
 .slider {
     margin: 90px 0;
 }
 
 .slider .slider-box {
     position: relative;
-    overflow: hidden;
 }
 
 .slider .main-title {
@@ -54,16 +53,23 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 10;
 }
 
 .slider .slider-box .slider-items {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: auto;
     width: 480px;
-    min-height: 684px;
-    overflow: hidden;
     position: relative;
+    overflow: visible;
+}
+
+.slider .slider-box .slider-items slider-card {
+    min-height: 684px;
+    width: 100%;
+    transition: none;
 }
 
 .slider .slider-box .slider-buttons button-carousel:first-child {
