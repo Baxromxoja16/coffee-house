@@ -5,7 +5,7 @@ class MenuLink extends HTMLElement {
     }
 
     connectedCallback() {
-        this.shadowRoot.innerHTML = `<style>
+        this.shadowRoot!.innerHTML = `<style>
             .menu-link {
                 letter-spacing: 0;
                 line-height: 150%;

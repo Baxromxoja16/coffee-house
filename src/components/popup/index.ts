@@ -1,4 +1,4 @@
-import { Additive, CartItem, IProductDetail, SizeEntry, SizesMap } from "../../types/interfaces";
+import { Additive, CartItem, IProductDetail, SizesMap } from "../../types/interfaces";
 import AppError from "../../shared/error";
 import { saveCartAndNotify } from "../../shared/save-cart-notify";
 import AppSuccess from "../../shared/succes";

@@ -145,7 +145,7 @@ class MenuPage {
     }
     
     setupResponsive() {
-        let resizeTimer: number;
+        let resizeTimer: NodeJS.Timeout;
         
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);

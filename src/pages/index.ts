@@ -30,8 +30,8 @@ class CarouselSlider {
 
   private currentIndex = 0;
   private autoPlayInterval = 6000;
-  private autoPlayTimer: ReturnType<typeof setTimeout> | null = null;
-  private progressTimer: ReturnType<typeof setInterval> | null = null;
+  private autoPlayTimer: number | null = null;
+  private progressTimer: number | null = null;
   private isPaused = false;
   private progressWidth = 0;
   private progressStep = 0;
