@@ -443,7 +443,7 @@
                 <slot name="text"></slot>
             </div>
         </a>
-        `}}customElements.define("contact-link",C);class L extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){const t=window.location.href.includes("localhost");this.shadowRoot.innerHTML=`<style>
+        `}}customElements.define("contact-link",C);class L extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.shadowRoot.innerHTML=`<style>
             .menu-link {
                 letter-spacing: 0;
                 line-height: 150%;
@@ -483,7 +483,7 @@
             }
 
         </style>
-        <a href="${t?"/coffee-house/pages/coffee/index":"/pages/coffee/index"}" class="menu-link">
+        <a href="'/coffee-house/pages/coffee/index'" class="menu-link">
             <div class="contact-content">
                 <slot name="text"></slot>
                 <slot name="icon"></slot>
@@ -634,7 +634,7 @@
                 </div>
             </div>
         </div>
-    `}}customElements.define("coffee-card",T);class M extends HTMLElement{constructor(){super(),this.isBurgerOpen=!1,this.onCartUpdated=t=>{var i;const e=t,s=((i=e.detail)==null?void 0:i.length)??this.getCartCount(),o=this.shadow.querySelector(".cart-button span");o.textContent=s.toString(),console.log(e),console.log(s)},this.shadow=this.attachShadow({mode:"open"}),window.addEventListener("cart-updated",this.onCartUpdated)}async connectedCallback(){const t=window.location.href.includes("localhost"),e=await fetch(t?"/coffee-house/global.css":"/global.css").then(s=>s.text());this.shadow.innerHTML=`
+    `}}customElements.define("coffee-card",T);class M extends HTMLElement{constructor(){super(),this.isBurgerOpen=!1,this.onCartUpdated=t=>{var i;const e=t,s=((i=e.detail)==null?void 0:i.length)??this.getCartCount(),o=this.shadow.querySelector(".cart-button span");o.textContent=s.toString(),console.log(e),console.log(s)},this.shadow=this.attachShadow({mode:"open"}),window.addEventListener("cart-updated",this.onCartUpdated)}async connectedCallback(){const t=await fetch("/coffee-house/global.css").then(e=>e.text());this.shadow.innerHTML=`
         <style>
             
             nav {
@@ -780,12 +780,12 @@
                     display: none !important;
                 }
             }
-            ${e}
+            ${t}
 
         </style>
         <div class="container">
             <nav>
-                <a href="${t?"/":"/coffee-house/"}" class="image">
+                <a href="/coffee-house/" class="image">
                     <img src="/coffee-house/images/logo.png" alt="png"/>
                 </a>
                 <ul class="nav-menu">
@@ -795,7 +795,7 @@
                     <li class="nav-item"><a href="#footer">Contact us</a></li>
                 </ul>
                 
-                <a class="menu-buttons" href="${t?"/coffee-house/pages/cart/index":"/pages/cart/index"}">
+                <a class="menu-buttons" href="/coffee-house/pages/cart/index">
                     <div class="cart-button">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.0942 8.36255L17.1455 15.1959C17.3319 16.4074 16.3945 17.5 15.1688 17.5H4.83122C3.60545 17.5 2.66809 16.4074 2.85448 15.1959L3.90576 8.36255C4.05586 7.38689 4.89536 6.66667 5.88251 6.66667H14.1175C15.1046 6.66667 15.9441 7.38689 16.0942 8.36255Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -852,9 +852,9 @@
             </menu-link>
         </div>
 
-        `,this.setupBurgerMenu()}getCartCount(){return JSON.parse(localStorage.getItem("cart")||"[]").length||0}setupBurgerMenu(){const t=this.shadow.querySelector("button-burger"),e=this.shadow.querySelector(".burger-menu"),s=this.shadow.querySelectorAll(".burger-menu a");!t||!e||(t.addEventListener("click",()=>{this.toggleBurgerMenu()}),s.forEach(o=>{o.addEventListener("click",i=>{i.preventDefault();const r=o.getAttribute("href"),n=document.querySelector(r);n&&n.scrollIntoView({behavior:"smooth",block:"start"}),this.closeBurgerMenu()})}),window.addEventListener("resize",()=>{window.innerWidth>768&&this.isBurgerOpen&&this.closeBurgerMenu()}))}toggleBurgerMenu(){this.isBurgerOpen?this.closeBurgerMenu():this.openBurgerMenu()}openBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.add("open"),this.isBurgerOpen=!0,e&&e.setAttribute("open","true")}closeBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.remove("open"),this.isBurgerOpen=!1,e&&e.removeAttribute("open")}}customElements.define("app-navbar",M);class A extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}async connectedCallback(){const t=window.location.href.includes("localhost"),e=await fetch(t?"/coffee-house/global.css":"/global.css").then(s=>s.text());this.shadow.innerHTML=`
+        `,this.setupBurgerMenu()}getCartCount(){return JSON.parse(localStorage.getItem("cart")||"[]").length||0}setupBurgerMenu(){const t=this.shadow.querySelector("button-burger"),e=this.shadow.querySelector(".burger-menu"),s=this.shadow.querySelectorAll(".burger-menu a");!t||!e||(t.addEventListener("click",()=>{this.toggleBurgerMenu()}),s.forEach(o=>{o.addEventListener("click",i=>{i.preventDefault();const r=o.getAttribute("href"),n=document.querySelector(r);n&&n.scrollIntoView({behavior:"smooth",block:"start"}),this.closeBurgerMenu()})}),window.addEventListener("resize",()=>{window.innerWidth>768&&this.isBurgerOpen&&this.closeBurgerMenu()}))}toggleBurgerMenu(){this.isBurgerOpen?this.closeBurgerMenu():this.openBurgerMenu()}openBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.add("open"),this.isBurgerOpen=!0,e&&e.setAttribute("open","true")}closeBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.remove("open"),this.isBurgerOpen=!1,e&&e.removeAttribute("open")}}customElements.define("app-navbar",M);class A extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}async connectedCallback(){const t=await fetch("coffee-house/global.css").then(e=>e.text());this.shadow.innerHTML=`
             <style>
-            ${e}
+            ${t}
                 footer {
                     margin-bottom: 40px;
                 } 
