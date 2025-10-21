@@ -2,6 +2,24 @@ import '../shared/error/index'
 import AppError from '../shared/error';
 import AppSuccess from '../shared/succes';
 
+import '@components/tab-button'
+import '@components/button-secondary'
+import '@components/button-primary'
+import '@components/button-app-store'
+import '@components/button-carousel'
+import '@components/button-social'
+import '@components/button-burger'
+import '@components/contact-link'
+import '@components/menu-link'
+import '@components/slider-card'
+import '@components/coffee-card'
+import '@components/navbar'
+import '@components/footer'
+import '@components/popup'
+
+import '@shared/error'
+import '@shared/succes'
+
 interface FavoriteProduct {
   id: number;
   name: string;

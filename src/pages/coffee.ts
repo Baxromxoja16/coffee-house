@@ -1,19 +1,19 @@
 import AppError from "../shared/error";
 import { Categories,  Category,  IProduct } from "../types/interfaces";
-import '@components/tab-button/index.ts'
-import '@components/button-secondary/index.ts'
-import '@components/button-primary/index.ts'
-import '@components/button-app-store/index.ts'
-import '@components/button-carousel/index.ts'
-import '@components/button-social/index.ts'
-import '@components/button-burger/index.ts'
-import '@components/contact-link/index.ts'
-import '@components/menu-link/index.ts'
-import '@components/slider-card/index.ts'
-import '@components/coffee-card/index.ts'
-import '@components/navbar/index.ts'
-import '@components/footer/index.ts'
-import '@components/popup/index.ts'
+import '@components/tab-button/index'
+import '@components/button-secondary/index'
+import '@components/button-primary/index'
+import '@components/button-app-store/index'
+import '@components/button-carousel/index'
+import '@components/button-social/index'
+import '@components/button-burger/index'
+import '@components/contact-link/index'
+import '@components/menu-link/index'
+import '@components/slider-card/index'
+import '@components/coffee-card/index'
+import '@components/navbar/index'
+import '@components/footer/index'
+import '@components/popup/index'
 
 class MenuPage {
     products: IProduct[] = [];

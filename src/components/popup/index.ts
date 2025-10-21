@@ -408,7 +408,7 @@ class Popup extends HTMLElement {
     }
     
     getImagePath(category: string, index: string) {
-        return `../images/dessert-img/${category}-${index}.jpg`;
+        return `/images/dessert-img/${category}-${index}.jpg`;
     }
     
     populateModal() {
