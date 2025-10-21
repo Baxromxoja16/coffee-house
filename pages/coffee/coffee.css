@@ -32,7 +32,8 @@ header .main-title span {
 .cards .cards-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 37px;
+    justify-content: center;
+    gap: 35px;
     align-items: stretch;
 }
 

@@ -7,7 +7,7 @@ class Footer extends HTMLElement {
     }
 
     async connectedCallback() {
-        const globalStyles = await fetch('/global.css').then(r => r.text());
+        const globalStyles = await fetch('/coffee-house/global.css').then(r => r.text());
 
         this.shadow.innerHTML = `
             <style>

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  base: './coffee-house',
+  base: '/coffee-house/',
   build: {
     rollupOptions: {
       input: {
@@ -20,6 +20,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
       '@shared': resolve(__dirname, './src/shared'),
+      '@pages': resolve(__dirname, './src/pages'),
     },
   },
   server: {
