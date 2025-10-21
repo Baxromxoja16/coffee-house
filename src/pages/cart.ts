@@ -2,6 +2,17 @@ import AppError from "../shared/error";
 import AppSuccess from "../shared/succes";
 import { CartItem, User } from "../types/interfaces";
 
+import '@components/button-secondary/index.ts'
+import '@components/button-primary/index.ts'
+import '@components/button-social/index.ts'
+import '@components/button-burger/index.ts'
+import '@components/contact-link/index.ts'
+import '@components/menu-link/index.ts'
+import '@components/navbar/index.ts'
+import '@components/footer/index.ts'
+import '@shared/error/index.ts'
+import '@shared/succes/index.ts'
+
 class Cart {
     private cart: CartItem[] = [];
     private user: User | null = null;
@@ -123,6 +134,7 @@ class Cart {
     }
 
     private createCartItemHTML(item: CartItem, index: number): string {
+        console.log(item);
         return `
             <div class="cart" data-index="${index}">
                 <div class="cart-left">
@@ -134,7 +146,7 @@ class Cart {
                     </span>
                     <div class="cart-info">
                         <div class="image">
-                            <img src="${item?.image || `./images/dessert-img/${item.category}-${item.id}.jpg`}" alt="${item.name}" width="100%">
+                            <img src="${`/images/dessert-img/${item.category}-${item.id}.jpg`}" alt="${item.name}" width="100%">
                         </div>
                         <div class="info-text">
                             <h3 class="info-title">${item.name}</h3>

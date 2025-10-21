@@ -1,6 +1,5 @@
 import { Additive, CartItem, IProductDetail, SizesMap } from "../../types/interfaces";
 import AppError from "../../shared/error";
-import { saveCartAndNotify } from "../../shared/save-cart-notify";
 import AppSuccess from "../../shared/succes";
 
 class Popup extends HTMLElement {
@@ -680,6 +679,24 @@ class Popup extends HTMLElement {
             });
         });
     }
+}
+function saveCartAndNotify(cart: CartItem) {
+    const cartsString = localStorage.getItem('cart') || '[]';
+    const carts: CartItem[] = JSON.parse(cartsString);
+    
+    const foundCart =  carts.findIndex((v) => v.id === cart.id);
+    if(foundCart + 1) {
+        carts.splice(foundCart, 1, cart)
+        localStorage.setItem('cart', JSON.stringify(carts));
+        return true;
+    };
+
+    carts.push(cart);
+
+    localStorage.setItem('cart', JSON.stringify(carts));
+
+    window.dispatchEvent(new CustomEvent('cart-updated', { detail: carts }));
+    return false;
 }
 
 customElements.define('popup-modal', Popup);

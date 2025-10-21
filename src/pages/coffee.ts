@@ -1,5 +1,19 @@
 import AppError from "../shared/error";
 import { Categories,  Category,  IProduct } from "../types/interfaces";
+import '@components/tab-button/index.ts'
+import '@components/button-secondary/index.ts'
+import '@components/button-primary/index.ts'
+import '@components/button-app-store/index.ts'
+import '@components/button-carousel/index.ts'
+import '@components/button-social/index.ts'
+import '@components/button-burger/index.ts'
+import '@components/contact-link/index.ts'
+import '@components/menu-link/index.ts'
+import '@components/slider-card/index.ts'
+import '@components/coffee-card/index.ts'
+import '@components/navbar/index.ts'
+import '@components/footer/index.ts'
+import '@components/popup/index.ts'
 
 class MenuPage {
     products: IProduct[] = [];
@@ -81,7 +95,7 @@ class MenuPage {
             newIdx = newIdx - 8
         }
 
-        return `../images/dessert-img/${categoryMap[category]}-${newIdx}.${categoryMap[category] === 'coffee' ? 'jpg' : 'png'}`;
+        return `/images/dessert-img/${categoryMap[category]}-${newIdx}.${categoryMap[category] === 'coffee' ? 'jpg' : 'png'}`;
     }
     
     createProductCard(product: IProduct) {

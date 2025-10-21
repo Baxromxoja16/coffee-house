@@ -3,6 +3,24 @@ import DropdownField from "../components/dropdown-field";
 import { ApiErrorResponse, ApiResponse, AuthSuccessResponse } from "../types/interfaces";
 import AppError from "../shared/error";
 
+import '@components/tab-button/index.ts';
+import '@components/button-secondary/index.ts';
+import '@components/button-primary/index.ts';
+import '@components/button-app-store/index.ts';
+import '@components/button-carousel/index.ts';
+import '@components/button-social/index.ts';
+import '@components/button-burger/index.ts';
+import '@components/contact-link/index.ts';
+import '@components/menu-link/index.ts';
+import '@components/slider-card/index.ts';
+import '@components/coffee-card/index.ts';
+import '@components/navbar/index.ts';
+import '@components/footer/index.ts';
+import '@components/popup/index.ts';
+import '@components/input-field/index.ts';
+import '@components/dropdown-field/index.ts';
+import '@shared/error/index.ts';
+
 interface CityStreets {
     [key: string]: string[];
 }

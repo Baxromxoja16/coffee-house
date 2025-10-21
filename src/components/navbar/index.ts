@@ -168,7 +168,7 @@ class Navbar extends HTMLElement {
         <div class="container">
             <nav>
                 <a href="/" class="image">
-                    <img src="${location.includes('index.html') ? './images/logo.png' : '../images/logo.png'}" alt="png"/>
+                    <img src="${location.includes('index.html') ? '/images/logo.png' : '/images/logo.png'}" alt="png"/>
                 </a>
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="#slider">Favorite coffee</a></li>
@@ -177,7 +177,7 @@ class Navbar extends HTMLElement {
                     <li class="nav-item"><a href="#footer">Contact us</a></li>
                 </ul>
                 
-                <a class="menu-buttons" href="/cart.html">
+                <a class="menu-buttons" href="/pages/cart/index">
                     <div class="cart-button">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.0942 8.36255L17.1455 15.1959C17.3319 16.4074 16.3945 17.5 15.1688 17.5H4.83122C3.60545 17.5 2.66809 16.4074 2.85448 15.1959L3.90576 8.36255C4.05586 7.38689 4.89536 6.66667 5.88251 6.66667H14.1175C15.1046 6.66667 15.9441 7.38689 16.0942 8.36255Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

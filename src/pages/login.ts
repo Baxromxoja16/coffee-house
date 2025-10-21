@@ -2,6 +2,19 @@ import AppError from "../shared/error";
 import InputField from "../components/input-field";
 import { ApiErrorResponse, ApiResponse, AuthSuccessResponse } from "../types/interfaces";
 
+import '@components/button-secondary/index.ts';
+import '@components/button-primary/index.ts';
+import '@components/button-social/index.ts';
+import '@components/button-burger/index.ts';
+import '@components/contact-link/index.ts';
+import '@components/menu-link/index.ts';
+import '@components/navbar/index.ts';
+import '@components/footer/index.ts';
+import '@components/input-field/index.ts';
+import '@shared/error/index.ts';
+import '@shared/succes/index.ts';
+
+
 class Login {
     public err: HTMLElement | null;
     public success: HTMLElement | null;

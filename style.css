@@ -118,6 +118,7 @@
     display: flex;
     justify-content: center;
     gap: 40px;
+    position: relative;
 }
 
 .friends .friends-content .content-box {
@@ -205,7 +206,7 @@
 /* download section end */
 
 .loader {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
