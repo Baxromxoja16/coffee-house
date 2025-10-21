@@ -483,7 +483,7 @@
             }
 
         </style>
-        <a href="'/coffee-house/pages/coffee/index'" class="menu-link">
+        <a href="/coffee-house/pages/coffee/index" class="menu-link">
             <div class="contact-content">
                 <slot name="text"></slot>
                 <slot name="icon"></slot>
@@ -852,7 +852,7 @@
             </menu-link>
         </div>
 
-        `,this.setupBurgerMenu()}getCartCount(){return JSON.parse(localStorage.getItem("cart")||"[]").length||0}setupBurgerMenu(){const t=this.shadow.querySelector("button-burger"),e=this.shadow.querySelector(".burger-menu"),s=this.shadow.querySelectorAll(".burger-menu a");!t||!e||(t.addEventListener("click",()=>{this.toggleBurgerMenu()}),s.forEach(o=>{o.addEventListener("click",i=>{i.preventDefault();const r=o.getAttribute("href"),n=document.querySelector(r);n&&n.scrollIntoView({behavior:"smooth",block:"start"}),this.closeBurgerMenu()})}),window.addEventListener("resize",()=>{window.innerWidth>768&&this.isBurgerOpen&&this.closeBurgerMenu()}))}toggleBurgerMenu(){this.isBurgerOpen?this.closeBurgerMenu():this.openBurgerMenu()}openBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.add("open"),this.isBurgerOpen=!0,e&&e.setAttribute("open","true")}closeBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.remove("open"),this.isBurgerOpen=!1,e&&e.removeAttribute("open")}}customElements.define("app-navbar",M);class A extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}async connectedCallback(){const t=await fetch("coffee-house/global.css").then(e=>e.text());this.shadow.innerHTML=`
+        `,this.setupBurgerMenu()}getCartCount(){return JSON.parse(localStorage.getItem("cart")||"[]").length||0}setupBurgerMenu(){const t=this.shadow.querySelector("button-burger"),e=this.shadow.querySelector(".burger-menu"),s=this.shadow.querySelectorAll(".burger-menu a");!t||!e||(t.addEventListener("click",()=>{this.toggleBurgerMenu()}),s.forEach(o=>{o.addEventListener("click",i=>{i.preventDefault();const r=o.getAttribute("href"),n=document.querySelector(r);n&&n.scrollIntoView({behavior:"smooth",block:"start"}),this.closeBurgerMenu()})}),window.addEventListener("resize",()=>{window.innerWidth>768&&this.isBurgerOpen&&this.closeBurgerMenu()}))}toggleBurgerMenu(){this.isBurgerOpen?this.closeBurgerMenu():this.openBurgerMenu()}openBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.add("open"),this.isBurgerOpen=!0,e&&e.setAttribute("open","true")}closeBurgerMenu(){const t=this.shadow.querySelector(".burger-menu"),e=this.shadow.querySelector("button-burger");t.classList.remove("open"),this.isBurgerOpen=!1,e&&e.removeAttribute("open")}}customElements.define("app-navbar",M);class A extends HTMLElement{constructor(){super(),this.shadow=this.attachShadow({mode:"open"})}async connectedCallback(){const t=await fetch("/coffee-house/global.css").then(e=>e.text());this.shadow.innerHTML=`
             <style>
             ${t}
                 footer {
