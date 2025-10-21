@@ -2,16 +2,16 @@ import AppError from "../shared/error";
 import AppSuccess from "../shared/succes";
 import { CartItem, User } from "../types/interfaces";
 
-import '@components/button-secondary/index.ts'
-import '@components/button-primary/index.ts'
-import '@components/button-social/index.ts'
-import '@components/button-burger/index.ts'
-import '@components/contact-link/index.ts'
-import '@components/menu-link/index.ts'
-import '@components/navbar/index.ts'
-import '@components/footer/index.ts'
-import '@shared/error/index.ts'
-import '@shared/succes/index.ts'
+import '@components/button-secondary/index'
+import '@components/button-primary/index'
+import '@components/button-social/index'
+import '@components/button-burger/index'
+import '@components/contact-link/index'
+import '@components/menu-link/index'
+import '@components/navbar/index'
+import '@components/footer/index'
+import '@shared/error/index'
+import '@shared/succes/index'
 
 class Cart {
     private cart: CartItem[] = [];
@@ -255,13 +255,21 @@ class Cart {
     private setupAuthButtons(): void {
         const signinBtn = document.getElementById('signin-btn');
         const registerBtn = document.getElementById('register-btn');
+        const button = signinBtn?.querySelector('button') as HTMLButtonElement;
+
+        button.disabled = true;
+        button.style.opacity =  '1';
+        button.style.cursor = 'pointer';
+
+        console.log(signinBtn?.querySelector('button')?.attributes);
+        
 
         signinBtn?.addEventListener('click', () => {
-            window.location.href = './pages/login/';
+            window.location.href = '/pages/login/index';
         });
 
         registerBtn?.addEventListener('click', () => {
-            window.location.href = './pages/registration/';
+            window.location.href = '/pages/register/index';
         });
     }
 
