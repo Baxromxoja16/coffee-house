@@ -87,15 +87,15 @@ class MenuPage {
             'tea': 'tea',
             'dessert': 'dessert'
         };
-        
+        // console.log(index);
         let newIdx = index;
         if(categoryMap[category] === 'dessert') {
-            newIdx = newIdx - 12;
+            newIdx = newIdx - 16;
         } else if(categoryMap[category] === 'tea') {
             newIdx = newIdx - 8
         }
-
-        return `/images/dessert-img/${categoryMap[category]}-${newIdx}.${categoryMap[category] === 'coffee' ? 'jpg' : 'png'}`;
+        console.log(newIdx);
+        return `../../images/dessert-img/${categoryMap[category]}-${newIdx}.${categoryMap[category] === 'coffee' ? 'jpg' : 'png'}`;
     }
     
     createProductCard(product: IProduct) {

@@ -407,8 +407,21 @@ class Popup extends HTMLElement {
         });
     }
     
-    getImagePath(category: string, index: string) {
-        return `/images/dessert-img/${category}-${index}.jpg`;
+    getImagePath(category: string, index: number) {
+        const categoryMap: {[key: string]:string} = {
+            'coffee': 'coffee',
+            'tea': 'tea',
+            'dessert': 'dessert'
+        };
+        // console.log(index);
+        let newIdx = index;
+        if(categoryMap[category] === 'dessert') {
+            newIdx = newIdx - 16;
+        } else if(categoryMap[category] === 'tea') {
+            newIdx = newIdx - 8
+        }
+        console.log(newIdx);
+        return `../../images/dessert-img/${categoryMap[category]}-${newIdx}.${categoryMap[category] === 'coffee' ? 'jpg' : 'png'}`;
     }
     
     populateModal() {
@@ -422,6 +435,7 @@ class Popup extends HTMLElement {
     
         // Set basic info
         img.src = this.productData.image || '';
+        console.log(img.src);
         img.alt = this.productData.name;
         title.textContent = this.productData.name;
         description.textContent = this.productData.description;
