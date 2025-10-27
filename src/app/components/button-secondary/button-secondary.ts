@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, effect, Input, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-button-secondary',
   imports: [],
   template: `
-    <button class="secondary-button">
+    <button class="secondary-button" [disabled]="disabled()">
       <ng-content select="span"></ng-content>
     </button>
   `,
@@ -33,5 +33,12 @@ import { Component } from '@angular/core';
   `,
 })
 export class ButtonSecondary {
+  @Input() disabled: WritableSignal<boolean> = signal(false);
+
+  constructor() {
+    effect(() => {
+      console.log(this.disabled());
+    })
+  }
 
 }
