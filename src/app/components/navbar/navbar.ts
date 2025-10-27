@@ -1,6 +1,6 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CartItem } from '../../types/interfaces';
+import { CartItem } from '../../shared/types/interfaces';
 
 @Component({
   selector: 'app-navbar',

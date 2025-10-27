@@ -1,0 +1,168 @@
+.form-field {
+    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.radio-field,
+.dropdown-field {
+    grid-column: span 1;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.button {
+    max-width: 200px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-field label,
+.field label,
+.radio-field label {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: var(--dark);
+}
+
+.radio-field .radio-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-field input {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--boder-ligtht);
+    color: var(--dark);
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
+    transition: border-color 0.3s ease;
+}
+
+.input-field input.error {
+    border-color: #ff4444;
+    padding-right: 40px;
+}
+
+.input-field input:focus {
+    outline: none;
+    border-color: var(--accent);
+}   
+
+.input-field input::placeholder {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    color: var(--placeholder);
+}
+
+.error-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
+.error-icon.show {
+    display: block;
+}
+
+.error-message {
+    font-size: 12px;
+    color: #ff4444;
+    font-weight: 400;
+    margin-top: 4px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+input[type="radio" i] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* size matches your SVG: 16x16 */
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    box-sizing: border-box;
+
+    /* make shape rounded like the SVG corners (rx 7.5 => circle-ish). We'll use border-radius 8 for full rounding */
+    border-radius: 8px;
+
+    /* default (unchecked) look: cream fill + dark border */
+    background-color: #E1D4C9; /* fill from your SVG */
+    border: 1px solid #665F55; /* stroke from your SVG */
+
+    /* align with label text */
+    vertical-align: middle;
+    margin: 0 6px 0 0; /* small gap between radio and following label text if you place input before label */
+    cursor: pointer;
+
+    /* smooth transition for state changes */
+    transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+} 
+
+input[type="radio" i]:focus,
+input[type="radio" i]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102,95,85,0.12); /* subtle focus ring */
+}
+
+input[type="radio" i]:checked {
+    background-color: #665F55; /* dark filled rect from checked SVG */
+    border-color: #665F55;
+
+    /* radial-gradient creates the inner cream circle perfectly centered */
+    background-image: radial-gradient(circle at 50% 50%, #E1D4C9 0 40%, transparent 47%);
+    background-repeat: no-repeat;
+    background-size: 100% 97%; /* adjust for inner circle size */
+}
+
+select {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--boder-ligtht);
+    color: var(--dark);
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
+    transition: border-color 0.3s ease;
+}
+
+select option {
+    background: var(--body);
+    color: var(--dark);
+    border: 1px solid var(--boder-ligtht);
+    border-radius: 12px;
+    padding: 10px;
+}
+select:focus {
+    outline: none;
+    border-color: var(--accent);
+}

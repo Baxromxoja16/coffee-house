@@ -1,4 +1,4 @@
-import { Component, effect, Input, signal, WritableSignal } from '@angular/core';
+import { Component, Input, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-button-secondary',
@@ -36,9 +36,6 @@ export class ButtonSecondary {
   @Input() disabled: WritableSignal<boolean> = signal(false);
 
   constructor() {
-    effect(() => {
-      console.log(this.disabled());
-    })
   }
 
 }

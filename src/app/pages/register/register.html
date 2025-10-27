@@ -1,1 +1,134 @@
-<p>register works!</p>
+<div class="container">
+    <h1 class="main-title">Registration</h1>
+
+    <form class="form-field" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Login -->
+        <div class="input-field">
+            <label for="login">Login</label>
+            <div class="input-wrapper">
+                <input type="text" id="login" formControlName="login" placeholder="Enter your login"
+                    [class.error]="hasError('login')" />
+                <span class="error-icon" [class.show]="hasError('login')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                            stroke="#ff4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+            @if (getFieldError('login')) {
+            <span class="error-message show">{{ getFieldError('login') }}</span>
+            }
+        </div>
+
+        <!-- Password -->
+        <div class="input-field">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+                <input type="password" id="password" formControlName="password" placeholder="Enter your password"
+                    [class.error]="hasError('password')" />
+                <span class="error-icon" [class.show]="hasError('password')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                            stroke="#ff4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+            @if (getFieldError('password')) {
+            <span class="error-message show">{{ getFieldError('password') }}</span>
+            }
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-field">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="input-wrapper">
+                <input type="password" id="confirmPassword" formControlName="confirmPassword"
+                    placeholder="Confirm your password" [class.error]="hasError('confirmPassword')" />
+                <span class="error-icon" [class.show]="hasError('confirmPassword')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                            stroke="#ff4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+            @if (getFieldError('confirmPassword')) {
+            <span class="error-message show">{{ getFieldError('confirmPassword') }}</span>
+            }
+        </div>
+
+        <!-- City -->
+        <div class="field">
+            <label for="city">City</label>
+            <select id="city" formControlName="city" [class.error]="hasError('city')">
+                <option value="">Select city</option>
+                @for (city of cities; track $index) {
+                <option [value]="city">{{city}}</option>
+                }
+            </select>
+            @if (getFieldError('city')) {
+            <span class="error-message show">{{ getFieldError('city') }}</span>
+            }
+        </div>
+
+        <!-- Street -->
+        <div class="field">
+            <label for="street">Street</label>
+            <select id="street" formControlName="street"
+                [class.error]="hasError('street')">
+                <option value="">Select street</option>
+                @for (street of getStreets(); track $index) {
+                <option [value]="street">{{street}}</option>
+                }
+            </select>
+            @if (getFieldError('street')) {
+            <span class="error-message show">{{ getFieldError('street') }}</span>
+            }
+        </div>
+
+        <!-- House Number -->
+        <div class="input-field">
+            <label for="houseNumber">House number</label>
+            <div class="input-wrapper">
+                <input type="number" id="houseNumber" formControlName="houseNumber" placeholder="Enter house number"
+                    [class.error]="hasError('houseNumber')" />
+                <span class="error-icon" [class.show]="hasError('houseNumber')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                            stroke="#ff4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+            @if (getFieldError('houseNumber')) {
+            <span class="error-message show">{{ getFieldError('houseNumber') }}</span>
+            }
+        </div>
+
+        <!-- Payment Method -->
+        <div class="radio-field">
+            <label class="title-label">Pay by</label>
+            <div class="radio-container">
+                <input type="radio" id="cash" value="cash" formControlName="paymentMethod">
+                <label for="cash">Cash</label>
+                <input type="radio" id="card" value="card" formControlName="paymentMethod">
+                <label for="card">Card</label>
+            </div>
+            @if (getFieldError('paymentMethod')) {
+            <span class="error-message show">{{ getFieldError('paymentMethod') }}</span>
+            }
+        </div>
+    </form>
+
+    <div class="button">
+        <app-button-secondary [disabled]="isLoading" (click)="onSubmit()">
+            @if (isLoading()) {
+            <span>Loading...</span>
+            } @else {
+            <span>Registration</span>
+            }
+        </app-button-secondary>
+    </div>
+</div>

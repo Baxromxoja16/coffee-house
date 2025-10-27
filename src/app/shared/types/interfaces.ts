@@ -1,3 +1,4 @@
+import { PaymentMethodEnum } from "./enums";
 
 /** Kategoriya enum (agar backend string qaytarsa ham enum orqali tekshirish mumkin) */
 export enum Category {
@@ -89,7 +90,7 @@ export interface User {
     city: string;
     street: string;
     houseNumber: number;
-    paymentMethod: 'cash' | 'card';
+    paymentMethod: PaymentMethodEnum;
     createdAt?: string; // ISO format
 }
 
