@@ -2,6 +2,7 @@ import { Component, signal, WritableSignal } from '@angular/core';
 import { ButtonSecondary } from "../../components/button-secondary/button-secondary";
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastService } from '../../shared/services/toast-service';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,7 +16,8 @@ export class SignIn {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService,
   ) {
     this.loginForm = this.fb.group({
       login: ['', [
@@ -151,14 +153,14 @@ export class SignIn {
       if (response.ok && result.data) {
         localStorage.setItem('access_token', result.data.access_token);
         localStorage.setItem('userData', JSON.stringify(result.data.user));
-
+        this.toastService.success('Login successful!')
         this.router.navigate(['/']);
       } else {
-        alert(result.error || 'Login failed. Please try again.');
+        this.toastService.error('Login or password incorrect!')
       }
     } catch (error) {
       console.error('Login error:', error);
-      alert('An error occurred. Please try again.');
+      this.toastService.error('An error occurred. Please try again')
     } finally {
       this.isLoading.set(false);
     }

@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { PaymentMethodEnum } from '../../shared/types/enums';
 import { Router } from '@angular/router';
 import { CustomValidators } from '../../shared/validators/custom-validators';
+import { ToastService } from '../../shared/services/toast-service';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,8 @@ export class Register {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService,
   ) {
     this.form = this.fb.group({
       login: ['', [
@@ -54,6 +56,10 @@ export class Register {
     this.form.get('city')?.valueChanges.subscribe(() => {
       this.form.get('street')?.setValue('');
     });
+
+    this.form.valueChanges.subscribe((data) => {
+      console.log(data);
+    })
   }
 
   // Error handling methods
@@ -126,6 +132,7 @@ export class Register {
       const formData = {
         login: this.form.value.login,
         password: this.form.value.password,
+        confirmPassword: this.form.value.confirmPassword,
         city: this.form.value.city,
         street: this.form.value.street,
         houseNumber: parseInt(this.form.value.houseNumber),
@@ -143,14 +150,14 @@ export class Register {
       if (response.ok && result.data) {
         localStorage.setItem('access_token', result.data.access_token);
         localStorage.setItem('userData', JSON.stringify(result.data.user));
-        localStorage.setItem('toastMessage', 'Registration successful!');
+        this.toastService.success('Registration successful!')
         this.router.navigate(['/']);
       } else {
-        alert(result.error || 'Registration failed. Please try again.');
+        this.toastService.error('Registration failed. Please try again')
       }
     } catch (error) {
       console.error('Registration error:', error);
-      alert('An error occurred. Please try again.');
+      this.toastService.error('An error occurred. Please try again.')
     } finally {
       this.isLoading.set(false)
     }
