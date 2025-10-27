@@ -55,17 +55,17 @@ export interface IProductDetail extends IProduct {
 }
 
 /** Generic success response with `data` */
-export interface ApiResponse<T> {
-    data: T;
+export interface ApiResponse {
+    data?: IProduct[];
     message?: string;
     error?: string | null;
 }
 
 /** products/favorites */
-export type ProductsListResponse = ApiResponse<IProduct[]>;
+// export type ProductsListResponse = ApiResponse<IProduct[]>;
 
 /** getDetails (data: ProductDetail) */
-export type ProductDetailResponse = ApiResponse<IProductDetail>;
+// export type ProductDetailResponse = ApiResponse<IProductDetail>;
 
 /** Simulated / error response structure */
 export interface ApiErrorResponse {

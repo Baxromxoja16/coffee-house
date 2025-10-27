@@ -2,34 +2,27 @@
     <h2 class="main-title">Choose your <span>favorite</span> coffee</h2>
     <div class="container">
         <div class="slider-box">
-            <div class="slider-items">
-                <div class="loader show">
-                    <div class="loader-spinner"></div>
+            @if(loading()) {
+                <div class="loader-container">
+                    <div class="loader show">
+                        <div class="loader-spinner"></div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="slider-buttons">
-                <app-button-carousel>
-                    <span class="center">
-                        <svg width="24" height="24"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                </app-button-carousel>
-                <app-button-carousel>
-                    <span class="center">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                </app-button-carousel>
-            </div>
+            } @else {
+                <owl-carousel-o [options]="customOptions" class="slider-carousel">
+                    @for (item of favorite(); track item.id) {
+                        <ng-template carouselSlide>
+                            <app-slider-card>
+                                <img id="image" [src]="getImagePath($index)" [alt]="item.name">
+                                <h2 id="content-title" class="title">{{item.name}}</h2>
+                                <p id="content-text" class="text">{{item.description}}</p>
+                                <span id="content-price" class="price" [innerHTML]="formatPrice(item)"></span>
+                            </app-slider-card>
+                        </ng-template>
+                    }
+                </owl-carousel-o>
+            }
         </div>
-    </div>
-    <div class="slider-pagination">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
     </div>
 </section>
 
