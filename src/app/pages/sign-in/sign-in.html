@@ -1,1 +1,38 @@
-<p>sign-in works!</p>
+<div class="container">
+    <h1 class="main-title">Sign In</h1>
+
+    <form class="form-field">
+        <div class="input-field">
+            <label for="Login">Login</label>
+            <div class="input-wrapper">
+                <input type="text" id="login" name="login" placeholder="Placeholder" />
+                <span class="error-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#ff4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </div>
+            @if(false) {
+                <span class="error-message">This field is required</span>
+            }
+        </div>
+        <div class="input-field">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+                <input type="password" id="password" name="password" placeholder="Placeholder" />
+                <span class="error-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" stroke="#ff4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </div>
+            @if(false) {
+                <span class="error-message">This field is required</span>
+            }
+        </div>
+    </form>
+
+    <div class="button">
+        <app-button-secondary><span>Sign In</span></app-button-secondary>
+    </div>
+</div>
