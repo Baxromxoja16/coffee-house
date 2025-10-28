@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+
+    
+    <script src="/src/main.ts" type="module" defer></script>
+
+    <title>Coffee House</title>
+</head>
+<body>
+    <app-success id="appSuccess"></app-success>
+    <app-error id="appError"></app-error>
+    <header>
+        <app-navbar></app-navbar>
+        <div class="container">
+            <div class="hero">
+                <h1 class="title"><span>Enjoy</span> premium coffee at our charming cafe</h1>
+                <p class="hero-text">
+                    With its inviting atmosphere and delicious coffee options, the Coffee House Resource is a popular destination for coffee lovers and those seeking a warm and inviting space to enjoy their favorite beverage.
+                </p>
+                <button-primary text="Menu"></button-primary>
+                <video class="hero-bg" src="./video/2909914-uhd_3840_2024_24fps.mp4" autoplay muted></video>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- slider -->
+        <section class="slider" id="slider">
+            <h2 class="main-title">Choose your <span>favorite</span> coffee</h2>
+            <div class="container">
+                <div class="slider-box">
+                    <div class="slider-items">
+                        <div class="loader show">
+                            <div class="loader-spinner"></div>
+                        </div>
+                    </div>
+
+                    <div class="slider-buttons">
+                        <button-carousel>
+                            <span slot="icon" class="center">
+                                <svg width="24" height="24"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button-carousel>
+                        <button-carousel>
+                            <span slot="icon" class="center">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button-carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-pagination">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+
+        <section class="friends" id="friends">
+            <div class="container">
+                <h2 class="main-title">Resource is <span>the perfect and cozy place</span> where you can enjoy a variety of hot beverages, relax, catch up with friends, or get some work done.</h2>
+                <div class="friends-content">
+                    <div class="content-box">
+                        <div class="first-image">
+                            <img src="/images/card-img/about-1.jpg" alt="jpg">
+                        </div>
+                        <div class="secound-image">
+                            <img src="/images/card-img/about-2.jpg" alt="jpg">
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <div class="third-image">
+                            <img src="/images/card-img/about-3.jpg" alt="jpg">
+                        </div>
+                        <div class="fourth-image">
+                            <img src="/images/card-img/about-4.jpg" alt="jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="download" id="download">
+            <div class="container">
+                <div class="download-content">
+                    <div class="content-info">
+                        <h2 class="main-title"><span>Download</span> our apps <br> to start ordering</h2>
+                        <p class="content-text">
+                            Download the Resource app today and experience the comfort of ordering your favorite coffee from wherever you are
+                        </p>
+                        <div class="content-buttons">
+                            <button-app-store text="App Store">
+                                <span slot="icon">
+                                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M26.7063 18.6307C26.6694 14.6324 30.0641 12.6872 30.2193 12.5966C28.2967 9.86366 25.3169 9.49026 24.2697 9.46048C21.767 9.20369 19.3393 10.9206 18.0644 10.9206C16.764 10.9206 14.8008 9.48529 12.6848 9.52747C9.96196 9.56841 7.41468 11.1055 6.01762 13.4923C3.13444 18.359 5.28474 25.5108 8.04705 29.4446C9.42884 31.3712 11.0435 33.5223 13.1569 33.4466C15.2245 33.3635 15.9968 32.1614 18.4919 32.1614C20.9641 32.1614 21.6893 33.4466 23.8447 33.3983C26.0637 33.3635 27.4608 31.463 28.7942 29.519C30.3911 27.3108 31.0323 25.1362 31.0578 25.0245C31.0056 25.0071 26.7483 23.4229 26.7063 18.6307Z" fill="#403F3D"/>
+                                        <path d="M22.6347 6.87268C23.7468 5.51675 24.5076 3.67205 24.2964 1.80005C22.6869 1.86952 20.674 2.88554 19.5149 4.21169C18.4893 5.38029 17.5732 7.29571 17.8099 9.097C19.6179 9.2285 21.4743 8.20752 22.6347 6.87268Z" fill="#403F3D"/>
+                                    </svg>
+                                </span>
+                            </button-app-store>
+                            <button-app-store text="Google Play">
+                                <span slot="icon">
+                                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.7558 3.20309C3.39335 3.57302 3.18359 4.14896 3.18359 4.89483V31.4995C3.18359 32.2454 3.39335 32.8213 3.7558 33.1913L3.84525 33.2725L19.1359 18.3701V18.0182L3.84525 3.11587L3.7558 3.20309Z" fill="#403F3D"/>
+                                        <path d="M26.0776 23.34L20.9863 18.3701V18.0182L26.0837 13.0482L26.1979 13.1129L32.2345 16.4618C33.9573 17.4122 33.9573 18.9761 32.2345 19.9325L26.1979 23.2754L26.0776 23.34Z" fill="#403F3D"/>
+                                        <path d="M25.2733 24.2008L20.0617 19.1196L4.68164 34.1167C5.25384 34.7031 6.18695 34.7738 7.24807 34.1873L25.2733 24.2008Z" fill="#403F3D"/>
+                                        <path d="M25.2733 12.1876L7.24807 2.20103C6.18695 1.62058 5.25384 1.69125 4.68164 2.27772L20.0617 17.2688L25.2733 12.1876Z" fill="#403F3D"/>
+                                    </svg>
+                                </span>
+                            </button-app-store>
+                        </div>
+                    </div>
+                    <div class="content-image">
+                        <img src="/images/mobile-screens.png" alt="png">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer id="footer"></custom-footer>
+
+
+    <!-- <tab-button text="Coffee" icon="☕"></tab-button>
+    <tab-button text="Tea" icon="🫖"></tab-button>
+    <tab-button text="Dessert" icon="🍰"></tab-button>
+
+    <button-secondary text="Close"></button-secondary>
+
+    <button-primary text="Menu"></button-primary>
+
+    <button-app-store text="App Store">
+        <svg width="36" height="36" slot="icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M26.7063 18.6307C26.6694 14.6324 30.0641 12.6872 30.2193 12.5966C28.2967 9.86366 25.3169 9.49026 24.2697 9.46048C21.767 9.20369 19.3393 10.9206 18.0644 10.9206C16.764 10.9206 14.8008 9.48529 12.6848 9.52747C9.96196 9.56841 7.41468 11.1055 6.01762 13.4923C3.13444 18.359 5.28474 25.5108 8.04705 29.4446C9.42884 31.3712 11.0435 33.5223 13.1569 33.4466C15.2245 33.3635 15.9968 32.1614 18.4919 32.1614C20.9641 32.1614 21.6893 33.4466 23.8447 33.3983C26.0637 33.3635 27.4608 31.463 28.7942 29.519C30.3911 27.3108 31.0323 25.1362 31.0578 25.0245C31.0056 25.0071 26.7483 23.4229 26.7063 18.6307Z" fill="#403F3D"/>
+            <path d="M22.6347 6.87268C23.7468 5.51675 24.5076 3.67205 24.2964 1.80005C22.6869 1.86952 20.674 2.88554 19.5149 4.21169C18.4893 5.38029 17.5732 7.29571 17.8099 9.097C19.6179 9.2285 21.4743 8.20752 22.6347 6.87268Z" fill="#403F3D"/>
+        </svg>
+    </button-app-store>
+    <button-app-store text="Google Play">
+        <svg width="36" height="36" slot="icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.7558 3.20309C3.39335 3.57302 3.18359 4.14896 3.18359 4.89483V31.4995C3.18359 32.2454 3.39335 32.8213 3.7558 33.1913L3.84525 33.2725L19.1359 18.3701V18.0182L3.84525 3.11587L3.7558 3.20309Z" fill="#403F3D"/>
+            <path d="M26.0776 23.34L20.9863 18.3701V18.0182L26.0837 13.0482L26.1979 13.1129L32.2345 16.4618C33.9573 17.4122 33.9573 18.9761 32.2345 19.9325L26.1979 23.2754L26.0776 23.34Z" fill="#403F3D"/>
+            <path d="M25.2733 24.2008L20.0617 19.1196L4.68164 34.1167C5.25384 34.7031 6.18695 34.7738 7.24807 34.1873L25.2733 24.2008Z" fill="#403F3D"/>
+            <path d="M25.2733 12.1876L7.24807 2.20103C6.18695 1.62058 5.25384 1.69125 4.68164 2.27772L20.0617 17.2688L25.2733 12.1876Z" fill="#403F3D"/>
+        </svg>
+
+    </button-app-store>
+
+    <button-carousel>
+        <svg width="36" height="36" slot="icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.7558 3.20309C3.39335 3.57302 3.18359 4.14896 3.18359 4.89483V31.4995C3.18359 32.2454 3.39335 32.8213 3.7558 33.1913L3.84525 33.2725L19.1359 18.3701V18.0182L3.84525 3.11587L3.7558 3.20309Z" fill="#403F3D"/>
+            <path d="M26.0776 23.34L20.9863 18.3701V18.0182L26.0837 13.0482L26.1979 13.1129L32.2345 16.4618C33.9573 17.4122 33.9573 18.9761 32.2345 19.9325L26.1979 23.2754L26.0776 23.34Z" fill="#403F3D"/>
+            <path d="M25.2733 24.2008L20.0617 19.1196L4.68164 34.1167C5.25384 34.7031 6.18695 34.7738 7.24807 34.1873L25.2733 24.2008Z" fill="#403F3D"/>
+            <path d="M25.2733 12.1876L7.24807 2.20103C6.18695 1.62058 5.25384 1.69125 4.68164 2.27772L20.0617 17.2688L25.2733 12.1876Z" fill="#403F3D"/>
+        </svg>
+        <svg width="24" height="24" slot="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+    </button-carousel>
+
+    <button-social>
+        <svg width="24" height="24" slot="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#E1D4C9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#E1D4C9"/>
+            <path d="M17.5 6.51L17.51 6.49889" stroke="#E1D4C9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button-social>
+
+    <button-burger>
+        <svg slot="burger" width="18" height="10" viewBox="0 0 18 10" fill="none">
+            <path d="M1 1H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M1 9H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg slot="close" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1.34375 1.34314L12.6575 12.6568" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M1.34375 12.6568L12.6575 1.34314" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+    </button-burger>
+
+    <contact-link>
+        <svg width="20" height="20" slot="icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.6673 8.33333C16.6673 12.0152 10.0007 18.3333 10.0007 18.3333C10.0007 18.3333 3.33398 12.0152 3.33398 8.33333C3.33398 4.65144 6.31875 1.66667 10.0007 1.66667C13.6825 1.66667 16.6673 4.65144 16.6673 8.33333Z" stroke="#E1D4C9" stroke-width="1.5"/>
+            <path d="M9.99935 9.16667C10.4596 9.16667 10.8327 8.79357 10.8327 8.33333C10.8327 7.8731 10.4596 7.5 9.99935 7.5C9.53911 7.5 9.16602 7.8731 9.16602 8.33333C9.16602 8.79357 9.53911 9.16667 9.99935 9.16667Z" fill="#E1D4C9" stroke="#E1D4C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <span slot="text">Contact Us</span>
+    </contact-link>
+
+    <menu-link>
+        <svg width="20" height="20" slot="icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.166 9.76667V11.6667C14.166 14.8883 11.5543 17.5 8.33268 17.5C5.11102 17.5 2.49935 14.8883 2.49935 11.6667V9.76667C2.49935 9.4353 2.76798 9.16667 3.09935 9.16667H13.566C13.8974 9.16667 14.166 9.4353 14.166 9.76667Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.99935 7.49996C9.99935 6.66663 10.5946 5.83329 11.7851 5.83329C13.1 5.83329 14.166 4.7673 14.166 3.45234V2.91663" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6.66732 7.5V7.08333C6.66732 5.70262 7.78661 4.58333 9.16732 4.58333C10.0878 4.58333 10.834 3.83714 10.834 2.91667V2.5" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13.334 9.16663H15.4173C16.5679 9.16663 17.5007 10.0994 17.5007 11.25C17.5007 12.4006 16.5679 13.3333 15.4173 13.3333H14.1673" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <span slot="text">
+            Menu
+        </span>
+    </menu-link>
+
+    <slider-card>
+        <img slot="image" src="./images/coffee-img/coffee-slider-1.png" alt="png">
+        <h2 slot="content-title" class="title">S’mores Frappuccino</h2>
+        <p slot="content-text" class="text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+        <span slot="content-price" class="price">$27.5</span>
+    </slider-card>
+    <slider-card>
+        <img slot="image" src="./images/coffee-img/coffee-slider-2.png" alt="png">
+        <h2 slot="content-title" class="title">Caramel Macchiato</h2>
+        <p slot="content-text" class="text">Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped thick foam.</p>
+        <span slot="content-price" class="price">$21.5</span>
+    </slider-card>
+
+    <coffee-card>
+        <img slot="image" src="./images/dessert-img/coffee-1.jpg" alt="png">
+        <h2 slot="content-title" class="title">Cappuccino</h2>
+        <p slot="content-text" class="text">Cappuccino is a coffee-based drink made primarily from espresso and milk.</p>
+        <span slot="content-price" class="price">$15.5</span>
+    </coffee-card> -->
+
+</body>
+</html>

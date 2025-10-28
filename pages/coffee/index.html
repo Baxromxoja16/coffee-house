@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/logo.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="./coffee.css">
+  <link rel="stylesheet" href="/global.css">
+
+
+
+  <script src="/src/main.ts" type="module" defer></script>
+
+  <title>Coffee Page</title>
+</head>
+
+<body>
+  <app-success id="appSuccess"></app-success>
+  <app-error id="appError"></app-error>
+  <header>
+    <app-navbar></app-navbar>
+    <div class="title">
+      <h2 class="main-title">
+        Behind each of our cups hides an <span>amazing surprise</span>
+      </h2>
+    </div>
+    <div class="category">
+      <tab-button text="Coffee" icon="☕"></tab-button>
+      <tab-button text="Tea" icon="🫖"></tab-button>
+      <tab-button text="Dessert" icon="🍰"></tab-button>
+    </div>
+  </header>
+  <main>
+    <section class="cards">
+      <div class="container">
+        <div class="cards-content">
+          <div class="loader show">
+              <div class="loader-spinner"></div>
+          </div>
+          <!-- Coffee -->
+          <!-- <coffee-card data-category="coffee">...</coffee-card> -->
+
+          <!-- Tea -->
+          <!-- <coffee-card data-category="tea">...</coffee-card> -->
+
+          <!-- Dessert -->
+          <!-- <coffee-card data-category="dessert">...</coffee-card> -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <custom-footer></custom-footer>
+</body>
+
+</html>

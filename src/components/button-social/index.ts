@@ -1,0 +1,66 @@
+class SocialButton extends HTMLElement {
+    shadow: ShadowRoot;
+    constructor() {
+        super();
+        this.shadow = this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+        this.shadow.innerHTML = `
+        <style>
+            .social-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 18px;
+                border-radius: 100px;
+                cursor: pointer;
+                line-height: 150%;
+                letter-spacing: 0;
+                font-size: 16px;
+                font-weight: 600;
+                width: 60px;
+                height: 60px;
+               
+                background: transparent;
+                border: 1px solid var(--boder-ligtht);
+
+                transition: ease-in-out 0.3s;
+            }
+
+            .social-button:hover {
+                background: var(--body);
+                border: 1px solid var(--body);
+            }
+        </style>
+
+        <button class="social-button">
+            <slot name="icon" class="test"></slot>
+        </button>
+        `;
+
+        const svgElement = this.shadow.querySelector('slot[name="icon"]') as HTMLSlotElement;
+        const buttonElement = this.shadow.querySelector('.social-button') as HTMLElement;
+        if (svgElement) {
+            const assignedNodes = svgElement.assignedNodes();
+            assignedNodes.forEach(node => {
+                if (node instanceof Element) {
+                    const paths = node.querySelectorAll('path');
+                    paths.forEach(p => {
+                        buttonElement.addEventListener('mouseover', () => {
+                            p.style.transition = '0.3s';
+                            p.style.stroke = 'var(--dark)';
+                        });
+                        buttonElement.addEventListener('mouseout', () => {
+                            p.style.transition = '0.3s';
+                            p.style.stroke = 'var(--light)';
+                        });
+                    });
+                }
+            });
+        }
+    }
+
+}
+
+customElements.define('button-social', SocialButton);
