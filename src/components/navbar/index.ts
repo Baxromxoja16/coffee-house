@@ -176,9 +176,8 @@ class Navbar extends HTMLElement {
                     <li class="nav-item"><a href="#footer">Contact us</a></li>
                 </ul>
                 
-                ${
-                    this.isLogin() ?
-                `<a class="menu-buttons" href="/coffee-house/pages/cart/index">
+           
+                <a class="menu-buttons" href="/coffee-house/pages/cart/index">
                     <div class="cart-button">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.0942 8.36255L17.1455 15.1959C17.3319 16.4074 16.3945 17.5 15.1688 17.5H4.83122C3.60545 17.5 2.66809 16.4074 2.85448 15.1959L3.90576 8.36255C4.05586 7.38689 4.89536 6.66667 5.88251 6.66667H14.1175C15.1046 6.66667 15.9441 7.38689 16.0942 8.36255Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -187,8 +186,6 @@ class Navbar extends HTMLElement {
 
                         <span>${this.getCartCount()}</span>
                     </div>
-                    </a>` : ''
-                }
                     <menu-link>
                         <svg width="20" height="20" slot="icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.166 9.76667V11.6667C14.166 14.8883 11.5543 17.5 8.33268 17.5C5.11102 17.5 2.49935 14.8883 2.49935 11.6667V9.76667C2.49935 9.4353 2.76798 9.16667 3.09935 9.16667H13.566C13.8974 9.16667 14.166 9.4353 14.166 9.76667Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -212,6 +209,8 @@ class Navbar extends HTMLElement {
                             <path d="M1.34375 12.6568L12.6575 1.34314" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
                         </svg>
                     </button-burger>
+                    </a>
+
             </nav>
         </div>
 
@@ -250,13 +249,6 @@ class Navbar extends HTMLElement {
         console.log(ev);
         console.log(count);
     };
-
-    private isLogin() {
-        if(localStorage.getItem('access_token')) {
-            return true;
-        }
-        return false;
-    }
     
 
     getCartCount() {
