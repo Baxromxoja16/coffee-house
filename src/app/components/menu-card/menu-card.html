@@ -1,14 +1,14 @@
 <div class="coffee-card">
     <div class="coffee-image">
-        <img src="/images/dessert-img/coffee-1.jpg" alt="jpg">
+        <img src="{{image()}}" alt="jpg">
     </div>
     <div class="coffee-content">
-        <h2 content-title class="title">Coffe name</h2>
-        <p content-text class="content-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, voluptate!</p>
+        <h2 content-title class="title">{{product()?.name}}</h2>
+        <p content-text class="content-title">{{product()?.description}}</p>
 
         <div class="cart-price">
-            <span content-price class="price">$5.40</span>
-            <span content-discountPrice class="content-discountPrice">$5.40</span>
+            <span content-price class="price">{{product()?.price}}</span>
+            <span content-discountPrice class="content-discountPrice">{{product()?.discountPrice}}</span>
         </div>
     </div>
 </div>

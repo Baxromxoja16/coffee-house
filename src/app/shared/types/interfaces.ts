@@ -1,11 +1,4 @@
-import { PaymentMethodEnum } from "./enums";
-
-/** Kategoriya enum (agar backend string qaytarsa ham enum orqali tekshirish mumkin) */
-export enum Category {
-    Coffee = 'coffee',
-    Dessert = 'dessert',
-    Tea = 'tea'
-}
+import { Category, PaymentMethodEnum } from "./enums";
 
 /** Categories */
 export interface Categories {

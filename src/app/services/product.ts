@@ -29,4 +29,18 @@ export class ProductService {
     )
   }
 
+  getProducts() {
+    return this.http.get(this.url + 'products/').pipe(
+      catchError((err: any, caught: any) => {
+        return of({error: 'error'})
+      }),
+      tap((data: ApiResponse) => {
+        if (data.error) {
+          this.toastService.error('Something went wrong. Please, refresh the page');
+          return;
+        };
+      })
+    )
+  }
+
 }
