@@ -84,28 +84,28 @@ class DropdownField extends HTMLElement {
         const disabled = this.hasAttribute('disabled');
         const optionsAttr = this.getAttribute('options');
         const valueAttr = this.getAttribute('value');
-      
+
         this.labelEl.textContent = label;
         this.selectEl.name = name;
         this.selectEl.disabled = disabled;
-      
+
         if (optionsAttr) {
-          try {
-            const parsed = JSON.parse(optionsAttr) as string[];
-            if (Array.isArray(parsed)) this.setOptions(parsed);
-          } catch {
-            // ignore invalid JSON
-          }
+            try {
+                const parsed = JSON.parse(optionsAttr) as string[];
+                if (Array.isArray(parsed)) this.setOptions(parsed);
+            } catch {
+                // ignore invalid JSON
+            }
         }
-      
+
         // Only update the select value if attribute differs from current select value.
         // This avoids calling setValue -> setAttribute -> attributeChangedCallback loop.
         if (valueAttr !== null && this.selectEl.value !== valueAttr) {
-          this.selectEl.value = valueAttr;
+            this.selectEl.value = valueAttr;
         }
-      }
-      
-    
+    }
+
+
 
     // Public API
     public setOptions(options: string[]): void {

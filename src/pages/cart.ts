@@ -240,6 +240,10 @@ class Cart {
             `;
 
             this.setupAuthButtons();
+            (buttonSection.querySelector('button-secondary button')as HTMLButtonElement).removeAttribute('disabled');
+            (buttonSection.querySelector('button-secondary button') as HTMLButtonElement).style.cursor = 'pointer'
+
+            console.log(buttonSection.querySelector('button-secondary button'));
         } else if (this.user && this.cart.length > 0) {
             buttonSection.innerHTML = `
                 <button-secondary text="Confirm Order" id="confirm-btn"></button-secondary>
@@ -256,7 +260,7 @@ class Cart {
         const registerBtn = document.getElementById('register-btn');
         const button = signinBtn?.querySelector('button') as HTMLButtonElement;
 
-        button.disabled = true;
+        button.disabled = false;
         button.style.opacity =  '1';
         button.style.cursor = 'pointer';
 
@@ -264,11 +268,11 @@ class Cart {
         
 
         signinBtn?.addEventListener('click', () => {
-            window.location.href = '/pages/login/index';
+            window.location.href = '/coffee-house/pages/login/index';
         });
 
         registerBtn?.addEventListener('click', () => {
-            window.location.href = '/pages/register/index';
+            window.location.href = '/coffee-house/pages/register/index';
         });
     }
 
@@ -301,7 +305,7 @@ class Cart {
                 totalPrice: +this.calculateTotals().totalDiscount || +this.calculateTotals().total
             };
 
-            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/orders/confirm', {
+            const response = await fetch('https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/orders/confirm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

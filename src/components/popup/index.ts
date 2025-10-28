@@ -386,7 +386,7 @@ class Popup extends HTMLElement {
         return new Promise((resolve, reject) => {
             setTimeout(async () => {
                 try {
-                    const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products/' + productId);
+                    const response = await fetch('https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products/' + productId);
                     const result = await response.json();
                     const product = result?.data;
                     

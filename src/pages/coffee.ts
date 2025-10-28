@@ -50,7 +50,7 @@ class MenuPage {
     async loadProducts() {
         try {
             this.loader = true;
-            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products');
+            const response = await fetch('https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products');
             const data = await response.json();
 
             if(data.error) {

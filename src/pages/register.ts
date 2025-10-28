@@ -101,10 +101,11 @@ class Register {
         const submitBtn = document.querySelector('button-secondary') as HTMLElement;
         const button = submitBtn?.querySelector('button');
         if (!button) return;
-
-        button.disabled = true;
-        button.style.opacity = '0.5';
-        button.style.cursor = 'not-allowed';
+        if(window.location.href.includes('register')) {
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            button.style.cursor = 'not-allowed';
+        }
 
         // field-changed (input-field va dropdown-field dan)
         document.addEventListener('field-changed', () => {
@@ -206,7 +207,7 @@ class Register {
         console.log('Submitting data:', data);
 
         try {
-            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/auth/register', {
+            const response = await fetch('https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/auth/register', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),

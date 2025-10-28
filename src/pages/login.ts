@@ -31,9 +31,11 @@ class Login {
         const button = submitBtn?.querySelector('button');
         if (!button) return;
 
-        button.disabled = true;
-        button.style.opacity = '0.5';
-        button.style.cursor = 'not-allowed';
+        if(window.location.href.includes('login')) {
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            button.style.cursor = 'not-allowed';
+        }
 
         document.addEventListener('field-changed', () => {
             this.checkFormValidity();
@@ -95,7 +97,7 @@ class Login {
         console.log('Submitting data:', data);
 
         try {
-            const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/auth/login', {
+            const response = await fetch('https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/auth/login', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
