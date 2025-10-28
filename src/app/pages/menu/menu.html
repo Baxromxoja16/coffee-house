@@ -1,1 +1,41 @@
-<p>menu works!</p>
+<header>
+    <div class="title">
+        <h2 class="main-title">
+            Behind each of our cups hides an <span>amazing surprise</span>
+        </h2>
+    </div>
+    <div class="category">
+        <app-tab-button>
+            <span>Coffee</span>
+            <span icon>☕</span>
+        </app-tab-button>
+        <app-tab-button>
+            <span>Tea</span>
+            <svg icon>🫖</svg>
+        </app-tab-button>
+        <app-tab-button>
+            <span>Dessert</span>
+            <svg icon>🍰</svg>
+        </app-tab-button>
+    </div>
+</header>
+
+<section class="cards">
+    <div class="container">
+        <div class="cards-content">
+            @if(loading) {
+                <div class="loader show">
+                    <div class="loader-spinner"></div>
+                </div>
+            }
+            <!-- Coffee -->
+            <!-- <coffee-card data-category="coffee">...</coffee-card> -->
+
+            <!-- Tea -->
+            <!-- <coffee-card data-category="tea">...</coffee-card> -->
+
+            <!-- Dessert -->
+            <!-- <coffee-card data-category="dessert">...</coffee-card> -->
+        </div>
+    </div>
+</section>
