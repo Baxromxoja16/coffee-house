@@ -19,14 +19,12 @@ export class MenuCard {
   }
 
   getImagePath(category: Category = Category.Coffee, index: number = 0) {
-    console.log(category);
     let newIdx = index;
     if(category === 'dessert') {
         newIdx = newIdx - 16;
     } else if(category === 'tea') {
         newIdx = newIdx - 8
     }
-    console.log(`/images/dessert-img/${category}-${newIdx}.${category === 'coffee' ? 'jpg' : 'png'}`);
     return `/images/dessert-img/${category}-${newIdx}.${category === 'coffee' ? 'jpg' : 'png'}`;
 }
 }

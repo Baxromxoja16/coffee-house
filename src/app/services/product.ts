@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse, IProduct } from '../shared/types/interfaces';
+import { ApiResponse, IProduct, IProductDetail } from '../shared/types/interfaces';
 import { catchError, of, tap } from 'rxjs';
 import { ToastService } from '../shared/services/toast-service';
 
@@ -35,6 +35,20 @@ export class ProductService {
         return of({error: 'error'})
       }),
       tap((data: ApiResponse) => {
+        if (data.error) {
+          this.toastService.error('Something went wrong. Please, refresh the page');
+          return;
+        };
+      })
+    )
+  }
+
+  getProduct(id: number) {
+    return this.http.get(this.url + 'products/' + id).pipe(
+      catchError((err: any, caught: any) => {
+        return of({error: 'error'})
+      }),
+      tap((data: {error?: string, data?: IProductDetail}) => {
         if (data.error) {
           this.toastService.error('Something went wrong. Please, refresh the page');
           return;

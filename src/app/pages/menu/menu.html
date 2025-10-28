@@ -29,7 +29,7 @@
                 </div>
             }
             @for (product of productsFiltered(); track $index) {
-                <app-menu-card [product]="product"></app-menu-card>
+                <app-menu-card (click)="openDialog(product.id)" [product]="product"></app-menu-card>
             }
         </div>
     </div>
