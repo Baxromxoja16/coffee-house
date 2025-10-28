@@ -18,11 +18,13 @@ import { tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SliderCard } from "../../components/slider-card/slider-card";
 import { OwlOptions, CarouselModule } from 'ngx-owl-carousel-o';
+import { ButtonSecondary } from "../../components/button-secondary/button-secondary";
+import { ButtonPrimary } from "../../components/button-primary/button-primary";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ButtonCarousel, ButtonAppStore, SliderCard, CarouselModule],
+  imports: [ButtonCarousel, ButtonAppStore, SliderCard, CarouselModule, ButtonSecondary, ButtonPrimary],
   templateUrl: './main.html',
   styleUrls: ['./main.css'],
 })

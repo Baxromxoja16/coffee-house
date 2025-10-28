@@ -1,0 +1,52 @@
+.primary-button {
+    position: relative;
+    padding: 20px 64px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+    background: var(--body);
+    color: var(--dark);
+    overflow: hidden;
+}
+
+.primary-button .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.primary-button .text-only {
+    opacity: 1;
+    transform: translateY(0);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary-button:hover .text-only {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.primary-button .with-icon {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.primary-button:hover .with-icon {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
