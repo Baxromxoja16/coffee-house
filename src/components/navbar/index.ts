@@ -176,6 +176,7 @@ class Navbar extends HTMLElement {
                     <li class="nav-item"><a href="#footer">Contact us</a></li>
                 </ul>
                 
+           
                 <a class="menu-buttons" href="/coffee-house/pages/cart/index">
                     <div class="cart-button">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,7 +198,7 @@ class Navbar extends HTMLElement {
                             Menu
                         </span>
                     </menu-link>
-                </a>
+                    
                     <button-burger>
                         <svg slot="burger" width="18" height="10" viewBox="0 0 18 10" fill="none">
                             <path d="M1 1H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
@@ -208,6 +209,8 @@ class Navbar extends HTMLElement {
                             <path d="M1.34375 12.6568L12.6575 1.34314" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round"/>
                         </svg>
                     </button-burger>
+                    </a>
+
             </nav>
         </div>
 

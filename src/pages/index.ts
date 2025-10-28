@@ -60,6 +60,8 @@ class CarouselSlider {
   public loader: boolean = false;
 
   constructor(sliderElement: HTMLElement) {
+    alert('https://github.com/Baxromxoja16/coffee-house/pull/1  -----> This is a PR link, I accidentally sent the deploy link')
+
     this.slider = sliderElement;
     this.err = document.getElementById('appError');
 
@@ -92,9 +94,10 @@ class CarouselSlider {
   private async loadFavorites(): Promise<void> {
     try {
       this.loader = true;
-      const response = await fetch('http://coffee-shop-be.eu-central-1.elasticbeanstalk.com/products/favorites');
+      const response = await fetch('https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com/products/favorites');
       const result: ApiResponse = await response.json();
       if (result.error) {
+        (document.querySelector('.slider-box') as HTMLElement).innerHTML = '<p style="text-align: center">Something went wrong. Please, refresh the page</p>';
         (this.err as AppError)?.show('Something went wrong. Please, refresh the page');
         return;
       };
