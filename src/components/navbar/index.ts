@@ -325,3 +325,4 @@ class Navbar extends HTMLElement {
 }
 
 customElements.define('app-navbar', Navbar);
+
