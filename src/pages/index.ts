@@ -60,7 +60,7 @@ class CarouselSlider {
   public loader: boolean = false;
 
   constructor(sliderElement: HTMLElement) {
-    alert('https://github.com/Baxromxoja16/coffee-house/pull/1  -----> This is a PR link, I accidentally sent the deploy link')
+    console.log('https://github.com/Baxromxoja16/coffee-house/pull/1  -----> This is a PR link, I accidentally sent the deploy link')
 
     this.slider = sliderElement;
     this.err = document.getElementById('appError');
