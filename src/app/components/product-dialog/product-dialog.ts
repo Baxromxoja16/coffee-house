@@ -6,10 +6,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IProductDetail } from '../../shared/types/interfaces';
 import { tap } from 'rxjs';
 import { TabButton } from "../tab-button/tab-button";
+import { SizesMap } from "../../shared/types/interfaces";
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-product-dialog',
-  imports: [ButtonSecondary, TabButton],
+  imports: [ButtonSecondary, TabButton, TooltipModule],
   templateUrl: './product-dialog.html',
   styleUrl: './product-dialog.css',
 })
@@ -41,6 +43,19 @@ export class ProductDialog implements OnInit {
       })
     ).subscribe()
   }
+
+  getObjectKeys(object: SizesMap | undefined): (keyof SizesMap)[] {
+    if (!object) return [];
+    return Object.keys(object ?? {}) as (keyof SizesMap)[]
+  }
+
+  formatTooltipContent(price: string, discountPrice?: string): string {
+    if (true && discountPrice && discountPrice !== price) { // islogin true ni o'rgniga
+      return `<span style="text-decoration: line-through; opacity: 0.7; margin-right: 8px;">$${price}</span><span style="color: #B0907A; font-weight: 600;">$${discountPrice}</span>`;
+    }
+    return `$${price}`;
+  }
+
 
   closeDialog(params: 'close' | 'add' = 'close') {
     if(params === 'add') {

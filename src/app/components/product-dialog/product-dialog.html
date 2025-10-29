@@ -4,60 +4,76 @@
             <div class="loader-spinner"></div>
         </div>
     }
-    <div class="modal">
-        <div class="close-icon" (click)="closeDialog('close')">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4L4 12M4 4L12 12" stroke="#c1b6ad" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </div>
-        <div class="modal-img">
-            <img src="/images/dessert-img/coffee-1.jpg" alt="product">
-        </div>
-        <div class="modal-info">
-            <h2 class="modal-title">{{product().name}}</h2>
-            <p class="modal-description">{{product().description}}</p>
-            <div class="modal-size">
-                <span class="size-label">Size</span>
-                <!-- @for (size of product().sizes; track $index) {
-                    
-                } -->
-                <div class="size-item-1"></div>
+    @else {
+        <div class="modal">
+            <div class="close-icon" (click)="closeDialog('close')">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4L4 12M4 4L12 12" stroke="#c1b6ad" stroke-width="2" stroke-linecap="round"/>
+                </svg>
             </div>
-            <div class="modal-additives">
-                <span class="size-label">Additives</span>
-                <div class="size-item-1">
-                    @for (additive of product().additives; track $index; let i = $index) {
-                        <app-tab-button>
-                            <span>{{additive.name}}</span>
-                            <span icon>{{i}}</span>
-                        </app-tab-button>
-                    }
+            <div class="modal-img">
+                <img src="/images/dessert-img/coffee-1.jpg" alt="product">
+            </div>
+            <div class="modal-info">
+                <h2 class="modal-title">{{product().name}}</h2>
+                <p class="modal-description">{{product().description}}</p>
+                <div class="modal-size">
+                    <span class="size-label">Size</span>
+                    <div class="size-item-1">
+                        @for (size of getObjectKeys(product().sizes); track $index) {
+                            <app-tab-button [pTooltip]="formatTooltipContent(
+                                product().sizes?.[size]?.price || '0',
+                                product().sizes?.[size]?.discountPrice
+                              )"
+                              [escape]="false"
+                              tooltipPosition="top">
+                                <span>{{product() ? product().sizes?.[size]?.size : ''}}</span>
+                                <span icon>{{size}}</span>
+                            </app-tab-button>
+                        }
+                    </div>
+                </div>
+                <div class="modal-additives">
+                    <span class="size-label">Additives</span>
+                    <div class="size-item-1">
+                        @for (additive of product().additives; track $index; let i = $index) {
+                            <app-tab-button [pTooltip]="formatTooltipContent(
+                                additive?.price || '0',
+                                additive?.discountPrice
+                              )"
+                              [escape]="false"
+                              tooltipPosition="top">
+                                <span>{{additive.name}}</span>
+                                <span icon>{{i}}</span>
+                            </app-tab-button>
+                        }
+                    </div>
+                </div>
+    
+                <div class="total">
+                    <p class="total-label">Total:</p>
+                    <p class="total-price"><span class="discount-price">{{product().discountPrice}}</span> <span class="price"> {{product().price}}</span></p>
+                </div>
+    
+                <div class="modal-alert">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_268_12877)">
+                            <path d="M8 7.66663V11" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 5.00667L8.00667 4.99926" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>                        
+                    </span>
+                    <p class="alert-text">The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.</p>
+                </div>
+    
+                <div class="modal-buttons">
+                    <app-button-secondary class="add-to-cart" (click)="closeDialog('add')">
+                        <span>Add to Cart</span>
+                    </app-button-secondary>
                 </div>
             </div>
-
-            <div class="total">
-                <p class="total-label">Total:</p>
-                <p class="total-price"><span class="discount-price">{{product().discountPrice}}</span> <span class="price"> {{product().price}}</span></p>
-            </div>
-
-            <div class="modal-alert">
-                <span class="icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_268_12877)">
-                        <path d="M8 7.66663V11" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 5.00667L8.00667 4.99926" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                        </g>
-                    </svg>                        
-                </span>
-                <p class="alert-text">The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.</p>
-            </div>
-
-            <div class="modal-buttons">
-                <app-button-secondary class="add-to-cart" (click)="closeDialog('add')">
-                    <span>Add to Cart</span>
-                </app-button-secondary>
-            </div>
         </div>
-    </div>
+    }
 </div>

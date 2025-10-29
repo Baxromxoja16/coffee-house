@@ -49,7 +49,7 @@ export class Menu implements OnInit {
 
   openDialog(id: number) {
     this.ref = this.dialogService.open(ProductDialog, {
-      width: '70%',
+      // width: '70%',
       modal:true,
       data: {
         id
