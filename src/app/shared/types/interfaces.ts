@@ -113,3 +113,12 @@ export interface Toast {
   duration: number; // ms
   createdAt: number;
 }
+
+export type Order = {
+    id: string;
+    createdAt: string;
+    status: string;
+    items: CartItem[];
+    totals: { subtotal: number; discountTotal: number; shipping: number; total: number; };
+};
+  

@@ -21,5 +21,9 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./pages/register/register').then(m => m.Register),
     },
+    {
+        path: 'orders',
+        loadComponent: () => import('./pages/order/order').then(m => m.Orders),
+    },
     { path: '**', redirectTo: 'main' },
 ];

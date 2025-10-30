@@ -71,6 +71,11 @@
 
     <div class="button">
         @if(isAuth()) {
+            <a routerLink="/orders">
+                <app-button-secondary (click)="confirm()">
+                    <span>Orders History</span>
+                </app-button-secondary> 
+            </a>
             <app-button-secondary (click)="confirm()">
                 <span>Confirm</span>
             </app-button-secondary> 
