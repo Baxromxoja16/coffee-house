@@ -57,4 +57,18 @@ export class ProductService {
     )
   }
 
+  confirm(params = {}) {
+    return this.http.post(this.url + 'orders/confirm', params).pipe(
+      catchError((err: any, caught: any) => {
+        return of({error: 'error'})
+      }),
+      tap((data: {error?: string, data?: IProductDetail}) => {
+        if (data.error) {
+          this.toastService.error('Something went wrong. Please, refresh the page');
+          return;
+        };
+      })
+    )
+  }
+
 }

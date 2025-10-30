@@ -1,1 +1,86 @@
-<p>cart works!</p>
+<div class="container">
+    <h1 class="main-title">Cart</h1>
+
+    <div class="cart-content">
+        @if(isAuth()) {
+            @for (product of products(); track $index) {
+            <div class="cart">
+                <div class="cart-left">
+                    <span class="trash">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9"
+                                stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M21 6H15.375M3 6H8.625M8.625 6V4C8.625 2.89543 9.52043 2 10.625 2H13.375C14.4796 2 15.375 2.89543 15.375 4V6M8.625 6H15.375"
+                                stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <div class="cart-info">
+                        <div class="image">
+                            <img src="{{product.image}}" alt="{{product.name}}" width="100%">
+                        </div>
+                        <div class="info-text">
+                            <h3 class="info-title">{{product.name}}</h3>
+                            <p class="info-description">{{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-right">
+                    @if(product.totalPrice.discountPrice) {
+                    <div class="price-discount">${{product.totalPrice.price}}</div>
+                    }
+                    <div class="price">${{product.totalPrice.discountPrice || product.totalPrice.price}}</div>
+                </div>
+            </div>
+            }
+        }
+    </div>
+    @if(isAuth()) {
+    <div class="total-price">
+        <p class="total-title">
+            Total:
+            <span class="all-price">
+                <span class="price-discount">${{totalProducts().price.toFixed(2)}}</span>
+                <span class="price">${{totalProducts().discountPrice.toFixed(2)}}</span>
+            </span>
+        </p>
+        <p class="total-title adress">
+            Address:
+            <span class="all-price">
+                <span class="price">{{this.user().city}} {{this.user().street}} {{this.user().houseNumber}} </span>
+            </span>
+        </p>
+        <p class="total-title pay-by">
+            Pay by:
+            <span class="all-price">
+                <span class="price">{{this.user().paymentMethod | uppercase}}</span>
+            </span>
+        </p>
+    </div>
+    } @else {
+    <div class="total-price">
+        <p class="total-title">
+            Total:
+            <span class="all-price">
+                <span class="price">$0.00</span>
+            </span>
+        </p>
+    </div>
+    }
+
+    <div class="button">
+        @if(isAuth()) {
+            <app-button-secondary (click)="confirm()">
+                <span>Confirm</span>
+            </app-button-secondary> 
+        } @else {
+            <app-button-secondary routerLink="sign-in">
+                <span>Sign In</span>
+            </app-button-secondary>
+            <app-button-secondary routerLink="register">
+                <span>Registration</span>
+            </app-button-secondary>
+        }
+    </div>
+</div>
