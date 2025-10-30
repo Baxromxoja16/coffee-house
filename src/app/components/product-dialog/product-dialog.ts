@@ -67,6 +67,9 @@ export class ProductDialog implements OnInit {
   addToCart() {
     const productsFromCart: IProductDetail[] = JSON.parse(localStorage.getItem('cart') || '[]');
 
+    const basePrice = +this.totalPrice()?.price || this.toNumber(this.product()?.price) || 0;
+    const baseDiscount = +this.totalPrice()?.discountPrice || this.toNumber(this.product()?.discountPrice) || basePrice;
+
     const productDetails: CartItem = {
       id: this.product().id,
       name: this.product().name,
@@ -75,7 +78,11 @@ export class ProductDialog implements OnInit {
       discountPrice: this.product().discountPrice,
       image: this.image(),
       description: this.product().description,
-      totalPrice: this.totalPrice(),
+      totalPrice:  {
+        price: basePrice.toString(),
+        discountPrice: baseDiscount.toString(),
+        hasDiscount: baseDiscount !== basePrice
+      },
       currentAdditive: this.currentAdditive(),
       currentSize: this.currentSize(),
     }
@@ -141,5 +148,12 @@ export class ProductDialog implements OnInit {
         newIdx = newIdx - 8
     }
     return `/images/dessert-img/${category}-${newIdx}.${category === 'coffee' ? 'jpg' : 'png'}`;
-}
+  }
+
+  private toNumber(v: any): number {
+    if (v == null) return 0;
+    const s = String(v).replace(/[^0-9.-]+/g, '');
+    const n = parseFloat(s);
+    return Number.isFinite(n) ? n : 0;
+  }
 }
