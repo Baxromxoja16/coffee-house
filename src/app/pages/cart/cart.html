@@ -75,12 +75,16 @@
                 <span>Confirm</span>
             </app-button-secondary> 
         } @else {
-            <app-button-secondary routerLink="sign-in">
-                <span>Sign In</span>
-            </app-button-secondary>
-            <app-button-secondary routerLink="register">
-                <span>Registration</span>
-            </app-button-secondary>
+            <a routerLink="/sign-in">
+                <app-button-secondary >
+                    <span>Sign In</span>
+                </app-button-secondary>
+            </a>
+            <a routerLink="/register">
+                <app-button-secondary routerLink="register">
+                    <span>Registration</span>
+                </app-button-secondary>
+            </a>
         }
     </div>
 </div>
