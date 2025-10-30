@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tab-button',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './tab-button.css',
 })
 export class TabButton {
-
+  @Input() active = false;
 }

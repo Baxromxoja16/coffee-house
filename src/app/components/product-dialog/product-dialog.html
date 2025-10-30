@@ -22,7 +22,8 @@
                     <div class="size-item-1">
                         @for (size of getObjectKeys(product().sizes); track $index) {
                             <app-tab-button 
-                                (click)="chooseSize(product().sizes?.[size])" 
+                                (click)="chooseSize(product().sizes?.[size])"
+                                [active]="currentSize()?.size === product().sizes?.[size]?.size"
                                 [pTooltip]="formatTooltipContent(
                                     product().sizes?.[size]?.price || '0',
                                     product().sizes?.[size]?.discountPrice
@@ -40,7 +41,8 @@
                     <div class="size-item-1">
                         @for (additive of product().additives; track $index; let i = $index) {
                             <app-tab-button 
-                                (click)="chooseAdditive(additive)" 
+                                (click)="chooseAdditive(additive)"
+                                [active]="currentAdditive()?.name === additive.name"
                                 [pTooltip]="formatTooltipContent(
                                 additive?.price || '0',
                                 additive?.discountPrice
