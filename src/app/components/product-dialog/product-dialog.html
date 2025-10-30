@@ -21,12 +21,14 @@
                     <span class="size-label">Size</span>
                     <div class="size-item-1">
                         @for (size of getObjectKeys(product().sizes); track $index) {
-                            <app-tab-button [pTooltip]="formatTooltipContent(
-                                product().sizes?.[size]?.price || '0',
-                                product().sizes?.[size]?.discountPrice
-                              )"
-                              [escape]="false"
-                              tooltipPosition="top">
+                            <app-tab-button 
+                                (click)="chooseSize(product().sizes?.[size])" 
+                                [pTooltip]="formatTooltipContent(
+                                    product().sizes?.[size]?.price || '0',
+                                    product().sizes?.[size]?.discountPrice
+                                )"
+                                [escape]="false"
+                                tooltipPosition="top">
                                 <span>{{product() ? product().sizes?.[size]?.size : ''}}</span>
                                 <span icon>{{size}}</span>
                             </app-tab-button>
@@ -37,7 +39,9 @@
                     <span class="size-label">Additives</span>
                     <div class="size-item-1">
                         @for (additive of product().additives; track $index; let i = $index) {
-                            <app-tab-button [pTooltip]="formatTooltipContent(
+                            <app-tab-button 
+                                (click)="chooseAdditive(additive)" 
+                                [pTooltip]="formatTooltipContent(
                                 additive?.price || '0',
                                 additive?.discountPrice
                               )"
@@ -52,7 +56,12 @@
     
                 <div class="total">
                     <p class="total-label">Total:</p>
-                    <p class="total-price"><span class="discount-price">{{product().discountPrice}}</span> <span class="price"> {{product().price}}</span></p>
+                    <p class="total-price">
+                        @if (totalPrice().hasDiscount) {
+                          <span class="discount-price">${{ totalPrice().price }}</span>
+                        }
+                        <span class="price"> ${{ totalPrice().discountPrice }}</span>
+                    </p>
                 </div>
     
                 <div class="modal-alert">

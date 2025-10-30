@@ -1,9 +1,9 @@
-import { Component, DestroyRef, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, DestroyRef, OnInit, signal, WritableSignal } from '@angular/core';
 import { ButtonSecondary } from "../button-secondary/button-secondary";
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductService } from '../../services/product';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IProductDetail } from '../../shared/types/interfaces';
+import { Additive, IProductDetail, SizeEntry } from '../../shared/types/interfaces';
 import { tap } from 'rxjs';
 import { TabButton } from "../tab-button/tab-button";
 import { SizesMap } from "../../shared/types/interfaces";
@@ -18,7 +18,34 @@ import { TooltipModule } from 'primeng/tooltip';
 export class ProductDialog implements OnInit {
   loading: WritableSignal<boolean> = signal(false);
   product: WritableSignal<IProductDetail> = signal({} as IProductDetail);
+  currentSize: WritableSignal<SizeEntry> = signal({price:'0', size: '', discountPrice: undefined});
+  currentAdditive: WritableSignal<Additive> = signal({price:'0', name: '', discountPrice: undefined});
+  totalPrice = computed(() => {
+    const size = this.currentSize();
+    const additive = this.currentAdditive();
   
+    // Original prices (without discount)
+    const sizeOriginalPrice = +(size.price || 0);
+    const additiveOriginalPrice = +(additive.price || 0);
+    
+    // Discounted prices (if discount exists, use it, otherwise use original)
+    const sizeDiscountedPrice = size.discountPrice ? +size.discountPrice : sizeOriginalPrice;
+    const additiveDiscountedPrice = additive.discountPrice ? +additive.discountPrice : additiveOriginalPrice;
+  
+    // Totals
+    const totalOriginal = sizeOriginalPrice + additiveOriginalPrice;
+    const totalDiscounted = sizeDiscountedPrice + additiveDiscountedPrice;
+  
+    const hasDiscount = totalOriginal !== totalDiscounted;
+  
+    return {
+      price: totalOriginal.toFixed(2),
+      discountPrice: totalDiscounted.toFixed(2),
+      hasDiscount: hasDiscount
+    };
+  });
+  
+
   constructor(
     private ref: DynamicDialogRef,
     private productService: ProductService,
@@ -54,6 +81,14 @@ export class ProductDialog implements OnInit {
       return `<span style="text-decoration: line-through; opacity: 0.7; margin-right: 8px;">$${price}</span><span style="color: #B0907A; font-weight: 600;">$${discountPrice}</span>`;
     }
     return `$${price}`;
+  }
+
+  chooseSize(size: SizeEntry | undefined) {
+    this.currentSize.set(size as SizeEntry);
+  }
+
+  chooseAdditive(additive: Additive | undefined) {
+    this.currentAdditive.set(additive as Additive);
   }
 
 
