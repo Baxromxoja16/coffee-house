@@ -83,7 +83,7 @@ export class ProductDialog implements OnInit {
     localStorage.setItem('cart', JSON.stringify([...filtered, productDetails]));
 
     this.toastService.success('Product add to cart!');
-
+    window.dispatchEvent(new CustomEvent('cart-updated', { detail: productDetails }));
     this.closeDialog('add');
   }
 
