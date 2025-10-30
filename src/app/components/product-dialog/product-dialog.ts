@@ -1,13 +1,15 @@
-import { Component, computed, DestroyRef, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, DestroyRef, effect, OnInit, signal, WritableSignal } from '@angular/core';
 import { ButtonSecondary } from "../button-secondary/button-secondary";
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductService } from '../../services/product';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Additive, IProductDetail, SizeEntry } from '../../shared/types/interfaces';
+import { Additive, CartItem, IProduct, IProductDetail, SizeEntry } from '../../shared/types/interfaces';
 import { tap } from 'rxjs';
 import { TabButton } from "../tab-button/tab-button";
 import { SizesMap } from "../../shared/types/interfaces";
 import { TooltipModule } from 'primeng/tooltip';
+import { ToastService } from '../../shared/services/toast-service';
+import { Category } from '../../shared/types/enums';
 
 @Component({
   selector: 'app-product-dialog',
@@ -17,6 +19,7 @@ import { TooltipModule } from 'primeng/tooltip';
 })
 export class ProductDialog implements OnInit {
   loading: WritableSignal<boolean> = signal(false);
+  image = signal('')
   product: WritableSignal<IProductDetail> = signal({} as IProductDetail);
   currentSize: WritableSignal<SizeEntry> = signal({price:'0', size: '', discountPrice: undefined});
   currentAdditive: WritableSignal<Additive> = signal({price:'0', name: '', discountPrice: undefined});
@@ -44,17 +47,44 @@ export class ProductDialog implements OnInit {
       hasDiscount: hasDiscount
     };
   });
-  
 
   constructor(
     private ref: DynamicDialogRef,
     private productService: ProductService,
     private destroyRef: DestroyRef,
-    private dynamicDialogConfig: DynamicDialogConfig
-  ) {}
+    private dynamicDialogConfig: DynamicDialogConfig,
+    private toastService: ToastService,
+  ) {
+    effect(() => {
+      this.image.set(this.getImagePath(this.product()?.category, this.product()?.id))
+    })
+  }
 
   ngOnInit(): void {
     this.getProduct(this.dynamicDialogConfig.data?.id)
+  }
+
+  addToCart() {
+    const productsFromCart: IProductDetail[] = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    const productDetails: CartItem = {
+      id: this.product().id,
+      name: this.product().name,
+      category: this.product().category,
+      image: this.image(),
+      description: this.product().description,
+      totalPrice: this.totalPrice(),
+      currentAdditive: this.currentAdditive(),
+      currentSize: this.currentSize(),
+    }
+
+    const filtered = productsFromCart.filter((item) => item.id !== this.product().id);
+
+    localStorage.setItem('cart', JSON.stringify([...filtered, productDetails]));
+
+    this.toastService.success('Product add to cart!');
+
+    this.closeDialog('add');
   }
 
   getProduct(id: number) {
@@ -100,4 +130,14 @@ export class ProductDialog implements OnInit {
 
     this.ref?.close({result: true})
   }
+
+  getImagePath(category: Category = Category.Coffee, index: number = 0) {
+    let newIdx = index;
+    if(category === 'dessert') {
+        newIdx = newIdx - 16;
+    } else if(category === 'tea') {
+        newIdx = newIdx - 8
+    }
+    return `/images/dessert-img/${category}-${newIdx}.${category === 'coffee' ? 'jpg' : 'png'}`;
+}
 }

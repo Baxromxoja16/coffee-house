@@ -92,14 +92,13 @@ export interface CartItem {
     name: string;
     description: string;
     category: Category;
-    size: string;
-    sizePrice: string;
-    sizeDiscountPrice?: string;
-    additives: string[];
-    additivesPrice: string;
-    additivesDiscountPrice?: string;
-    totalPrice: string;
-    totalDiscountPrice?: string;
+    totalPrice: {
+        price: string;
+        discountPrice: string;
+        hasDiscount: boolean;
+    }
+    currentAdditive: Additive;
+    currentSize: SizeEntry;
     image?: string;
 }
 

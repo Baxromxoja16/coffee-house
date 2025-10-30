@@ -12,7 +12,7 @@
                 </svg>
             </div>
             <div class="modal-img">
-                <img src="/images/dessert-img/coffee-1.jpg" alt="product">
+                <img src="{{image()}}" alt="product">
             </div>
             <div class="modal-info">
                 <h2 class="modal-title">{{product().name}}</h2>
@@ -78,7 +78,7 @@
                 </div>
     
                 <div class="modal-buttons">
-                    <app-button-secondary class="add-to-cart" (click)="closeDialog('add')">
+                    <app-button-secondary (click)="addToCart()" class="add-to-cart" (click)="closeDialog('add')">
                         <span>Add to Cart</span>
                     </app-button-secondary>
                 </div>
