@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    cursor: pointer;
 
 }
 .cart-content .cart .cart-left .cart-info .image {

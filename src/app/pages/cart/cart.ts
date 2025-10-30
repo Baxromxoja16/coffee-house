@@ -7,16 +7,20 @@ import { ToastService } from '../../shared/services/toast-service';
 import { ProductService } from '../../services/product';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ProductDialog } from '../../components/product-dialog/product-dialog';
 
 @Component({
   selector: 'app-cart',
   imports: [UpperCasePipe, ButtonSecondary, RouterLink],
+  providers: [DialogService],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
 export class Cart implements OnInit {
   products: WritableSignal<CartItem[]> = signal([]);
   user: WritableSignal<User> = signal({} as User);
+  ref!: DynamicDialogRef<ProductDialog> | null;
 
   totalProducts = computed(() => {
     const result = { price: 0, discountPrice: 0 };
@@ -33,7 +37,8 @@ export class Cart implements OnInit {
   constructor(
     private toastService: ToastService,
     private productService: ProductService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +57,20 @@ export class Cart implements OnInit {
 
   isAuth(): boolean {
     return !!localStorage.getItem('access_token');
+  }
+
+  openDialog(id: number) {
+    this.ref = this.dialogService.open(ProductDialog, {
+      // width: '70%',
+      modal:true,
+      data: {
+        id
+      }
+    });
+
+    this.ref?.onClose.subscribe(() => {
+      this.products.set(this.getProducts());
+    })
   }
 
   removeItem(product: CartItem) {
