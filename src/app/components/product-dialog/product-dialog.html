@@ -59,10 +59,10 @@
                 <div class="total">
                     <p class="total-label">Total:</p>
                     <p class="total-price">
-                        @if (totalPrice().hasDiscount) {
-                          <span class="discount-price">${{ totalPrice().price }}</span>
+                        @if (totalPrice().hasDiscount ) {
+                          <span class="discount-price">${{ +totalPrice().price || product().price }}</span>
                         }
-                        <span class="price"> ${{ totalPrice().discountPrice }}</span>
+                        <span class="price"> ${{ +totalPrice().discountPrice || product().discountPrice }}</span>
                     </p>
                 </div>
     

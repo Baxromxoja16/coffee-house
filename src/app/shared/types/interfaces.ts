@@ -92,6 +92,8 @@ export interface CartItem {
     name: string;
     description: string;
     category: Category;
+    price: string;
+    discountPrice?: string;
     totalPrice: {
         price: string;
         discountPrice: string;

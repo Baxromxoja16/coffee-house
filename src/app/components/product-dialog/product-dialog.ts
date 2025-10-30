@@ -71,6 +71,8 @@ export class ProductDialog implements OnInit {
       id: this.product().id,
       name: this.product().name,
       category: this.product().category,
+      price: this.product().price,
+      discountPrice: this.product().discountPrice,
       image: this.image(),
       description: this.product().description,
       totalPrice: this.totalPrice(),

@@ -54,6 +54,18 @@ export class Cart implements OnInit {
     return !!localStorage.getItem('access_token');
   }
 
+  removeItem(product: CartItem) {
+    const newProduct = this.products().filter((item: CartItem) => product.id !== item.id);
+
+    this.products.set(newProduct);
+
+    localStorage.setItem('cart', JSON.stringify(this.products()));
+
+    this.toastService.success(product.name + ' deleted successfully');
+
+    window.dispatchEvent(new CustomEvent('cart-updated'));
+  }
+
   confirm() {
     const orderData = {
       items: this.products().map(item => ({
@@ -66,14 +78,13 @@ export class Cart implements OnInit {
     };
 
     this.productService.confirm(orderData)
-    .pipe(
-      takeUntilDestroyed(this.destroyRef),
-      tap((data) => {
-        if(data.error) return;
-        console.log(data);
-        this.toastService.success('Thank you for your order! Our manager will contact you shortly.');
-      })
-    ).subscribe()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((data) => {
+          if (data.error) return;
+          this.toastService.success('Thank you for your order! Our manager will contact you shortly.');
+        })
+      ).subscribe()
   }
 
   get getToken(): string {
