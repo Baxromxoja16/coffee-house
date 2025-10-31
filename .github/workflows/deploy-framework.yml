@@ -3,12 +3,12 @@ name: Deploy framework to GitHub Pages
 on:
   push:
     branches:
-      - main       # o'zingiz ishlatadigan asosiy branch nomi (masalan 'main' yoki 'master')
+      - migrate-framework       # o'zingiz ishlatadigan asosiy branch nomi (masalan 'main' yoki 'master')
   workflow_dispatch:   # qo'l bilan ishga tushirish uchun
 
 env:
   # repo name (just the repository name, without owner). We'll use it to compute base-href.
-  REPO_NAME: ${{ github.event.repository.name }}
+  REPO_NAME: https://baxromxoja16.github.io/coffee-house/framework/
   PUBLISH_BRANCH: gh-pages
   DEST_DIR: framework   # gh-pages branch ichida joylashadigan papka (o'zgartiring xohlasangiz)
   DIST_DIR: dist/framework
