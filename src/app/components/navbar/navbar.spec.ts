@@ -1,14 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Navbar } from './navbar';
+import { ActivatedRoute } from '@angular/router';
 
 describe('Navbar', () => {
   let component: Navbar;
   let fixture: ComponentFixture<Navbar>;
+  const fakeActivatedRoute = {
+    snapshot: { data: {} }
+  } as ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Navbar]
+      imports: [Navbar],
+      providers: [{provide: ActivatedRoute, useValue: fakeActivatedRoute}]
     })
     .compileComponents();
 
