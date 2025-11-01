@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: 'main',
+        path: '',
         loadComponent: () => import('./pages/main/main').then(m => m.Main),
     },
     {
@@ -25,5 +25,5 @@ export const routes: Routes = [
         path: 'orders',
         loadComponent: () => import('./pages/order/order').then(m => m.Orders),
     },
-    { path: '**', redirectTo: 'main' },
+    { path: '**', redirectTo: '/' },
 ];
