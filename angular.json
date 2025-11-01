@@ -27,6 +27,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/coffee-house/framework/",
               "budgets": [
                 {
                   "type": "initial",

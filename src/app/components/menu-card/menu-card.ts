@@ -25,6 +25,6 @@ export class MenuCard {
     } else if(category === 'tea') {
         newIdx = newIdx - 8
     }
-    return `/images/dessert-img/${category}-${newIdx}.${category === 'coffee' ? 'jpg' : 'png'}`;
+    return `images/dessert-img/${category}-${newIdx}.${category === 'coffee' ? 'jpg' : 'png'}`;
 }
 }

@@ -93,7 +93,7 @@ export class Main implements OnInit, AfterViewInit, OnDestroy {
 
     // Get image path
     getImagePath(index: number): string {
-      return `./images/coffee-img/coffee-slider-${index + 1}.png`;
+      return `images/coffee-img/coffee-slider-${index + 1}.png`;
     }
   
     // Format price with discount
