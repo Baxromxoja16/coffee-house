@@ -10,7 +10,7 @@
             <div class="cart-left">
                 <div class="cart-info">
                     <div class="image">
-                        <img src="{{ order.items?.[0]?.image || '/assets/placeholder.png' }}" alt="item" width="100%">
+                        <img src="{{ order?.items?.[0]?.image || '/assets/placeholder.png' }}" alt="item" width="100%">
                     </div>
                     <div class="info-text">
                         <h3 class="info-title">Order {{ order.id }}</h3>

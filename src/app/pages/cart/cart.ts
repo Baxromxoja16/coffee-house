@@ -9,10 +9,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductDialog } from '../../components/product-dialog/product-dialog';
+import { CartComponent } from "./components/cart-component/cart-component";
 
 @Component({
   selector: 'app-cart',
-  imports: [UpperCasePipe, ButtonSecondary, RouterLink],
+  imports: [UpperCasePipe, ButtonSecondary, RouterLink, CartComponent],
   providers: [DialogService],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
@@ -60,12 +61,13 @@ export class Cart implements OnInit {
     return !!localStorage.getItem('access_token');
   }
 
-  openDialog(id: number) {
+  openDialog(product: CartItem) {
+    // console.log(product, 'opeeeen');
     this.ref = this.dialogService.open(ProductDialog, {
       // width: '70%',
       modal:true,
       data: {
-        id
+        id: product.id
       }
     });
 
