@@ -99,7 +99,7 @@ export class Main implements OnInit, AfterViewInit, OnDestroy {
     // Format price with discount
     formatPrice(item: IProduct): string {
       if (item.discountPrice && item.discountPrice !== item.price) {
-        return `<span style="text-decoration: line-through; opacity: 0.6; margin-right: 8px;">$${item.price}</span>$${item.discountPrice}`;
+        return `<span style="text-decoration: line-through; opacity: 0.6; margin-right: 8px;">$${item.price}</span> $${item.discountPrice}`;
       }
       return `$${item.price}`;
     }

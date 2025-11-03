@@ -24,11 +24,12 @@
                 <owl-carousel-o [options]="customOptions" class="slider-carousel">
                     @for (item of favorite(); track item.id) {
                         <ng-template carouselSlide>
-                            <app-slider-card>
-                                <img id="image" [src]="getImagePath($index)" [alt]="item.name">
-                                <h2 id="content-title" class="title">{{item.name}}</h2>
-                                <p id="content-text" class="text">{{item.description}}</p>
-                                <span id="content-price" class="price" [innerHTML]="formatPrice(item)"></span>
+                            <app-slider-card [productData]="{
+                                img: getImagePath($index),
+                                name: item.name,
+                                description: item.description,
+                                price: formatPrice(item)
+                            }">
                             </app-slider-card>
                         </ng-template>
                     }

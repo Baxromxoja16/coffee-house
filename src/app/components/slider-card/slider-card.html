@@ -1,10 +1,10 @@
 <div class="slider-card">
     <div class="slider-image">
-        <ng-content select="img"></ng-content>
+        <img id="image" [src]="productData()?.img" [alt]="productData()?.name">
     </div>
     <div class="slider-content">
-        <ng-content select="h2"></ng-content>
-        <ng-content select="p"></ng-content>
-        <ng-content select="span"></ng-content>
+        <h2 id="content-title" class="title">{{productData()?.name}}</h2>
+        <p id="content-text" class="text">{{productData()?.description}}</p>
+        <span id="content-price" class="price" [innerHTML]="productData()?.price"></span>
     </div>
 </div>
