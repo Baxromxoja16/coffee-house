@@ -5,15 +5,15 @@
         </h2>
     </div>
     <div class="category">
-        <app-tab-button (click)="filter(Category.Coffee)">
+        <app-tab-button (click)="filter(Category.Coffee)" [active]="productsFiltered()[0].category === Category.Coffee">
             <span>Coffee</span>
             <span icon>☕</span>
         </app-tab-button>
-        <app-tab-button (click)="filter(Category.Tea)">
+        <app-tab-button (click)="filter(Category.Tea)" [active]="productsFiltered()[0].category === Category.Tea">
             <span>Tea</span>
             <svg icon>🫖</svg>
         </app-tab-button>
-        <app-tab-button (click)="filter(Category.Dessert)">
+        <app-tab-button (click)="filter(Category.Dessert)" [active]="productsFiltered()[0].category === Category.Dessert">
             <span>Dessert</span>
             <svg icon>🍰</svg>
         </app-tab-button>
