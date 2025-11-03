@@ -1,0 +1,15 @@
+<div class="coffee-card">
+    <div class="coffee-image">
+        <img src="{{image()}}" alt="jpg">
+    </div>
+    <div class="coffee-content">
+        <h2 content-title class="title">{{product()?.name}}</h2>
+        <p content-text class="content-title">{{product()?.description}}</p>
+
+        <div class="cart-price">
+            <span content-price class="price">${{product()?.price}}</span>
+            <span content-discountPrice class="content-discountPrice">${{product()?.discountPrice}}</span>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+.social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    border-radius: 100px;
+    cursor: pointer;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-size: 16px;
+    font-weight: 600;
+    width: 60px;
+    height: 60px;
+
+    background: transparent;
+    border: 1px solid var(--boder-ligtht);
+
+    transition: ease-in-out 0.3s;
+}
+
+.social-button:hover {
+    background: var(--body);
+    border: 1px solid var(--body);
+}
+.social-button:hover svg path {
+    stroke: var(--dark) !important;
+    transition: 0.3s;
+}

@@ -1,0 +1,80 @@
+name: Deploy framework to GitHub Pages
+
+on:
+  push:
+    branches:
+      - migrate-framework       # o'zingiz ishlatadigan asosiy branch nomi (masalan 'main' yoki 'master')
+  workflow_dispatch:   # qo'l bilan ishga tushirish uchun
+
+env:
+  # repo name (just the repository name, without owner). We'll use it to compute base-href.
+  REPO_NAME: https://baxromxoja16.github.io/coffee-house/framework/
+  PUBLISH_BRANCH: gh-pages
+  DEST_DIR: framework   # gh-pages branch ichida joylashadigan papka (o'zgartiring xohlasangiz)
+  DIST_DIR: dist/framework
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'   # loyihangiz talab qiladigan Node versiyasi
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project (Angular / other)
+        # IMPORTANT: change this build command if you use a different tool (vite/webpack/react).
+        # For Angular, we set --output-path to DIST_DIR and base-href to /<repo>/framework/
+        run: |
+          # ensure output dir exists
+          mkdir -p $DIST_DIR
+
+          # If you use Angular CLI:
+          if [ -f angular.json ]; then
+            echo "Detected Angular project. Running ng build..."
+            npx ng build --configuration production --output-path=$DIST_DIR --base-href "/${{ env.REPO_NAME }}/${{ env.DEST_DIR }}/"
+          else
+            # fallback: run default build script
+            echo "No angular.json found — running npm run build"
+            npm run build
+          fi
+
+      - name: Normalize dist (move browser/* up if present)
+        run: |
+          if [ -d "${{ env.DIST_DIR }}/browser" ]; then
+            echo "Found browser/ subfolder inside ${{ env.DIST_DIR }}. Moving its contents up..."
+            shopt -s dotglob || true
+            mv "${{ env.DIST_DIR }}/browser/"* "${{ env.DIST_DIR }}/" || true
+            rm -rf "${{ env.DIST_DIR }}/browser"
+          else
+            echo "No browser/ subfolder — no move required."
+          fi
+
+      - name: Create 404 fallback (copy index.html -> 404.html)
+        run: |
+          if [ -f "${{ env.DIST_DIR }}/index.html" ]; then
+            cp "${{ env.DIST_DIR }}/index.html" "${{ env.DIST_DIR }}/404.html"
+          fi
+
+      - name: Deploy to gh-pages (into subdirectory)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # publish the contents of the dist folder
+          publish_dir: ${{ env.DIST_DIR }}
+          # push into gh-pages branch under DEST_DIR subfolder (preserves other folders)
+          publish_branch: ${{ env.PUBLISH_BRANCH }}
+          destination_dir: ${{ env.DEST_DIR }}
+          # token (GITHUB_TOKEN provided automatically by Actions)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # commit author
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com

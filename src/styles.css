@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: 0%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --dark: rgba(64, 63, 61, 1);
+    --light: rgba(225, 212, 201, 1);
+    --accent: rgba(176, 144, 122, 1);
+    --body: rgba(225, 212, 201, 1);
+    --container: rgba(102, 95, 85, 1);
+    --backdrop: rgba(64, 63, 61, 0.8);
+    --boder-ligtht: rgba(193, 182, 173, 1);
+    --boder-dark: rgba(102, 95, 85, 1);
+    --white: rgba(255,255,255, 1);
+    --placeholder: rgba(161, 168, 179, 1);
+}
+
+.container {
+    max-width: 1400px;
+    padding: 0 20px;
+    margin: auto;
+}
+
+body {
+    background-color: var(--body);
+}
+
+.main-title {
+    font-size: 60px;
+    line-height: 125%;
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.main-title span {
+    font-style: italic;
+    color: var(--accent);
+}
+
+span[slot="icon"] {
+    display: block;
+}
+
+.center {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 648px;
+    }
+}
+
+@media (max-width: 380px) {
+    .container {
+        max-width: 316px;
+        padding: 0 16px;
+        margin: auto;
+    }
+}

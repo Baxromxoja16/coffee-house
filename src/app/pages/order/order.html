@@ -1,0 +1,68 @@
+<div class="container">
+    <h1 class="main-title">Order History</h1>
+
+    @if(orders().length === 0) {
+    <p>No orders yet.</p>
+    } @else {
+    <div class="orders-list">
+        @for (order of orders(); track $index) {
+        <div class="cart order-card" (click)="openDetail(order)">
+            <div class="cart-left">
+                <div class="cart-info">
+                    <div class="image">
+                        <img src="{{ order?.items?.[0]?.image || '/assets/placeholder.png' }}" alt="item" width="100%">
+                    </div>
+                    <div class="info-text">
+                        <h3 class="info-title">Order {{ order.id }}</h3>
+                        <p class="info-description">{{ formatDate(order.createdAt) | date: 'M/d/yy, h:mm' }}</p>
+                        <p class="info-description">Items: {{ order.items.length || 0 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-right">
+                <div class="price">${{ order.totals.total.toFixed(2) }}</div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- Detail modal (simple) -->
+    @if(selectedOrder()) {
+    <div class="modal-overlay" (click)="closeDetail()"></div>
+    <div class="modal-pane">
+        <button class="modal-close" (click)="closeDetail()">X</button>
+        <h2>Order {{ selectedOrder()?.id }}</h2>
+        <p>{{ selectedOrder()?.createdAt | date: 'M/d/yy, h:mm' }} — Status: {{ selectedOrder()?.status }}</p>
+
+        <div class="order-items">
+            @for (item of selectedOrder()?.items; track $index) {
+            <div class="order-item">
+                <div class="image">
+                    <img src="{{ item.image || '/assets/placeholder.png' }}" alt="{{ item.name }}" width="80">
+                </div>
+                <div class="info-text">
+                    <div>{{ item.name }}</div>
+                    <div class="small">{{ item.currentSize.size || '' }} {{ item.currentAdditive.name || '' }}</div>
+                </div>
+                <div class="price small">
+                    ${{ (+item.totalPrice.discountPrice || +item.totalPrice.price || 0).toFixed(2) }}
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="order-totals">
+            <p class="discount-price">Subtotal: ${{ selectedOrder()?.totals?.subtotal?.toFixed(2) }}</p>
+            <p >Discounted: ${{ selectedOrder()?.totals?.discountTotal?.toFixed(2) }}</p>
+            <p>Total: ${{ selectedOrder()?.totals?.total?.toFixed(2) }}</p>
+        </div>
+
+        <div class="modal-actions">
+            <app-button-secondary (click)="reorder(selectedOrder())"><span>Reorder</span></app-button-secondary>
+            <app-button-secondary (click)="closeDetail()"><span>Cancel</span></app-button-secondary>
+        </div>
+    </div>
+    }
+</div>

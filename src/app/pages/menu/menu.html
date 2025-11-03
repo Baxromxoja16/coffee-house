@@ -1,0 +1,36 @@
+<header>
+    <div class="title">
+        <h2 class="main-title">
+            Behind each of our cups hides an <span>amazing surprise</span>
+        </h2>
+    </div>
+    <div class="category">
+        <app-tab-button (click)="filter(Category.Coffee)" [active]="productsFiltered()[0].category === Category.Coffee">
+            <span>Coffee</span>
+            <span icon>☕</span>
+        </app-tab-button>
+        <app-tab-button (click)="filter(Category.Tea)" [active]="productsFiltered()[0].category === Category.Tea">
+            <span>Tea</span>
+            <svg icon>🫖</svg>
+        </app-tab-button>
+        <app-tab-button (click)="filter(Category.Dessert)" [active]="productsFiltered()[0].category === Category.Dessert">
+            <span>Dessert</span>
+            <svg icon>🍰</svg>
+        </app-tab-button>
+    </div>
+</header>
+
+<section class="cards">
+    <div class="container">
+        <div class="cards-content">
+            @if(loading()) {
+                <div class="loader show">
+                    <div class="loader-spinner"></div>
+                </div>
+            }
+            @for (product of productsFiltered(); track $index) {
+                <app-menu-card (click)="openDialog(product.id)" [product]="product"></app-menu-card>
+            }
+        </div>
+    </div>
+</section>

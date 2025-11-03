@@ -1,0 +1,71 @@
+<div class="container">
+    <h1 class="main-title">Cart</h1>
+
+    <div class="cart-content">
+        @if(isAuth()) {
+            @for (product of products(); track $index) {
+                <app-cart-component
+                    [product]="product"
+                    (deletedProduct)="removeItem($event)"
+                    (openDialogEmitter)="openDialog($event)"
+                ></app-cart-component>
+            }
+        }
+    </div>
+    @if(isAuth()) {
+    <div class="total-price">
+        <p class="total-title">
+            Total:
+            <span class="all-price">
+                <span class="price-discount">${{totalProducts().price.toFixed(2)}}</span>
+                <span class="price">${{totalProducts().discountPrice.toFixed(2)}}</span>
+            </span>
+        </p>
+        <p class="total-title adress">
+            Address:
+            <span class="all-price">
+                <span class="price">{{this.user().city}} {{this.user().street}} {{this.user().houseNumber}} </span>
+            </span>
+        </p>
+        <p class="total-title pay-by">
+            Pay by:
+            <span class="all-price">
+                <span class="price">{{this.user().paymentMethod | uppercase}}</span>
+            </span>
+        </p>
+    </div>
+    } @else {
+    <div class="total-price">
+        <p class="total-title">
+            Total:
+            <span class="all-price">
+                <span class="price">$0.00</span>
+            </span>
+        </p>
+    </div>
+    }
+
+    <div class="button">
+        @if(isAuth()) {
+            <a routerLink="/orders">
+                <app-button-secondary>
+                    <span>Orders History</span>
+                </app-button-secondary> 
+            </a>
+            <app-button-secondary (click)="confirm()">
+                <span>Confirm</span>
+            </app-button-secondary> 
+        } @else {
+            <a routerLink="/sign-in">
+                <app-button-secondary >
+                    <span>Sign In</span>
+                </app-button-secondary>
+            </a>
+            <a routerLink="/register">
+                <app-button-secondary routerLink="register">
+                    <span>Registration</span>
+                </app-button-secondary>
+            </a>
+        }
+    </div>
+</div>

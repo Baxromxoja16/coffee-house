@@ -1,0 +1,24 @@
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { provideRouter, withHashLocation } from '@angular/router';
+
+import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { logInterceptor } from './shared/interceptors/log-interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAnimations(),
+    provideBrowserGlobalErrorListeners(),
+    provideZonelessChangeDetection(),
+    provideRouter(routes, withHashLocation()),
+    provideHttpClient(withInterceptors([logInterceptor])),
+    providePrimeNG({
+      theme: {
+          preset: Aura
+      }
+  })
+  ]
+};
